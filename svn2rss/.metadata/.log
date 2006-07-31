@@ -1,0 +1,131 @@
+!SESSION 2006-07-20 02:52:28.509 -----------------------------------------------
+eclipse.buildId=M20060629-1905
+java.version=1.5.0_07
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2006-07-20 02:58:23.271
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Java Model Status [svn2rss does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:485)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:1507)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1911)
+	at org.eclipse.jdt.internal.core.JavaProject.getResolvedClasspath(JavaProject.java:2049)
+	at org.eclipse.jdt.internal.core.PackageFragmentRoot.getRawClasspathEntry(PackageFragmentRoot.java:587)
+	at org.eclipse.jdt.internal.ui.actions.JarImportWizardAction.selectionChanged(JarImportWizardAction.java:89)
+	at org.eclipse.jdt.internal.ui.actions.JarImportWizardAction.selectionChanged(JarImportWizardAction.java:107)
+	at org.eclipse.jface.viewers.Viewer$2.run(Viewer.java:162)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:843)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:44)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:149)
+	at org.eclipse.jface.viewers.Viewer.fireSelectionChanged(Viewer.java:160)
+	at org.eclipse.jface.viewers.StructuredViewer.updateSelection(StructuredViewer.java:1976)
+	at org.eclipse.jface.viewers.StructuredViewer.handleInvalidSelection(StructuredViewer.java:1092)
+	at org.eclipse.jdt.internal.ui.viewsupport.ProblemTreeViewer.handleInvalidSelection(ProblemTreeViewer.java:206)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart$PackageExplorerProblemTreeViewer.handleInvalidSelection(PackageExplorerPart.java:384)
+	at org.eclipse.jface.viewers.StructuredViewer.preservingSelection(StructuredViewer.java:1336)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart$PackageExplorerProblemTreeViewer.preservingSelection(PackageExplorerPart.java:402)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.remove(AbstractTreeViewer.java:1934)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.remove(AbstractTreeViewer.java:1986)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerContentProvider$5.run(PackageExplorerContentProvider.java:640)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerContentProvider$7.run(PackageExplorerContentProvider.java:666)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:123)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3325)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2971)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.block(ModalContext.java:158)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:326)
+	at org.eclipse.jface.wizard.WizardDialog.run(WizardDialog.java:851)
+	at org.eclipse.jdt.internal.ui.wizards.JavaProjectWizardSecondPage.removeProject(JavaProjectWizardSecondPage.java:392)
+	at org.eclipse.jdt.internal.ui.wizards.JavaProjectWizardSecondPage.performCancel(JavaProjectWizardSecondPage.java:433)
+	at org.eclipse.jdt.internal.ui.wizards.JavaProjectWizard.performCancel(JavaProjectWizard.java:92)
+	at org.eclipse.jface.wizard.WizardDialog.okToClose(WizardDialog.java:780)
+	at org.eclipse.jface.wizard.WizardDialog.close(WizardDialog.java:406)
+	at org.eclipse.jface.window.Window.handleShellCloseEvent(Window.java:736)
+	at org.eclipse.jface.window.Window$3.shellClosed(Window.java:682)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:159)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:928)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:952)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:937)
+	at org.eclipse.swt.widgets.Decorations.closeWidget(Decorations.java:257)
+	at org.eclipse.swt.widgets.Decorations.WM_CLOSE(Decorations.java:1606)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3248)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1539)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1634)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4025)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:1842)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:438)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3334)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1539)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1634)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4025)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:1842)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:438)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3334)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1539)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1634)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4025)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:1923)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2966)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:820)
+	at org.eclipse.jface.window.Window.open(Window.java:796)
+	at org.eclipse.ui.actions.NewProjectAction.run(NewProjectAction.java:116)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:499)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:539)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:488)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:400)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:928)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3348)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2968)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1914)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1878)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:419)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:95)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:78)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:92)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:68)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:336)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:280)
+	at org.eclipse.core.launcher.Main.run(Main.java:977)
+	at org.eclipse.core.launcher.Main.main(Main.java:952)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2006-07-20 02:58:23.273
+!MESSAGE svn2rss does not exist
+
+!ENTRY org.eclipse.update.core 4 0 2006-07-20 03:01:43.372
+!MESSAGE Digest could not be parsed:Unable to retrieve remote reference "http://download.eclipse.org/updates/3.2/digest.zip". [Server returned HTTP response code: "404 Not Found" for URL: http://download.eclipse.org/updates/3.2/digest.zip.]
+!SESSION 2006-07-20 03:05:35.112 -----------------------------------------------
+eclipse.buildId=M20060629-1905
+java.version=1.5.0_07
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 2 0 2006-07-20 04:23:41.338
+!MESSAGE The 'org.eclipse.jdt.ui.JavaTypeCompletionProposalComputer' proposal computer from the 'org.eclipse.jdt.ui' plug-in did not complete normally. The extension took too long to return from the 'computeCompletionProposals()' operation.
+
+!ENTRY org.eclipse.jdt.ui 2 0 2006-07-20 04:24:15.297
+!MESSAGE The 'org.eclipse.jdt.ui.JavaTypeCompletionProposalComputer' proposal computer from the 'org.eclipse.jdt.ui' plug-in did not complete normally. The extension took too long to return from the 'computeCompletionProposals()' operation.
+!SESSION 2006-07-30 17:40:02.587 -----------------------------------------------
+eclipse.buildId=M20060629-1905
+java.version=1.5.0_07
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.update.core 4 0 2006-07-30 17:52:28.760
+!MESSAGE Digest could not be parsed:Unable to retrieve remote reference "http://download.eclipse.org/updates/3.2/digest.zip". [Server returned HTTP response code: "404 Not Found" for URL: http://download.eclipse.org/updates/3.2/digest.zip.]

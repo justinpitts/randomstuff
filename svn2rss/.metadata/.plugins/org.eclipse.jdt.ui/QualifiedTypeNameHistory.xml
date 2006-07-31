@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.randomhumans.rss.SVNLogRssGenerator"/>
+<fullyQualifiedTypeName name="org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory"/>
+<fullyQualifiedTypeName name="org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl"/>
+<fullyQualifiedTypeName name="org.tmatesoft.svn.core.io.SVNRepository"/>
+<fullyQualifiedTypeName name="org.tmatesoft.svn.core.io.SVNRepositoryFactory"/>
+<fullyQualifiedTypeName name="org.tmatesoft.svn.core.SVNURL"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="viecili.jrss.generator.RSSFeedGeneratorFactory"/>
+<fullyQualifiedTypeName name="viecili.jrss.generator.RSSFeedGenerator"/>
+<fullyQualifiedTypeName name="viecili.jrss.generator.elem.RSS"/>
+<fullyQualifiedTypeName name="javax.swing.text.ChangedCharSetException"/>
+<fullyQualifiedTypeName name="viecili.jrss.generator.elem.Channel"/>
+<fullyQualifiedTypeName name="org.tmatesoft.svn.core.SVNLogEntry"/>
+<fullyQualifiedTypeName name="viecili.jrss.generator.elem.Item"/>
+<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
+<fullyQualifiedTypeName name="viecili.jrss.generator.elem.Category"/>
+</qualifiedTypeNameHistroy>

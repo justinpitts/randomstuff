@@ -1,0 +1,13 @@
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2830682333.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2818303615.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\3745513965.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2624544697.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\1333615245.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2166051329.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2707342869.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\1232778814.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2843375736.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2857259953.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\494447995.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\3649210125.index
+D:\home\justin\dev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2540641051.index

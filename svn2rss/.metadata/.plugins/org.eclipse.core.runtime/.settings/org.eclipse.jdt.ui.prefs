@@ -1,0 +1,20 @@
+#Thu Jul 20 04:41:19 GMT 2006
+org.eclipse.jdt.ui.text.templates_migrated=true
+useAnnotationsPrefPage=true
+eclipse.preferences.version=1
+org.eclipse.jface.textfont=1|Consolas|9|0|WINDOWS|1|-12|0|0|0|400|0|0|0|0|3|2|1|49|Consolas;
+tabWidthPropagated=true
+org.eclipse.jdt.ui.editor.tab.width=
+fontPropagated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8"?><templates/>
+org.eclipse.jdt.ui.javadoclocations.migrated=true
+proposalOrderMigrated=true
+org.eclipse.jdt.ui.ondemandthreshold=5
+org.eclipse.jdt.ui.formatterprofiles.version=10
+useQuickDiffPrefPage=true
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8"?><templates/>
+org.eclipse.jdt.ui.staticondemandthreshold=99
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8"?><history maxLHS\="100" maxRHS\="10"><lhs name\="org.tmatesoft.svn.core.SVNURL"><rhs name\="org.tmatesoft.svn.core.SVNURL"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.Collection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="viecili.jrss.generator.elem.RSS"><rhs name\="viecili.jrss.generator.elem.RSS"/></lhs><lhs name\="viecili.jrss.generator.elem.Channel"><rhs name\="viecili.jrss.generator.elem.Channel"/></lhs><lhs name\="viecili.jrss.generator.elem.Item"><rhs name\="viecili.jrss.generator.elem.Item"/></lhs><lhs name\="java.lang.CharSequence"><rhs name\="java.lang.StringBuffer"/></lhs><lhs name\="java.lang.AbstractStringBuilder"><rhs name\="java.lang.StringBuffer"/></lhs><lhs name\="java.lang.Appendable"><rhs name\="java.lang.StringBuffer"/></lhs></history>
+org.eclipse.jdt.ui.importorder=java;javax;org;com;
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.ignorelowercasenames=true
