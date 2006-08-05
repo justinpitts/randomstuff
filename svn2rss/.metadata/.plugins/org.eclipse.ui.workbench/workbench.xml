@@ -1,70 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="11" version="2.0">
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="1024" x="247" y="9">
+<window height="768" maximized="true" width="1024" x="110" y="110">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
 </perspectiveBar>
 <coolbarLayout locked="0">
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="100" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="97" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
-<coolItem id="com.altova.xmlspyforeclipse.actionSet.NewFile" itemType="typeToolBarContribution" x="77" y="22"/>
-<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="130" y="22"/>
-<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="100" y="22"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="62" y="22"/>
-<coolItem id="org.eclipse.ui.WorkingSetActionSet" itemType="typeToolBarContribution" x="54" y="22"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="62" y="22"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="127" y="22"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="97" y="22"/>
+<coolItem id="org.eclipse.jst.ws.consumption" itemType="typeToolBarContribution" x="36" y="22"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="59" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="59" y="22"/>
+<coolItem id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" itemType="typeToolBarContribution" x="36" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="191" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="188" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="jadclipse.JadclipseClassFileEditor" itemType="typeToolBarContribution" x="36" y="22"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
-<page aggregateWorkingSetId="Aggregate for window 1153364242828" focus="true" label="Workspace - Java">
+<page focus="true" label="Workspace - Java">
 <editors>
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LogIndexer.java" partName="LogIndexer.java" path="C:/BLDev/workspaces/svn2rss/svnindex/src/svnindex/LogIndexer.java" title="LogIndexer.java" tooltip="svnindex/src/svnindex/LogIndexer.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/svnindex/src/svnindex/LogIndexer.java"/>
+</editor>
+<editor focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RevisionDocument.java" partName="RevisionDocument.java" path="C:/BLDev/workspaces/svn2rss/svnindex/src/svnindex/RevisionDocument.java" title="RevisionDocument.java" tooltip="svnindex/src/svnindex/RevisionDocument.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/svnindex/src/svnindex/RevisionDocument.java"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CommitQuery.java" partName="CommitQuery.java" path="C:/BLDev/workspaces/svn2rss/svnindex/src/svnindex/CommitQuery.java" title="CommitQuery.java" tooltip="svnindex/src/svnindex/CommitQuery.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/svnindex/src/svnindex/CommitQuery.java"/>
+</editor>
+<editor id="jadclipse.JadclipseClassFileEditor" name="Field.class" partName="Field.class" title="Field.class" tooltip="org.apache.lucene.document.Field" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" org.eclipse.jdt.ui.ClassFileIdentifier="=svnindex/lib\/lucene-core-2.0.0.jar&lt;org.apache.lucene.document(Field.class"/>
+</editor>
 </editors>
 <views>
-<view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
+<view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
+<view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
+</view>
+<view id="org.eclipse.debug.ui.VariableView" partName="Variables">
+<viewState org.eclipse.debug.ui.variablesView.SASH_WEIGHTS-0="684" org.eclipse.debug.ui.variablesView.SASH_WEIGHTS-1="315" org.eclipse.debug.ui.variablesView.SASH_WEIGHTS-Length="2"/>
 </view>
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console">
 <viewState/>
 </view>
-<view id="org.eclipse.ui.views.ProblemView" partName="Problems">
-<viewState columnWidth0="259" columnWidth1="84" columnWidth2="159" columnWidth3="69" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
-<columnOrder columnOrderIndex="0"/>
-<columnOrder columnOrderIndex="1"/>
-<columnOrder columnOrderIndex="2"/>
-<columnOrder columnOrderIndex="3"/>
-<columnOrder columnOrderIndex="4"/>
+<view id="org.eclipse.debug.ui.DebugView" partName="Debug">
+<viewState/>
+</view>
+<view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
+<viewState layout="2" org.eclipse.jdt.ui.packages.linktoeditor="0" rootMode="1" workingSetName="">
+<customFilters userDefinedPatternsEnabled="false">
+<xmlDefinedFilters>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.FieldsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.LocalTypesFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_*$*.class" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonPublicFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.EmptyPackageFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonJavaProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.ImportDeclarationFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.StaticsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonSharedProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.EmptyInnerPackageFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.SyntheticMembersFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonJavaElementFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.CuAndClassFileFilter" isEnabled="false"/>
+<child filterId="org.eclipse.pde.ui.BinaryProjectFilter1" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.PackageDeclarationFilter" isEnabled="true"/>
+</xmlDefinedFilters>
+</customFilters>
 </viewState>
 </view>
+<view id="org.eclipse.debug.ui.BreakpointView" partName="Breakpoints">
+<viewState>
+<isTrackingSelection value="false"/>
+</viewState>
+</view>
+<view id="org.eclipse.jdt.ui.TypeHierarchy" partName="Hierarchy"/>
 </views>
-<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
+<alwaysOnActionSet id="org.eclipse.jst.ws.consumption"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.openExternalFile"/>
-<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
 <alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
-<alwaysOnActionSet id="org.eclipse.ui.WorkingSetActionSet"/>
 <alwaysOnActionSet id="org.eclipse.update.ui.softwareUpdates"/>
+<alwaysOnActionSet id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
@@ -81,8 +128,6 @@
 <show_view_action id="org.eclipse.ui.views.ContentOutline"/>
 <show_view_action id="org.eclipse.ui.views.ProblemView"/>
 <show_view_action id="org.eclipse.ui.views.ResourceNavigator"/>
-<show_view_action id="org.eclipse.ui.views.TaskList"/>
-<show_view_action id="org.eclipse.ui.views.ProgressView"/>
 <show_view_action id="org.eclipse.ant.ui.views.AntView"/>
 <show_view_action id="org.eclipse.pde.runtime.LogView"/>
 <new_wizard_action id="org.eclipse.jdt.ui.wizards.NewPackageCreationWizard"/>
@@ -99,22 +144,24 @@
 <perspective_action id="org.eclipse.jdt.ui.JavaPerspective"/>
 <perspective_action id="org.eclipse.debug.ui.DebugPerspective"/>
 <perspective_action id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
-<view id="org.eclipse.ui.views.ProblemView"/>
-<view id="org.eclipse.jdt.ui.JavadocView"/>
+<view id="org.eclipse.jdt.ui.PackageExplorer"/>
+<view id="org.eclipse.jdt.ui.TypeHierarchy"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
-<view id="org.eclipse.ui.views.ContentOutline"/>
 <layout>
 <mainWindow>
 <info folder="true" part="left">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
-<page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
+<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
+<page content="org.eclipse.jdt.ui.TypeHierarchy" label="Hierarchy"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.junit.ResultView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@169b66e" ratio="0.749499" ratioLeft="748" ratioRight="250" relationship="2" relative="left">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1d8f162" ratio="0.53433305" ratioLeft="677" ratioRight="590" relationship="2" relative="left">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
@@ -122,11 +169,11 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.1673244" ratioLeft="212" ratioRight="1055" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.7281879" ratioLeft="651" ratioRight="243" relationship="4" relative="org.eclipse.ui.editorss">
+<info part="org.eclipse.ui.editorss" ratio="0.25019732" ratioLeft="317" ratioRight="950" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.52237135" ratioLeft="467" ratioRight="427" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
-<page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
+<page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.ui.JavadocView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="LabelNotFound"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
@@ -134,12 +181,94 @@
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
-<part id="2"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1d3ac6e" ratio="0.74899864" ratioLeft="561" ratioRight="188" relationship="2" relative="org.eclipse.ui.editorss">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@d5276a" ratio="0.8673171" ratioLeft="889" ratioRight="136" relationship="2" relative="org.eclipse.ui.editorss">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+<perspective editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.eclipse.debug.internal.ui.DebugPerspectiveFactory" id="org.eclipse.debug.ui.DebugPerspective" label="Debug"/>
+<alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.openExternalFile"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.update.ui.softwareUpdates"/>
+<alwaysOnActionSet id="org.eclipse.jst.ws.consumption"/>
+<alwaysOnActionSet id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.debug.ui.JDTDebugActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.debugActionSet"/>
+<show_view_action id="org.eclipse.debug.ui.DebugView"/>
+<show_view_action id="org.eclipse.debug.ui.VariableView"/>
+<show_view_action id="org.eclipse.debug.ui.BreakpointView"/>
+<show_view_action id="org.eclipse.debug.ui.ExpressionView"/>
+<show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="org.eclipse.ui.console.ConsoleView"/>
+<show_view_action id="org.eclipse.ui.views.TaskList"/>
+<show_view_action id="org.eclipse.ant.ui.views.AntView"/>
+<show_view_action id="org.eclipse.jdt.debug.ui.DisplayView"/>
+<show_view_action id="org.eclipse.pde.runtime.LogView"/>
+<perspective_action id="org.eclipse.jdt.ui.JavaPerspective"/>
+<perspective_action id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.ui.views.TaskList"/>
+<view id="org.eclipse.debug.ui.DebugView"/>
+<view id="org.eclipse.wst.server.ui.ServersView"/>
+<view id="org.eclipse.debug.ui.VariableView"/>
+<view id="org.eclipse.debug.ui.BreakpointView"/>
+<view id="org.eclipse.ui.views.ContentOutline"/>
+<layout>
+<mainWindow>
+<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
+<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
+<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
+<page content="org.eclipse.wst.server.ui.ServersView" label="Servers"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.7496063" ratioLeft="952" ratioRight="318" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.74972314" ratioLeft="677" ratioRight="226" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
+<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.debug.ui.DisplayView" label="LabelNotFound"/>
+<page content="org.eclipse.search.SearchResultView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.44903988" ratioLeft="304" ratioRight="373" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.7496063" ratioLeft="952" ratioRight="318" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
@@ -148,164 +277,224 @@
 </presentation>
 </folder>
 </info>
+<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="635" ratioRight="635" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">
+<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<page content="org.eclipse.debug.ui.BreakpointView" label="Breakpoints"/>
+<page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
+<page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
 </mainWindow>
 </layout>
 </perspective>
 </perspectives>
-<workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svn2rss/spike.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svn2rss/src/spike.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svn2rss/src/com/randomhumans/rss/SVNLogRssGenerator.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/svn2rss/a.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svn2rss/src/com/biglots/util/RssBuilder.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svnindex/src/svnindex/LogIndexer.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svnindex/src/svnindex/RevisionDocument.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svnindex/src/svnindex/CommitQuery.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svnindex/src/svnindex/LogIterator.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svnindex/src/svnindex/LogIterable.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="jadclipse.JadclipseClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=svnindex/lib\/lucene-core-2.0.0.jar&lt;org.apache.lucene.document(Field.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svnindex/src/svnindex/RepositoryFactory.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/svnindex/src/svnindex/RevisionDocument.java"/>
 </editors>
-<item historyLabel="spike.java" index="0">
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="spike.java" index="1">
+<item historyLabel="LogIterator.java" index="4">
+<position info="not_deleted" x="95" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="784" y="0"/>
+</item>
+<item historyLabel="LogIterator.java" index="4">
+<position info="not_deleted" x="95" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="784" y="0"/>
+</item>
+<item historyLabel="RssBuilder.java" index="0">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="244" y="0"/>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="784" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1944" y="1"/>
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="801" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="2727" y="0"/>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="784" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="2097" y="0"/>
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="676" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="2598" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIterable.java" index="5">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="1399" y="0"/>
+</item>
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="1407" y="7"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="1219" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="1219" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="1219" y="0"/>
+</item>
+<item historyLabel="LogIterable.java" index="5">
+<position info="not_deleted" x="1448" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="1012" y="7"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="1223" y="0"/>
+</item>
+<item historyLabel="RssBuilder.java" index="0">
+<position info="not_deleted" x="952" y="4"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="1223" y="0"/>
+</item>
+<item historyLabel="Field.class" index="6">
+<position info="not_deleted" x="7163" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="1223" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="692" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="688" y="0"/>
+</item>
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="2598" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="2014" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1016" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1212" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1081" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1065" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1184" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1179" y="0"/>
-</item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIndexer.java" index="1">
 <position/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1460" y="0"/>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="187" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1583" y="0"/>
+<item historyLabel="CommitQuery.java" index="3">
+<position info="not_deleted" x="992" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1567" y="0"/>
+<item historyLabel="RepositoryFactory.java" index="7">
+<position info="not_deleted" x="146" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1563" y="0"/>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="1223" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1623" y="0"/>
+<item historyLabel="RepositoryFactory.java" index="7">
+<position info="not_deleted" x="481" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1756" y="0"/>
+<item historyLabel="RepositoryFactory.java" index="7">
+<position info="not_deleted" x="854" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1779" y="0"/>
+<item historyLabel="RepositoryFactory.java" index="7">
+<position info="not_deleted" x="1154" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1815" y="0"/>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="1223" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1850" y="0"/>
+<item historyLabel="RepositoryFactory.java" index="7">
+<position info="not_deleted" x="1154" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="1848" y="0"/>
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="634" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position info="not_deleted" x="0" y="7"/>
+<item historyLabel="RevisionDocument.java" index="2">
+<position info="not_deleted" x="719" y="0"/>
 </item>
-<item historyLabel="a.xml" index="3">
-<position/>
+<item historyLabel="CommitQuery.java" index="3">
+<position info="not_deleted" x="992" y="0"/>
 </item>
-<item historyLabel="SVNLogRssGenerator.java" index="2">
-<position/>
+<item historyLabel="RssBuilder.java" index="0">
+<position info="not_deleted" x="952" y="4"/>
 </item>
-<item historyLabel="a.xml" index="3">
-<position/>
+<item historyLabel="CommitQuery.java" index="3">
+<position info="not_deleted" x="946" y="0"/>
 </item>
-<item active="true" historyLabel="SVNLogRssGenerator.java" index="2">
+<item historyLabel="LogIndexer.java" index="1">
+<position info="not_deleted" x="634" y="0"/>
+</item>
+<item active="true" historyLabel="RevisionDocument.java" index="8">
 <position/>
 </item>
 </navigationHistory>
-<stickyState/>
+<stickyState>
+<perspective IMemento.internal.id="org.eclipse.jdt.ui.JavaPerspective"/>
+<perspective IMemento.internal.id="org.eclipse.debug.ui.DebugPerspective"/>
+</stickyState>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
-<trimLayout>
-<trimArea IMemento.internal.id="128">
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
-</trimArea>
-<trimArea IMemento.internal.id="1024">
-<trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
-<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-</trimArea>
-</trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="a.xml" tooltip="svn2rss/a.xml">
-<persistable path="/svn2rss/a.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RepositoryFactory.java" tooltip="svnindex/src/svnindex/RepositoryFactory.java">
+<persistable path="/svnindex/src/svnindex/RepositoryFactory.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SVNLogRssGenerator.java" tooltip="svn2rss/src/com/randomhumans/rss/SVNLogRssGenerator.java">
-<persistable path="/svn2rss/src/com/randomhumans/rss/SVNLogRssGenerator.java"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="jadclipse.JadclipseClassFileEditor" name="Field.class" tooltip="org.apache.lucene.document.Field">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=svnindex/lib\/lucene-core-2.0.0.jar&lt;org.apache.lucene.document(Field.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="spike.java" tooltip="svn2rss/spike.java">
-<persistable path="/svn2rss/spike.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RssBuilder.java" tooltip="svn2rss/src/com/biglots/util/RssBuilder.java">
+<persistable path="/svn2rss/src/com/biglots/util/RssBuilder.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LogIterator.java" tooltip="svnindex/src/svnindex/LogIterator.java">
+<persistable path="/svnindex/src/svnindex/LogIterator.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Query.java" tooltip="svnindex/src/svnindex/Query.java">
+<persistable path="/svnindex/src/svnindex/Query.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RevisionDocument.java" tooltip="svnindex/src/svnindex/RevisionDocument.java">
+<persistable path="/svnindex/src/svnindex/RevisionDocument.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LogIndexer.java" tooltip="svnindex/src/svnindex/LogIndexer.java">
+<persistable path="/svnindex/src/svnindex/LogIndexer.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="jadclipse.JadclipseClassFileEditor" name="RSSFeedGenerator.class" tooltip="viecili.jrss.generator.RSSFeedGenerator">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=svn2rss/lib\/jrss.jar&lt;viecili.jrss.generator(RSSFeedGenerator.class"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="jadclipse.JadclipseClassFileEditor" name="SVNLogEntry.class" tooltip="org.tmatesoft.svn.core.SVNLogEntry">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=svn2rss/Z:\/lib\/javasvn-1.0.6\/javasvn.jar&lt;org.tmatesoft.svn.core(SVNLogEntry.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="svnlog2rss.java" tooltip="svn2rss/src/com/biglots/util/svnlog2rss.java">
+<persistable path="/svn2rss/src/com/biglots/util/svnlog2rss.java"/>
 </file>
 </mruList>
 </workbench>

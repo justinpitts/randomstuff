@@ -5,10 +5,4 @@
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 		</list>
 	</section>
-	<section name="org.eclipse.ui.views.problem">
-	</section>
-	<section name="ResourceNavigator">
-		<item key="ResourceWorkingSetFilter.STORE_WORKING_SET" value="Aggregate for window 1153364242828"/>
-		<item key="ResourceViewer.STORE_SORT_TYPE" value="1"/>
-	</section>
 </section>

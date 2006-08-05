@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="org.eclipse.debug.ui.SCOPED_SAVE_SELECTION_DIALOG">
-		<item key="DIALOG_X_ORIGIN" value="469"/>
-		<item key="DIALOG_HEIGHT" value="474"/>
-		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
-		<item key="DIALOG_Y_ORIGIN" value="189"/>
-		<item key="DIALOG_WIDTH" value="359"/>
-	</section>
 	<section name="org.eclipse.debug.ui.LAUNCH_CONFIGURATIONS_DIALOG_SECTION">
-		<item key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_1" value="237"/>
-		<item key="DIALOG_X_ORIGIN" value="248"/>
-		<item key="DIALOG_HEIGHT" value="640"/>
-		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
-		<item key="org.eclipse.debug.ui.EXPANDED_NODES" value=", "/>
-		<item key="DIALOG_Y_ORIGIN" value="79"/>
-		<item key="DIALOG_WIDTH" value="800"/>
-		<item key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_2" value="762"/>
+		<item key="org.eclipse.debug.ui.DIALOG_HEIGHT" value="572"/>
+		<item key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_1" value="231"/>
+		<item key="org.eclipse.debug.ui.DIALOG_ORIGIN_Y" value="125"/>
+		<item key="org.eclipse.debug.ui.DIALOG_WIDTH" value="731"/>
+		<item key="org.eclipse.debug.ui.DIALOG_SASH_WEIGHTS_2" value="768"/>
+		<item key="org.eclipse.debug.ui.DIALOG_ORIGIN_X" value="330"/>
 	</section>
 </section>

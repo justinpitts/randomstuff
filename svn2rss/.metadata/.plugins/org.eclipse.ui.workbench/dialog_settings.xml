@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="WorkbenchPreferenceDialogSettings">
-		<item key="DIALOG_X_ORIGIN" value="354"/>
-		<item key="DIALOG_Y_ORIGIN" value="146"/>
-	</section>
-	<section name="NewWizardAction">
+	<section name="org.eclipse.ui.internal.dialogs.FilteredComboTree">
+		<list key="search">
+			<item value="form"/>
+		</list>
 	</section>
 </section>
