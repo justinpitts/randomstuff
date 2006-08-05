@@ -27,7 +27,8 @@ public class CommitQuery
 		Searcher s = new IndexSearcher(ir);
 		Analyzer a = new StandardAnalyzer();
 		
-		Query q = new QueryParser("message", a).parse("NGPHASE*");
+		Query q = new QueryParser("author", a).parse("jpitts");
+		
 		
 		Hits hits = s.search(q);
 		
