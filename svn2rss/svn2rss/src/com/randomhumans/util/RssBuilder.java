@@ -1,4 +1,4 @@
-package com.biglots.util;
+package com.randomhumans.util;
 
 import java.io.File;
 import java.io.IOException;
