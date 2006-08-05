@@ -1,0 +1,6 @@
+package svnindex;
+
+public class RevisionDocument
+{
+
+}

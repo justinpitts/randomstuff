@@ -1,0 +1,18 @@
+package svnindex;
+
+import org.apache.lucene.index.IndexReader;
+
+public class Query
+{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args)
+	{
+		IndexReader ir = IndexReader.open("z:/index");
+	// TODO Auto-generated method stub
+
+	}
+
+}

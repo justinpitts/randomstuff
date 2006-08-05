@@ -1,0 +1,17 @@
+package svnindex;
+
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.tmatesoft.svn.core.SVNLogEntry;
+
+public class RevisionDocument
+{
+	public static Document createRevisionDocument(SVNLogEntry logEntry )
+	{
+		Document doc = new Document();
+		doc.add(new Field());
+		
+		return doc;
+	}
+
+}

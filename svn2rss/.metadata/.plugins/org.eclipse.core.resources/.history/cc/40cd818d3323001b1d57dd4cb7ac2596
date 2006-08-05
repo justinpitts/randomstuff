@@ -1,0 +1,12 @@
+package svnindex;
+
+import org.tmatesoft.svn.core.io.SVNRepository;
+
+public class RepositoryFactory
+{
+	static SVNRepository getRepo()
+	{
+		
+	}
+
+}

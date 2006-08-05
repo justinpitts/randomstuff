@@ -1,0 +1,15 @@
+package svnindex;
+
+import org.apache.lucene.document.Document;
+import org.tmatesoft.svn.core.SVNLogEntry;
+
+public class RevisionDocument
+{
+	public static Document createRevisionDocument(SVNLogEntry logEntry )
+	{
+		Document doc = new Document();
+		
+		return doc;
+	}
+
+}

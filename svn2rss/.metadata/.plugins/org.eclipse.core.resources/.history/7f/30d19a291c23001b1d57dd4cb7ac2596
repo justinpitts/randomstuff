@@ -1,0 +1,72 @@
+package svnindex;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.index.IndexWriter;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.SVNLogEntryPath;
+import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
+import org.tmatesoft.svn.core.io.SVNRepository;
+import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
+
+public class LogIndexer
+{
+
+	
+	public static void main(String[] args) throws SVNException, InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
+		SVNRepository repository = getRepository();
+		Collection<SVNLogEntry> logs = getLastNLogs(repository, 100);
+		IndexWriter iw = new IndexWriter("z:/index", new StandardAnalyzer(), true);		
+		for (SVNLogEntry entry : logs) {
+			iw.addDocument(RevisionDocument.createRevisionDocument(entry));	
+			if (entry.getRevision() % 100 == 0)
+				System.out.print(".");
+		}
+		iw.optimize();
+		iw.close();
+		
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private static Collection<SVNLogEntry> getLastNLogs(SVNRepository repository, int count ) throws SVNException {
+		long end = repository.getLatestRevision();
+		long start = end - count;		
+		Collection<SVNLogEntry> logs = repository.log(new String[] { "" },null, start, end, true, true);
+		return logs;
+	}
+
+	private static SVNRepository getRepository() throws SVNException {
+		DAVRepositoryFactory.setup();
+		SVNRepository repository = null;
+		repository = SVNRepositoryFactory.create(SVNURL.parseURIEncoded(getRepoURL()));
+		ISVNAuthenticationManager authManager = SVNWCUtil
+				.createDefaultAuthenticationManager(getRepoUser(), getRepoPassword());
+		repository.setAuthenticationManager(authManager);
+		return repository;
+	}
+
+	private static String getRepoPassword() {
+		String password = "gir@ffe";
+		return password;
+	}
+
+	private static String getRepoUser() {
+		String user = "jpitts";
+		return user;
+	}
+
+	private static String getRepoURL() {
+		String url = "http://svn.cns.com/repo";
+		return url;
+	}
+
+
+}
