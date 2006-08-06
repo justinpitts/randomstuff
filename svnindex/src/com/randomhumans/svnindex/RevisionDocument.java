@@ -1,4 +1,4 @@
-package svnindex;
+package com.randomhumans.svnindex;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;

@@ -1,4 +1,4 @@
-package svnindex;
+package com.randomhumans.svnindex;
 
 import java.io.IOException;
 
