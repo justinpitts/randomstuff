@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/lucene-core-2.0.0.jar">
+	<classpathentry exported="true" kind="lib" path="lib/lucene-core-2.0.0.jar">
 		<attributes>
 			<attribute value="file:/Z:/lib/lucene-2.0.0/docs/api/" name="javadoc_location"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="Z:/lib/javasvn-1.0.6/javasvnsrc.zip" kind="lib" path="lib/javasvn.jar">
+	<classpathentry exported="true" sourcepath="Z:/lib/javasvn-1.0.6/javasvnsrc.zip" kind="lib" path="lib/javasvn.jar">
 		<attributes>
 			<attribute value="file:/Z:/lib/javasvn-1.0.6/doc/javadoc/" name="javadoc_location"/>
 		</attributes>
