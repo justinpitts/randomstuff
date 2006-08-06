@@ -1,10 +1,8 @@
 package com.randomhumans.svnindex;
 
 import java.io.IOException;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -16,32 +14,41 @@ import org.apache.lucene.search.Searcher;
 public class CommitQuery
 {
 
-	/**
+	private String indexLocation;
+    /**
 	 * @param args
 	 * @throws IOException 
 	 * @throws ParseException 
 	 */
-	public static void main(String[] args) throws IOException, ParseException
+    
+    public CommitQuery()
+    {        
+        indexLocation = Configuration.getConfig().getIndexLocation();
+    }
+    public Hits performQuery(String query)
 	{
-		IndexReader ir = IndexReader.open("z:/index");
-		Searcher s = new IndexSearcher(ir);
-		Analyzer a = new StandardAnalyzer();
-		
-		Query q = new QueryParser("author", a).parse("jpitts");
-		
-		
-		Hits hits = s.search(q);
-		
-		for(int i = 0; i < hits.length(); i++)
-		{
-			Document doc = hits.doc(i);			
-			System.out.println(doc.getField("revision").stringValue());
-			System.out.println(doc.getField("author").stringValue());
-			System.out.println(doc.getField("message").stringValue());
-			System.out.println("");	
-			System.out.println("----------------------------------------------------------------");
-		}
-		ir.close();
+		IndexReader ir;
+        try
+        {
+            ir = IndexReader.open(indexLocation);
+            Searcher s = new IndexSearcher(ir);
+            Analyzer a = new StandardAnalyzer();
+            QueryParser qp = new QueryParser("message", a);            
+            Query q = qp.parse(query);
+            return s.search(q);
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+            return null;
+        }
+        catch (ParseException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+            return null;
+        }
 	}
 
 }

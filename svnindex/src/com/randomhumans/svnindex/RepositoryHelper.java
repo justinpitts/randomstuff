@@ -1,7 +1,6 @@
 package com.randomhumans.svnindex;
 
 import java.util.ArrayList;
-
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.SVNURL;
@@ -20,8 +19,8 @@ public class RepositoryHelper
 		repository = SVNRepositoryFactory.create(SVNURL
 				.parseURIEncoded(getRepoURL()));
 		ISVNAuthenticationManager authManager = SVNWCUtil
-				.createDefaultAuthenticationManager(getRepoUser(),
-						getRepoPassword());
+				.createDefaultAuthenticationManager(Configuration.getConfig().getRepoUser(),
+						Configuration.getConfig().getRepoPassword());
 		repository.setAuthenticationManager(authManager);
 		return repository;
 	}
@@ -37,22 +36,9 @@ public class RepositoryHelper
 			repo.closeSession();
 		}
 	}
-	private static String getRepoPassword()
-	{
-		String password = "gir@ffe";
-		return password;
-	}
-
-	private static String getRepoUser()
-	{
-		String user = "jpitts";
-		return user;
-	}
-
 	private static String getRepoURL()
 	{
-		String url = "http://svn.cns.com/repo";
-		return url;
+        return Configuration.getConfig().getRepositoryURL();
 	}
 
 	@SuppressWarnings("unchecked")

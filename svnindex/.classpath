@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/lucene-core-2.0.0.jar">
 		<attributes>
-			<attribute value="file:/Z:/lib/lucene-2.0.0/docs/api/" name="javadoc_location"/>
+			<attribute value="file:/D:/tools/lucene-2.0.0/docs/api/" name="javadoc_location"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" sourcepath="Z:/lib/javasvn-1.0.6/javasvnsrc.zip" kind="lib" path="lib/javasvn.jar">
@@ -12,5 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.1.1/src/org.junit_3.8.1/junitsrc.zip" kind="var" path="JUNIT_HOME/junit.jar"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

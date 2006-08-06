@@ -12,7 +12,7 @@ public class LogIndexer
 			InstantiationException, IllegalAccessException,
 			ClassNotFoundException, IOException
 	{		
-		IndexWriter iw = new IndexWriter("z:/index", new StandardAnalyzer(), true);
+		IndexWriter iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), true);
 		try
 		{
 			for (long i = RepositoryHelper.getLatestRevision(); i > 1; i -= 1)
