@@ -14,6 +14,7 @@ import org.apache.lucene.search.Searcher;
 public class CommitQuery
 {
 
+    IndexReader ir = null;
 	private String indexLocation;
     /**
 	 * @param args
@@ -25,9 +26,9 @@ public class CommitQuery
     {        
         indexLocation = Configuration.getConfig().getIndexLocation();
     }
+
     public Hits performQuery(String query)
 	{
-		IndexReader ir = null;
         try
         {
             ir = IndexReader.open(indexLocation);
@@ -49,18 +50,20 @@ public class CommitQuery
             e.printStackTrace();
             return null;
         }
-        finally{
-            try
-            {
-                if(ir != null)
-                    ir.close();
-            }
-            catch (IOException e)
-            {
-                // TODO Auto-generated catch block -- Finish Me
-                e.printStackTrace();
-            }
-        }
 	}
+    
+    public void close()
+    {
+        try
+        {
+            if(ir != null)
+                ir.close();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+        }
+    }
 
 }
