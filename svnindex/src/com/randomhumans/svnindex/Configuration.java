@@ -19,7 +19,7 @@ public class Configuration
     
     public String getRepositoryURL()
     {
-        String url = "http://randomstuff.googlecode.com/svn/";
+        String url = "http://randomstuff.googlecode.com/svn";
         return url;
     }
 
@@ -37,7 +37,7 @@ public class Configuration
 
     public String getIndexLocation()
     {
-        return System.getProperty("com.randomhumans.svnindex.indexLocation", "z:/index");
+        return System.getProperty("com.randomhumans.svnindex.indexLocation", "d:/index");
     }
 
 }
