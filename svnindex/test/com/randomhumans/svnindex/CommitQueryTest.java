@@ -16,6 +16,7 @@ public class CommitQueryTest extends TestCase
     public void testPerformQuery() throws IOException
     {
         CommitQuery t = new CommitQuery();
+        try {
         Hits h = t.performQuery("author:justinpitts");
         assertNotNull(h);
         for(int i = 0; i < h.length(); i ++)
@@ -23,6 +24,9 @@ public class CommitQueryTest extends TestCase
             Document d = h.doc(i);
             System.out.println(d);        
             
+        }
+        } finally {
+            t.close();
         }
         
     }
