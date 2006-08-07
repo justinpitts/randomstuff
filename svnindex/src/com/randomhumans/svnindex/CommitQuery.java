@@ -27,13 +27,13 @@ public class CommitQuery
     }
     public Hits performQuery(String query)
 	{
-		IndexReader ir;
+		IndexReader ir = null;
         try
         {
             ir = IndexReader.open(indexLocation);
             Searcher s = new IndexSearcher(ir);
             Analyzer a = new StandardAnalyzer();
-            QueryParser qp = new QueryParser("message", a);            
+            QueryParser qp = new QueryParser(RevisionDocument.MESSAGE_FIELDNAME, a);            
             Query q = qp.parse(query);
             return s.search(q);
         }
@@ -48,6 +48,18 @@ public class CommitQuery
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
             return null;
+        }
+        finally{
+            try
+            {
+                if(ir != null)
+                    ir.close();
+            }
+            catch (IOException e)
+            {
+                // TODO Auto-generated catch block -- Finish Me
+                e.printStackTrace();
+            }
         }
 	}
 
