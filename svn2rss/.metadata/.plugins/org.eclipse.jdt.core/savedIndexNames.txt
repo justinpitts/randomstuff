@@ -1,9 +1,0 @@
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2879859608.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2843375736.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\1136526898.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\3745513965.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2624544697.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2166051329.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\156922138.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2548171441.index
-C:\BLDev\workspaces\svn2rss\.metadata\.plugins\org.eclipse.jdt.core\2540641051.index
