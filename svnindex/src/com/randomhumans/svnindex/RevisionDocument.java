@@ -17,9 +17,9 @@ public class RevisionDocument implements Runnable
 		SVNLogEntry logEntry = RepositoryHelper.getLogEntry(revisionNumber);	
 		
 		
-		doc.add(new Field(AUTHOR_FIELDNAME, logEntry.getAuthor(), Field.Store.YES, Field.Index.UN_TOKENIZED));
+		doc.add(new Field(AUTHOR_FIELDNAME, logEntry.getAuthor() + "", Field.Store.YES, Field.Index.UN_TOKENIZED));
 		doc.add(new Field(DATE_FIELDNAME, logEntry.getDate().toString(), Field.Store.YES, Field.Index.UN_TOKENIZED));
-		doc.add(new Field(MESSAGE_FIELDNAME, logEntry.getMessage(), Field.Store.YES, Field.Index.TOKENIZED));
+		doc.add(new Field(MESSAGE_FIELDNAME, logEntry.getMessage() + "", Field.Store.YES, Field.Index.TOKENIZED));
 		doc.add(new Field(REVISION_FIELDNAME, Long.toString(logEntry.getRevision()), Field.Store.YES, Field.Index.UN_TOKENIZED));	
 		
 		return doc;
