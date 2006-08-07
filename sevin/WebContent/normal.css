@@ -1,0 +1,39 @@
+body { 
+	font: 8pt/16pt georgia; 
+	color: #555753; 
+	background: #fff ;
+	margin: 0px; 
+	}
+p { 
+	font: 8pt/16pt georgia; 
+	margin-top: 0px; 
+	text-align: justify;
+	}
+h3 { 
+	font: italic normal 12pt georgia; 
+	letter-spacing: 1px; 
+	margin-bottom: 0px; 
+	color: #7D775C;
+	}
+a:link { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #B7A5DF;
+	}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #D4CDDC;
+	}
+a:hover, a:active { 
+	text-decoration: underline; 
+	color: #9685BA;
+	}
+
+
+.highlighter {}
+
+.highlighter tr:HOVER {
+    background: mediumslateblue;
+    color: yellow
+	}
