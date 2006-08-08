@@ -10,6 +10,7 @@ import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.Sort;
 
 public class CommitQuery
 {
@@ -27,16 +28,17 @@ public class CommitQuery
         indexLocation = Configuration.getConfig().getIndexLocation();
     }
 
-    public Hits performQuery(String query)
+    public Hits performQuery(String query, Sort sort)
 	{
+        System.out.println("query" + query);
         try
         {
             ir = IndexReader.open(indexLocation);
             Searcher s = new IndexSearcher(ir);
             Analyzer a = new StandardAnalyzer();
             QueryParser qp = new QueryParser(RevisionDocument.MESSAGE_FIELDNAME, a);            
-            Query q = qp.parse(query);
-            return s.search(q);
+            Query q = qp.parse(query);            
+            return s.search(q, sort);
         }
         catch (IOException e)
         {

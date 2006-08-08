@@ -2,11 +2,16 @@ package com.randomhumans.sevin;
 
 import java.io.IOException;
 import org.apache.lucene.search.Hits;
+import org.apache.lucene.search.Sort;
+
 import com.randomhumans.svnindex.CommitQuery;
+import com.randomhumans.svnindex.RevisionDocument;
 
 public class Query
 {
     private String query = "";
+    
+    private String sortField = RevisionDocument.REVISION_FIELDNAME;
     
     public String getQuery()
     {
@@ -23,7 +28,8 @@ public class Query
         CommitQuery cq = new CommitQuery();
         try
         {
-        Hits h = cq.performQuery(query);
+        Hits h = cq.performQuery(query, new Sort(sortField));
+        
         Document[] docs = new Document[h.length()];
      
         for(int i = 0; i < h.length(); i++)
@@ -43,5 +49,17 @@ public class Query
             cq.close();
         }
     }
+
+    public String getSortField()
+    {
+        return sortField;
+    }
+
+    public void setSortField(String sortField)
+    {
+        this.sortField = sortField;
+    }
+    
+    
 
 }

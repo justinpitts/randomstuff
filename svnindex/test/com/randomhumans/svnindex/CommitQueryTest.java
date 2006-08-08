@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.search.Hits;
+import org.apache.lucene.search.Sort;
 
 import junit.framework.TestCase;
 
@@ -17,7 +18,7 @@ public class CommitQueryTest extends TestCase
     {
         CommitQuery t = new CommitQuery();
         try {
-        Hits h = t.performQuery("author:justinpitts");
+        Hits h = t.performQuery("author:justinpitts", new Sort(RevisionDocument.REVISION_FIELDNAME));
         assertNotNull(h);
         for(int i = 0; i < h.length(); i ++)
         {
