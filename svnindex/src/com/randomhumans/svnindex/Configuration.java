@@ -19,25 +19,25 @@ public class Configuration
     
     public String getRepositoryURL()
     {
-        String url = "http://randomstuff.googlecode.com/svn";
+        String url = "http://svn.cns.com/repo";
         return url;
     }
 
     public String getRepoPassword()
     {
-    	String password = "";
+    	String password = "ng7#mht";
     	return password;
     }
 
     public String getRepoUser()
     {
-    	String user = "";
+    	String user = "nextgenbuilder";
     	return user;
     }
 
     public String getIndexLocation()
     {
-        return System.getProperty("com.randomhumans.svnindex.indexLocation", "d:/index");
+        return System.getProperty("com.randomhumans.svnindex.indexLocation", "z:/index");
     }
 
 }

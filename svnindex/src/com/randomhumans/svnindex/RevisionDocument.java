@@ -4,7 +4,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.tmatesoft.svn.core.SVNLogEntry;
 
-public class RevisionDocument implements Runnable
+public class RevisionDocument 
 {
     public static final String REVISION_FIELDNAME = "revision";
     public static final String MESSAGE_FIELDNAME = "message";
@@ -15,20 +15,10 @@ public class RevisionDocument implements Runnable
 	{
 		Document doc = new Document();		
 		SVNLogEntry logEntry = RepositoryHelper.getLogEntry(revisionNumber);	
-		
-		
 		doc.add(new Field(AUTHOR_FIELDNAME, logEntry.getAuthor() + "", Field.Store.YES, Field.Index.UN_TOKENIZED));
 		doc.add(new Field(DATE_FIELDNAME, logEntry.getDate().toString(), Field.Store.YES, Field.Index.UN_TOKENIZED));
 		doc.add(new Field(MESSAGE_FIELDNAME, logEntry.getMessage() + "", Field.Store.YES, Field.Index.TOKENIZED));
 		doc.add(new Field(REVISION_FIELDNAME, Long.toString(logEntry.getRevision()), Field.Store.YES, Field.Index.UN_TOKENIZED));	
-		
 		return doc;
 	}
-
-	public void run()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
 }
