@@ -7,7 +7,6 @@ import org.apache.lucene.index.IndexWriter;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
-import org.tmatesoft.svn.core.internal.wc.SVNReporter;
 import org.tmatesoft.svn.core.io.SVNRepository;
 
 public class ContentIndexer 
