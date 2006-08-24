@@ -3,11 +3,18 @@ package com.randomhumans.svnindex;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.math.BigInteger;
+import java.security.DigestInputStream;
+import java.security.DigestOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.tmatesoft.svn.core.SVNDirEntry;
@@ -45,7 +52,8 @@ public class ContentDocument
         doc.add(new Field(DATE, entry.getDate().toString(), Field.Store.YES, Field.Index.NO));
         doc.add(new Field(REVISION, Long.toString(entry.getRevision()), Field.Store.YES, Field.Index.UN_TOKENIZED));
         doc.add(new Field(URL, entry.getURL().toString(), Field.Store.YES, Field.Index.NO));
-
+        String digest = "";
+        Field content = null;
         System.out.println(entry.getURL());
 
         try
@@ -54,10 +62,23 @@ public class ContentDocument
             try
             {
                 File temp = File.createTempFile("index", "dat");
-                OutputStream stream = new FileOutputStream(temp);
+                OutputStream os = new FileOutputStream(temp);
+                MessageDigest md5 = null;;
+                try
+                {
+                    md5 = MessageDigest.getInstance("MD5");
+                }
+                catch (NoSuchAlgorithmException e)
+                {
+                    // TODO Auto-generated catch block -- Finish Me
+                    e.printStackTrace();
+                }
+                DigestOutputStream stream = new DigestOutputStream(os, md5);
+                
                 try
                 {
                     repo.getFile("", -1, null, stream);
+                    digest = new BigInteger(stream.getMessageDigest().digest()).toString(16);
                 }
                 finally
                 {
@@ -66,7 +87,7 @@ public class ContentDocument
                 Reader r = new InputStreamReader(new FileInputStream(temp));
                 try
                 {
-                    doc.add(new Field(CONTENT, r));
+                    content = new Field(CONTENT, r);
                 }
                 finally
                 {
@@ -84,7 +105,42 @@ public class ContentDocument
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
         }
-        doc.add(new Field(CONTENT, "", Field.Store.NO, Field.Index.TOKENIZED));
+        doc.add(content);
+        doc.add(new Field("MD5", digest, Field.Store.YES, Field.Index.UN_TOKENIZED));
+        
+
         return doc;
+    }
+
+    private String getFileMd5(File f)
+    {
+        String result = "";
+        try
+        {
+            DigestInputStream dis = new DigestInputStream(new FileInputStream(f), MessageDigest.getInstance("MD5"));
+            byte[] buf = new byte[10240];
+            while (dis.read(buf) == buf.length)
+                ;
+            byte[] digest = dis.getMessageDigest().digest();
+            BigInteger bi = new BigInteger(digest);
+            result = bi.toString(16);  
+            dis.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+        }
+        return result;
     }
 }
