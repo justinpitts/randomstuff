@@ -25,13 +25,13 @@ public class Configuration
 
     public String getRepoPassword()
     {
-    	String password = "ng7#mht";
+    	String password = ""; //"ng7#mht";
     	return password;
     }
 
     public String getRepoUser()
     {
-    	String user = "nextgenbuilder";
+    	String user = "" ; //"nextgenbuilder";
     	return user;
     }
 

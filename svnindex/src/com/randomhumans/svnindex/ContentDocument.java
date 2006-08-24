@@ -14,12 +14,14 @@ import java.security.DigestInputStream;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
+import org.tmatesoft.svn.core.SVNProperty;
 import org.tmatesoft.svn.core.io.SVNRepository;
 
 public class ContentDocument
@@ -54,16 +56,17 @@ public class ContentDocument
         doc.add(new Field(URL, entry.getURL().toString(), Field.Store.YES, Field.Index.NO));
         String digest = "";
         Field content = null;
-        System.out.println(entry.getURL());
+        String mimeType = "";
 
         try
         {
             SVNRepository repo = RepositoryHelper.getRepo(entry.getURL().toString());
             try
             {
+                Map properties = new HashMap();
                 File temp = File.createTempFile("index", "dat");
                 OutputStream os = new FileOutputStream(temp);
-                MessageDigest md5 = null;;
+                MessageDigest md5 = null;                
                 try
                 {
                     md5 = MessageDigest.getInstance("MD5");
@@ -74,26 +77,33 @@ public class ContentDocument
                     e.printStackTrace();
                 }
                 DigestOutputStream stream = new DigestOutputStream(os, md5);
-                
+
                 try
                 {
-                    repo.getFile("", -1, null, stream);
+                    repo.getFile("", -1, properties, stream);
+                    mimeType = (String) properties.get(SVNProperty.MIME_TYPE);
+                    System.out.print(entry.getURL() + "     ");
+                    System.out.println(mimeType);
                     digest = new BigInteger(stream.getMessageDigest().digest()).toString(16);
                 }
                 finally
                 {
                     stream.close();
                 }
-                Reader r = new InputStreamReader(new FileInputStream(temp));
-                try
+                if (SVNProperty.isTextMimeType(mimeType))
                 {
-                    content = new Field(CONTENT, r);
+                    Reader r = new InputStreamReader(new FileInputStream(temp));
+                    try
+                    {
+                        content = new Field(CONTENT, r);
+                        doc.add(content);
+                    }
+                    finally
+                    {
+                        r.close();
+                    }
                 }
-                finally
-                {
-                    r.close();
-                    temp.delete();
-                }
+                temp.delete();
             }
             finally
             {
@@ -104,43 +114,10 @@ public class ContentDocument
         {
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
-        }
-        doc.add(content);
+        }        
         doc.add(new Field("MD5", digest, Field.Store.YES, Field.Index.UN_TOKENIZED));
-        
 
         return doc;
     }
-
-    private String getFileMd5(File f)
-    {
-        String result = "";
-        try
-        {
-            DigestInputStream dis = new DigestInputStream(new FileInputStream(f), MessageDigest.getInstance("MD5"));
-            byte[] buf = new byte[10240];
-            while (dis.read(buf) == buf.length)
-                ;
-            byte[] digest = dis.getMessageDigest().digest();
-            BigInteger bi = new BigInteger(digest);
-            result = bi.toString(16);  
-            dis.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
-        }
-        return result;
-    }
+    
 }
