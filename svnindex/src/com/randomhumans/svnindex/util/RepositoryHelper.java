@@ -1,5 +1,5 @@
 
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +13,7 @@ import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+
 
 public class RepositoryHelper
 {
@@ -98,8 +99,13 @@ public class RepositoryHelper
 
     public static Collection<SVNDirEntry> dir(SVNRepository repo, String url) throws SVNException
     {
+        return dir(repo, url, repo.getLatestRevision());
+    }
+
+    public static Collection<SVNDirEntry> dir(SVNRepository repo, String url, long revision) throws SVNException
+    {
         ArrayList<SVNDirEntry> entries = new ArrayList<SVNDirEntry>();
-        repo.getDir(url, repo.getLatestRevision(), null, entries);
+        repo.getDir(url, revision, null, entries);
         return entries;
     }
 

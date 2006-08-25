@@ -6,6 +6,9 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
+import com.randomhumans.svnindex.indexing.RevisionDocument;
+import com.randomhumans.svnindex.queries.CommitQuery;
+
 import junit.framework.TestCase;
 
 public class CommitQueryTest extends TestCase

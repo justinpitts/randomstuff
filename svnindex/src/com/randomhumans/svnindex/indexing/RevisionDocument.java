@@ -1,8 +1,10 @@
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.indexing;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.tmatesoft.svn.core.SVNLogEntry;
+
+import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class RevisionDocument 
 {
@@ -11,7 +13,7 @@ public class RevisionDocument
     public static final String AUTHOR_FIELDNAME = "author";
     public static final String DATE_FIELDNAME = "date";
     
-	static Document createRevisionDocument(long revisionNumber )
+	static public Document createRevisionDocument(long revisionNumber )
 	{
 		Document doc = new Document();		
 		SVNLogEntry logEntry = RepositoryHelper.getLogEntry(revisionNumber);	

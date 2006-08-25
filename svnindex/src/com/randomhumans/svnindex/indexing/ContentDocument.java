@@ -1,5 +1,5 @@
 
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.indexing;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,6 +23,8 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.SVNProperty;
 import org.tmatesoft.svn.core.io.SVNRepository;
+
+import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class ContentDocument
 {

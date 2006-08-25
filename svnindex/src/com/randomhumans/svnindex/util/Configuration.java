@@ -1,4 +1,4 @@
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.util;
 
 public class Configuration
 {

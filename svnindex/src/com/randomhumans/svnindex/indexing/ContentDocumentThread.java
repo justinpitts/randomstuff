@@ -1,4 +1,4 @@
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.indexing;
 
 public class ContentDocumentThread implements Runnable
 {

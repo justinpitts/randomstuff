@@ -1,9 +1,13 @@
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.indexing;
+
+import java.util.TreeSet;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.io.SVNRepository;
+
+import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class SVNRepoTreeWalker
 {
@@ -13,7 +17,9 @@ public class SVNRepoTreeWalker
         try
         {
             repo = RepositoryHelper.getRepo(url);
-            map("", action, repo);            
+            long currentRevision = repo.getLatestRevision();            
+            
+            map("", action, repo, currentRevision);            
         }
         catch (SVNException e)
         {
@@ -32,16 +38,16 @@ public class SVNRepoTreeWalker
         }        
     }
     
-    private void map(String url, ISVNUrlAction action, SVNRepository repo)
+    private void map(String url, ISVNUrlAction action, SVNRepository repo, long revision)
     {
         try
         {
             for(SVNDirEntry entry : RepositoryHelper.dir(repo, url))
             {
-                action.execute(url + "/" + entry.getName(), entry);
-                if (entry.getKind() == SVNNodeKind.DIR)
+                boolean process =  action.execute(url + "/" + entry.getName(), entry);
+                if ( process && entry.getKind() == SVNNodeKind.DIR )
                 {                    
-                    map( (url.equals("") ?  entry.getName() : url + "/" + entry.getName()), action, repo);                        
+                    map( (url.equals("") ?  entry.getName() : url + "/" + entry.getName()), action, repo, revision);                        
                 }
             }
         }

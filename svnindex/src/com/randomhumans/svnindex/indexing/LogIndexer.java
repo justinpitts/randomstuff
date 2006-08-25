@@ -1,9 +1,12 @@
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.indexing;
 
 import java.io.IOException;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.IndexWriter;
 import org.tmatesoft.svn.core.SVNException;
+
+import com.randomhumans.svnindex.util.Configuration;
+import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class LogIndexer
 {	

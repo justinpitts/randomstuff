@@ -1,5 +1,5 @@
 
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.indexing;
 
 import java.io.IOException;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -8,6 +8,9 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.io.SVNRepository;
+
+import com.randomhumans.svnindex.util.Configuration;
+import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class ContentIndexer 
 {

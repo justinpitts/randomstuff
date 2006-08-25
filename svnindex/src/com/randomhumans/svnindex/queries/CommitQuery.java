@@ -1,4 +1,4 @@
-package com.randomhumans.svnindex;
+package com.randomhumans.svnindex.queries;
 
 import java.io.IOException;
 import org.apache.lucene.analysis.Analyzer;
@@ -11,6 +11,9 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.Sort;
+
+import com.randomhumans.svnindex.indexing.RevisionDocument;
+import com.randomhumans.svnindex.util.Configuration;
 
 public class CommitQuery
 {
