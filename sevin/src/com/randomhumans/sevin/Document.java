@@ -1,6 +1,6 @@
 package com.randomhumans.sevin;
 
-import com.randomhumans.svnindex.RevisionDocument;
+import com.randomhumans.svnindex.indexing.RevisionDocument;
 
 public class Document
 {

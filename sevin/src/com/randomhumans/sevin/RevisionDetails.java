@@ -2,7 +2,7 @@ package com.randomhumans.sevin;
 
 import org.tmatesoft.svn.core.SVNLogEntry;
 
-import com.randomhumans.svnindex.RepositoryHelper;
+import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class RevisionDetails
 {

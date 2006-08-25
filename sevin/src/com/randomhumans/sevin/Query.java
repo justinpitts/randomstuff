@@ -4,8 +4,8 @@ import java.io.IOException;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
-import com.randomhumans.svnindex.CommitQuery;
-import com.randomhumans.svnindex.RevisionDocument;
+import com.randomhumans.svnindex.indexing.RevisionDocument;
+import com.randomhumans.svnindex.queries.CommitQuery;
 
 public class Query
 {
