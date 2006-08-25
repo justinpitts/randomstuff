@@ -2,80 +2,121 @@
 package com.randomhumans.svnindex.indexing;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
-import org.tmatesoft.svn.core.SVNDirEntry;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNNodeKind;
-import org.tmatesoft.svn.core.io.SVNRepository;
-
 import com.randomhumans.svnindex.util.Configuration;
-import com.randomhumans.svnindex.util.RepositoryHelper;
 
-public class ContentIndexer 
+public class ContentIndexer implements Runnable
 {
-    public static void main(String[] args) throws IOException, SVNException
-    {
-        ContentIndexer indexer = new ContentIndexer();
-        indexer.index();
+    private static ExecutorService indexerPool = Executors.newSingleThreadExecutor();
+
+    Document doc;
+
+    public static void queueDocument(Document d)
+    {        
+        indexerPool.submit(new ContentIndexer(d));
     }
 
-    IndexWriter iw = null;
-
-    public void index() throws IOException, SVNException
+    public ContentIndexer(Document d)
     {
-        iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), true);
+        doc = d;
+    }
+
+    public void run()
+    {        
+        IndexWriter iw = null;
         try
         {
-            SVNRepository repo = RepositoryHelper.getRepo();
-            try
-            {
-            index("", repo);
-            } finally {
-                repo.closeSession();
-            }
+            iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), false);
+            iw.addDocument(doc);
+        }
+        catch (IOException e)
+        {
+            queueDocument(doc);
+            e.printStackTrace();
         }
         finally
         {
             try
             {
-                iw.optimize();
+                if (iw != null)
+                {
+                    iw.close();
+                }
             }
-            finally
+            catch (IOException e)
             {
-                iw.close();
+                e.printStackTrace();
             }
         }
     }
 
-    public void index(String path, SVNRepository repo)
+    public static void init()
     {
+        IndexWriter iw = null;
         try
         {
-            for(SVNDirEntry entry : RepositoryHelper.dir(repo, path))
+            iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), true);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        finally
+        {
+            try
             {
-                try
-                {
-                    if (entry.getKind() == SVNNodeKind.FILE)
-                    {
-                        iw.addDocument(ContentDocument.createDocument(entry, path + "/" + entry.getName()));
-                    }
-                    else if (entry.getKind() == SVNNodeKind.DIR)
-                    {
-                        index( (path.equals("") ?  entry.getName() : path + "/" + entry.getName()), repo);                        
-                    }
-                }
-                catch (IOException e)
-                {
-                    // TODO Auto-generated catch block -- Finish Me
-                    e.printStackTrace();
-                }
+                iw.close();                
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                ;
             }
         }
-        catch (SVNException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
-        }        
     }
+
+    public static void optimizeIndex()
+    {
+        indexerPool.shutdown();
+        try
+        {
+            indexerPool.awaitTermination(60, TimeUnit.SECONDS);
+        }
+        catch (InterruptedException e1)
+        {
+            e1.printStackTrace();
+        }
+        IndexWriter iw = null;
+        try
+        {
+            iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), true);
+            iw.optimize();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                iw.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

@@ -11,12 +11,22 @@ import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.io.SVNRepository;
-import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.wc.DefaultSVNRepositoryPool;
+import org.tmatesoft.svn.core.wc.ISVNRepositoryPool;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 
 public class RepositoryHelper
 {
+    private static ISVNRepositoryPool pool = null;
+    static {
+        DAVRepositoryFactory.setup();
+        String user = Configuration.getConfig().getRepoUser();
+        String password = Configuration.getConfig().getRepoPassword();
+        ISVNAuthenticationManager auth = SVNWCUtil.createDefaultAuthenticationManager(user, password);
+        pool = new DefaultSVNRepositoryPool(auth);
+        
+    }
     public static SVNRepository getRepo() throws SVNException
     {
         return getRepo(getRepoURL());
@@ -24,20 +34,7 @@ public class RepositoryHelper
     
     public static SVNRepository getRepo(String url) throws SVNException
     {
-        DAVRepositoryFactory.setup();
-        SVNRepository repository = null;
-        repository = SVNRepositoryFactory.create(SVNURL.parseURIEncoded(url));
-        ISVNAuthenticationManager authManager = SVNWCUtil
-                                                         .createDefaultAuthenticationManager(
-                                                                                             Configuration
-                                                                                                          .getConfig()
-                                                                                                          .getRepoUser(),
-                                                                                             Configuration
-                                                                                                          .getConfig()
-                                                                                                          .getRepoPassword());
-        repository.setAuthenticationManager(authManager);
-        return repository;
-        
+        return pool.createRepository(SVNURL.parseURIEncoded(url), true);
     }
 
     public static long getLatestRevision() throws SVNException
@@ -59,7 +56,7 @@ public class RepositoryHelper
         SVNRepository repo = null;
         try
         {
-            repo = getRepo();
+            repo = getRepo();            
             return repo.checkPath(path, -1);
         }
         finally
@@ -133,14 +130,12 @@ public class RepositoryHelper
                 }
                 catch (SVNException e)
                 {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
             }
             catch (SVNException e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             return logEntry;
@@ -153,7 +148,6 @@ public class RepositoryHelper
             }
             catch (SVNException e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

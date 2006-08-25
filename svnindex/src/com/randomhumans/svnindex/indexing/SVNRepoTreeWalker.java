@@ -1,12 +1,9 @@
 package com.randomhumans.svnindex.indexing;
 
-import java.util.TreeSet;
-
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.io.SVNRepository;
-
 import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class SVNRepoTreeWalker

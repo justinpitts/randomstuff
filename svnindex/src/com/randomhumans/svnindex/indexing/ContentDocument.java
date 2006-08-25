@@ -3,14 +3,12 @@ package com.randomhumans.svnindex.indexing;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.math.BigInteger;
-import java.security.DigestInputStream;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,7 +21,6 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.SVNProperty;
 import org.tmatesoft.svn.core.io.SVNRepository;
-
 import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class ContentDocument
@@ -46,7 +43,9 @@ public class ContentDocument
         try
         {
             if (RepositoryHelper.checkPath(path) == SVNNodeKind.NONE)
+            {
                 return doc;
+            }
         }
         catch (SVNException e1)
         {}
@@ -68,7 +67,7 @@ public class ContentDocument
                 Map properties = new HashMap();
                 File temp = File.createTempFile("index", "dat");
                 OutputStream os = new FileOutputStream(temp);
-                MessageDigest md5 = null;                
+                MessageDigest md5 = null;
                 try
                 {
                     md5 = MessageDigest.getInstance("MD5");
@@ -84,8 +83,6 @@ public class ContentDocument
                 {
                     repo.getFile("", -1, properties, stream);
                     mimeType = (String) properties.get(SVNProperty.MIME_TYPE);
-                    System.out.print(entry.getURL() + "     ");
-                    System.out.println(mimeType);
                     digest = new BigInteger(stream.getMessageDigest().digest()).toString(16);
                 }
                 finally
@@ -116,10 +113,8 @@ public class ContentDocument
         {
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
-        }        
+        }
         doc.add(new Field("MD5", digest, Field.Store.YES, Field.Index.UN_TOKENIZED));
-
         return doc;
     }
-    
 }
