@@ -2,10 +2,11 @@
 package com.randomhumans.svnindex.indexing;
 
 import java.io.IOException;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
@@ -13,31 +14,53 @@ import com.randomhumans.svnindex.util.Configuration;
 
 public class ContentIndexer implements Runnable
 {
-    private static ExecutorService indexerPool = Executors.newSingleThreadExecutor();
-
-    Document doc;
-
-    public static void queueDocument(Document d)
+    private static ExecutorService indexerPool = null;
+    private static BlockingQueue<Document> documentQueue = new LinkedBlockingQueue<Document>();
+    private volatile static boolean signal = false;
+    
+        
+    public synchronized static void queueDocument(Document d) throws InterruptedException
     {        
-        indexerPool.submit(new ContentIndexer(d));
+        if (indexerPool == null)
+        {
+            indexerPool = Executors.newSingleThreadExecutor();
+            indexerPool.submit(new ContentIndexer());
+        }
+        documentQueue.put(d);        
     }
 
-    public ContentIndexer(Document d)
-    {
-        doc = d;
-    }
-
+   
     public void run()
     {        
+        Document doc = null;
         IndexWriter iw = null;
         try
         {
             iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), false);
-            iw.addDocument(doc);
+            do
+            {
+                doc = documentQueue.poll(1, TimeUnit.SECONDS);
+                if (doc != null)
+                {
+                    iw.addDocument(doc);
+                }
+            }
+            while (!signal);
+            doc = documentQueue.poll();
+            while(doc != null)
+            {
+                iw.addDocument(doc);
+                doc = documentQueue.poll();
+            }
+            
         }
         catch (IOException e)
         {
-            queueDocument(doc);
+            
+            e.printStackTrace();
+        }
+        catch (InterruptedException e)
+        {        
             e.printStackTrace();
         }
         finally
@@ -45,7 +68,7 @@ public class ContentIndexer implements Runnable
             try
             {
                 if (iw != null)
-                {
+                {                    
                     iw.close();
                 }
             }
@@ -87,7 +110,7 @@ public class ContentIndexer implements Runnable
 
     public static void optimizeIndex()
     {
-        indexerPool.shutdown();
+        signal = true;
         try
         {
             indexerPool.awaitTermination(60, TimeUnit.SECONDS);

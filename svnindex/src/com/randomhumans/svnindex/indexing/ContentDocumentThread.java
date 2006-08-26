@@ -36,6 +36,11 @@ public class ContentDocumentThread implements Runnable
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
         }
+        catch (InterruptedException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+        }
     }
 
 }
