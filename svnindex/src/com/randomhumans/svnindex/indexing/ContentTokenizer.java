@@ -22,7 +22,7 @@ public class ContentTokenizer implements ISVNUrlAction
     }
 
     public boolean execute(String url, SVNDirEntry entry)
-    {
+    {        
         boolean process = !nameFilters.contains(entry.getName())
                           && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder") && entry.getSize() < 2 * MB;
         if (process)

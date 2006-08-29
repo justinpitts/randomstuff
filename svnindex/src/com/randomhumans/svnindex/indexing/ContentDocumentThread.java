@@ -40,7 +40,12 @@ public class ContentDocumentThread implements Runnable
         {
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
-        }
+        }        
+    }
+    
+    public static void shutdown()
+    {
+        indexerPool.shutdown();
     }
 
 }

@@ -19,8 +19,7 @@ public class Configuration
     
     public String getRepositoryURL()
     {
-        String url = "http://svn.cns.com/repo";
-        return url;
+        return System.getProperty("com.randomhumans.svnindex.repoURL");        
     }
 
     public String getRepoPassword()
@@ -37,7 +36,7 @@ public class Configuration
 
     public String getIndexLocation()
     {
-        return System.getProperty("com.randomhumans.svnindex.indexLocation", "z:/index");
+        return System.getProperty("com.randomhumans.svnindex.indexLocation");
     }
 
 }

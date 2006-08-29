@@ -21,11 +21,6 @@ public class ContentIndexer implements Runnable
         
     public synchronized static void queueDocument(Document d) throws InterruptedException
     {        
-        if (indexerPool == null)
-        {
-            indexerPool = Executors.newSingleThreadExecutor();
-            indexerPool.submit(new ContentIndexer());
-        }
         documentQueue.put(d);        
     }
 
@@ -46,17 +41,19 @@ public class ContentIndexer implements Runnable
                 }
             }
             while (!signal);
+            System.out.println("signal caught; draining queue");
+
+            
             doc = documentQueue.poll();
             while(doc != null)
             {
+                System.out.println( documentQueue.size());
                 iw.addDocument(doc);
                 doc = documentQueue.poll();
             }
-            
         }
         catch (IOException e)
-        {
-            
+        {            
             e.printStackTrace();
         }
         catch (InterruptedException e)
@@ -68,8 +65,11 @@ public class ContentIndexer implements Runnable
             try
             {
                 if (iw != null)
-                {                    
+                {
+                    System.out.println("optimizing index");
+                    iw.optimize();
                     iw.close();
+                    System.out.println("index closed");
                 }
             }
             catch (IOException e)
@@ -106,39 +106,23 @@ public class ContentIndexer implements Runnable
                 ;
             }
         }
+        indexerPool = Executors.newSingleThreadExecutor();
+        indexerPool.submit(new ContentIndexer());
     }
 
-    public static void optimizeIndex()
+    public static void close()
     {
         signal = true;
         try
         {
+            System.out.println("waiting");
+            indexerPool.shutdown();
             indexerPool.awaitTermination(60, TimeUnit.SECONDS);
+            System.out.println("waited");
         }
         catch (InterruptedException e1)
         {
             e1.printStackTrace();
-        }
-        IndexWriter iw = null;
-        try
-        {
-            iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), true);
-            iw.optimize();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                iw.close();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
         }
     }
 
