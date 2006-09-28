@@ -1,6 +1,7 @@
 package com.randomhumans.svnindex.queries;
 
 import java.io.IOException;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.IndexReader;
@@ -12,34 +13,40 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.Sort;
 
-import com.randomhumans.svnindex.indexing.RevisionDocument;
 import com.randomhumans.svnindex.util.Configuration;
 
-public class CommitQuery
+public class AbstractQuery
 {
 
-    IndexReader ir = null;
-	private String indexLocation;
-    /**
-	 * @param args
-	 * @throws IOException 
-	 * @throws ParseException 
-	 */
-    
-    public CommitQuery()
-    {        
-        indexLocation = Configuration.getConfig().getIndexLocation();
+    private IndexReader ir = null;
+    protected IndexReader getReader() throws IOException
+    {
+        if (ir == null)
+            ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
+        return ir;
     }
 
-    public Hits performQuery(String query, Sort sort)
-	{
-        System.out.println("query" + query);
+    public void close()
+    {
         try
         {
-            ir = IndexReader.open(indexLocation);
-            Searcher s = new IndexSearcher(ir);
+            if(ir != null)
+                ir.close();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            e.printStackTrace();
+        }
+    }
+
+    public Hits performQuery(String query, Sort sort, String defaultFieldName)
+    {
+        try
+        {
+            Searcher s = new IndexSearcher(getReader());
             Analyzer a = new StandardAnalyzer();
-            QueryParser qp = new QueryParser(RevisionDocument.MESSAGE_FIELDNAME, a);            
+            QueryParser qp = new QueryParser(defaultFieldName, a);            
             Query q = qp.parse(query);            
             return s.search(q, sort);
         }
@@ -54,20 +61,6 @@ public class CommitQuery
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
             return null;
-        }
-	}
-    
-    public void close()
-    {
-        try
-        {
-            if(ir != null)
-                ir.close();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
         }
     }
 

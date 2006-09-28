@@ -7,7 +7,8 @@ import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
 import com.randomhumans.svnindex.indexing.RevisionDocument;
-import com.randomhumans.svnindex.queries.CommitQuery;
+import com.randomhumans.svnindex.queries.IQuery;
+import com.randomhumans.svnindex.queries.RevisionQuery;
 
 import junit.framework.TestCase;
 
@@ -19,7 +20,7 @@ public class CommitQueryTest extends TestCase
      */
     public void testPerformQuery() throws IOException
     {
-        CommitQuery t = new CommitQuery();
+        IQuery t = new RevisionQuery();
         try {
         Hits h = t.performQuery("author:justinpitts", new Sort(RevisionDocument.REVISION_FIELDNAME));
         assertNotNull(h);

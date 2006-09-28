@@ -25,17 +25,17 @@ import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class ContentDocument
 {
-    private static final String CONTENT = "content";
+    public static final String CONTENT = "content";
 
-    private static final String URL = "url";
+    public static final String URL = "url";
 
-    private static final String REVISION = "revision";
+    public static final String REVISION = "revision";
 
-    private static final String DATE = "date";
+    public static final String DATE = "date";
 
-    private static final String MESSAGE = "message";
+    public static final String MESSAGE = "message";
 
-    private static final String AUTHOR = "author";
+    public static final String AUTHOR = "author";
 
     public static Document createDocument(SVNDirEntry entry, String path) throws IOException
     {

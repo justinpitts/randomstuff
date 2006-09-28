@@ -5,7 +5,8 @@ import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
 import com.randomhumans.svnindex.indexing.RevisionDocument;
-import com.randomhumans.svnindex.queries.CommitQuery;
+import com.randomhumans.svnindex.queries.IQuery;
+import com.randomhumans.svnindex.queries.RevisionQuery;
 
 public class Query
 {
@@ -25,7 +26,7 @@ public class Query
 
     public Document[] getResults()
     {
-        CommitQuery cq = new CommitQuery();
+        IQuery cq = new RevisionQuery();
         try
         {
         Hits h = cq.performQuery(query, new Sort(sortField));
