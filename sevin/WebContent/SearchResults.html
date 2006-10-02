@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Query Results</title>
+<style type="text/css" media="all">
+    @import "normal.css";
+  </style>
+</head>
+<body jwcid="@Body">
+<p /><p /><p /><p />
+<center>
+<table class="highlighter" border="1px" bordercolor="black">
+  <tr id="header bgcolor="cyan">
+    <td onclick="setSort('revision')">Revision</td>
+    <td onclick="setSort('author')" >Author</td>
+    <td onclick="setSort('date')">Date</td>
+    <td>Message</td>
+   </tr>
+   <tr jwcd="@For" source="ognl:results" value="ognl:doc" element="tr" >
+    <td><span jwcd="@Insert" value="ognl:doc.revision">12345</span></td>
+    <td><span jwcd="@Insert" value="ognl:doc.author">jsmith</span></td>
+    <td><span jwcd="@Insert" value="ognl:doc.date">1/1/2007</span></td>
+    <td><span jwcd="@Insert" value="ognl:doc.message">Commit message here</span></td>
+   </tr>
+</table> 
+</center>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Search Subversion Repository</title>
+<style type="text/css" media="all">
+    @import "normal.css";
+  </style>
+</head>
+<body jwcid="@Body">
+<center>
+
+<h2>Nifty slogan here</h2>
+<form jwcid="form@Form" success="listener:doSubmit">
+  <input jwcid="query@TextField" value="ognl:query" size="100"/><input type="submit" value="Submit">
+</form>
+
+This search uses Lucene and Lucene syntax. The available fields are author: date: message: revision: and content:
+Example searches :
+<table>
+<tr><td>author:foo</td><td>find all commits authored by "foo"</td> </tr>
+<tr><td>foo</td><td>find all commits with "foo" somewhere</td> </tr>
+</table>
+<br/> <br/> <h5>rendered at <span jwcid="@Insert" value="ognl:new java.util.Date()">June 26 2005</span></h5>
+</center>
+</body>
+</html>
