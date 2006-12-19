@@ -17,7 +17,6 @@ public class FilteringTestAction implements ISVNUrlAction
 
     public boolean execute(String url, SVNDirEntry entry)
     {        
-        System.out.println(url);
         boolean result = !nameFilters.contains(entry.getName())  && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder");        
         return result ;
     }

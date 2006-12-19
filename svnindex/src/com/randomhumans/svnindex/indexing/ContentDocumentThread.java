@@ -3,12 +3,15 @@ package com.randomhumans.svnindex.indexing;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.tmatesoft.svn.core.SVNDirEntry;
 
 public class ContentDocumentThread implements Runnable
 {
-
+	static Log log = LogFactory.getLog(ContentDocumentThread.class);
     private static ExecutorService indexerPool = Executors.newFixedThreadPool(20);
     String docUrl = "";
     SVNDirEntry dirEntry = null;
@@ -33,13 +36,11 @@ public class ContentDocumentThread implements Runnable
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+        	log.error(e);
         }
         catch (InterruptedException e)
         {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+            log.error(e);
         }        
     }
     

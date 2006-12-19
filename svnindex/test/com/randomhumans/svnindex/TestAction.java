@@ -1,18 +1,17 @@
-package com.randomhumans.svnindex.indexing;
+package com.randomhumans.svnindex;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
+
+import com.randomhumans.svnindex.indexing.ISVNUrlAction;
 
 
 public class TestAction implements ISVNUrlAction
 {
     int i =0;
 
-    public boolean execute(String url, SVNDirEntry entry)
+    public boolean execute(final String url, final SVNDirEntry entry)
     {
         i++;
-        System.out.println(i);
-        if(i %100 == 0)
-            System.out.println(url);
         return true;
     }
 

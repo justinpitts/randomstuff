@@ -1,5 +1,7 @@
 package com.randomhumans.svnindex.indexing;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
@@ -8,6 +10,7 @@ import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class SVNRepoTreeWalker
 {
+	Log log = LogFactory.getLog(Walker.class);
     public void map(String url, ISVNUrlAction action)
     {
         SVNRepository repo = null;
@@ -20,8 +23,7 @@ public class SVNRepoTreeWalker
         }
         catch (SVNException e)
         {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+            log.error(e);            
         } finally {
             try
             {
@@ -29,8 +31,7 @@ public class SVNRepoTreeWalker
             }
             catch (SVNException e)
             {
-                // TODO Auto-generated catch block -- Finish Me
-                e.printStackTrace();
+            	log.error(e);
             }
         }        
     }
@@ -50,8 +51,7 @@ public class SVNRepoTreeWalker
         }
         catch (SVNException e)
         {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+            log.error(e);
         }        
     }
 

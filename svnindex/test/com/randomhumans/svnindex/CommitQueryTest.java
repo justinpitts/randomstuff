@@ -2,6 +2,8 @@ package com.randomhumans.svnindex;
 
 import java.io.IOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
@@ -14,6 +16,7 @@ import junit.framework.TestCase;
 
 public class CommitQueryTest extends TestCase
 {
+	Log log = LogFactory.getLog(CommitQueryTest.class);
 
     /*
      * Test method for 'com.randomhumans.svnindex.CommitQuery.performQuery(String)'
@@ -27,8 +30,7 @@ public class CommitQueryTest extends TestCase
         for(int i = 0; i < h.length(); i ++)
         {
             Document d = h.doc(i);
-            System.out.println(d);        
-            
+            log.debug(d);            
         }
         } finally {
             t.close();

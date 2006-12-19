@@ -14,6 +14,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.tmatesoft.svn.core.SVNDirEntry;
@@ -36,7 +39,10 @@ public class ContentDocument
     public static final String MESSAGE = "message";
 
     public static final String AUTHOR = "author";
+    
+    public static final String MD5 = "md5";
 
+    static Log log = LogFactory.getLog(ContentDocument.class);
     public static Document createDocument(SVNDirEntry entry, String path) throws IOException
     {
         Document doc = new Document();
@@ -48,7 +54,9 @@ public class ContentDocument
             }
         }
         catch (SVNException e1)
-        {}
+        {
+        	log.warn(e1);
+        }
 
         doc.add(new Field(AUTHOR, entry.getAuthor() + "", Field.Store.YES, Field.Index.TOKENIZED));
         doc.add(new Field(MESSAGE, entry.getCommitMessage() + "", Field.Store.COMPRESS, Field.Index.TOKENIZED));
@@ -74,8 +82,7 @@ public class ContentDocument
                 }
                 catch (NoSuchAlgorithmException e)
                 {
-                    // TODO Auto-generated catch block -- Finish Me
-                    e.printStackTrace();
+                    log.error(e);
                 }
                 DigestOutputStream stream = new DigestOutputStream(os, md5);
 
@@ -111,10 +118,9 @@ public class ContentDocument
         }
         catch (SVNException e)
         {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+            log.error(e);
         }
-        doc.add(new Field("MD5", digest, Field.Store.YES, Field.Index.UN_TOKENIZED));
+        doc.add(new Field(MD5, digest, Field.Store.YES, Field.Index.UN_TOKENIZED));
         return doc;
     }
 }

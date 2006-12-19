@@ -11,9 +11,9 @@ public class ContentTokenizer implements ISVNUrlAction
 {
     SortedSet<String> nameFilters = null;
 
-    static long KB = 1024;
+    static final long KB = 1024;
 
-    static long MB = KB * KB;
+    static final long MB = KB * KB;
 
     int i = 0;
     public ContentTokenizer(Set<String> filters)
@@ -28,10 +28,6 @@ public class ContentTokenizer implements ISVNUrlAction
         if (process)
         {            
             ContentDocumentThread.queueEntry(url, entry);
-            if (i++ % 100 == 0)
-            {
-                System.out.println(url);
-            }
         }
         return process;
     }

@@ -7,6 +7,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
@@ -14,16 +17,15 @@ import com.randomhumans.svnindex.util.Configuration;
 
 public class ContentIndexer implements Runnable
 {
+	static Log log = LogFactory.getLog(ContentIndexer.class);
     private static ExecutorService indexerPool = null;
     private static BlockingQueue<Document> documentQueue = new LinkedBlockingQueue<Document>();
     private volatile static boolean signal = false;
-    
         
     public synchronized static void queueDocument(Document d) throws InterruptedException
     {        
         documentQueue.put(d);        
     }
-
    
     public void run()
     {        
@@ -41,24 +43,22 @@ public class ContentIndexer implements Runnable
                 }
             }
             while (!signal);
-            System.out.println("signal caught; draining queue");
-
-            
+            log.info("signal caught; draining queue");            
             doc = documentQueue.poll();
             while(doc != null)
             {
-                System.out.println( documentQueue.size());
+                log.debug("Queuesize: " + documentQueue.size());
                 iw.addDocument(doc);
                 doc = documentQueue.poll();
             }
         }
         catch (IOException e)
         {            
-            e.printStackTrace();
+        	log.error(e);            
         }
         catch (InterruptedException e)
         {        
-            e.printStackTrace();
+        	log.warn(e);            
         }
         finally
         {
@@ -66,10 +66,10 @@ public class ContentIndexer implements Runnable
             {
                 if (iw != null)
                 {
-                    System.out.println("optimizing index");
+                    log.debug("optimizing index");
                     iw.optimize();
                     iw.close();
-                    System.out.println("index closed");
+                    log.debug("index closed");
                 }
             }
             catch (IOException e)
@@ -88,7 +88,7 @@ public class ContentIndexer implements Runnable
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.error(e);
         }
 
         finally
@@ -99,7 +99,7 @@ public class ContentIndexer implements Runnable
             }
             catch (IOException e)
             {
-                e.printStackTrace();
+                log.error(e);
             }
             finally
             {
@@ -115,14 +115,14 @@ public class ContentIndexer implements Runnable
         signal = true;
         try
         {
-            System.out.println("waiting");
+            log.debug("waiting");
             indexerPool.shutdown();
             indexerPool.awaitTermination(60, TimeUnit.SECONDS);
-            System.out.println("waited");
+            log.debug("wait complete");
         }
         catch (InterruptedException e1)
         {
-            e1.printStackTrace();
+            log.error(e1);
         }
     }
 
