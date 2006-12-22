@@ -9,5 +9,6 @@
 	<classpathentry sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.1.1/src/org.junit_3.8.1/junitsrc.zip" kind="var" path="JUNIT_HOME/junit.jar"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="lib" path="/svnindex/lib/javasvn.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tapestry"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

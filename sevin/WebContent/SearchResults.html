@@ -10,18 +10,20 @@
 <body jwcid="@Body">
 <p /><p /><p /><p />
 <center>
-<table class="highlighter" border="1px" bordercolor="black">
+<table class="highlighter" border="0px" width="75%">
   <tr id="header bgcolor="cyan">
-    <td onclick="setSort('revision')">Revision</td>
-    <td onclick="setSort('author')" >Author</td>
-    <td onclick="setSort('date')">Date</td>
-    <td>Message</td>
+    <td >Revision</td>
+    <td >Author</td>
+    <td >Date</td>
+    <td>MD5 Hash</td>
+    <td>URL</td>
    </tr>
-   <tr jwcd="@For" source="ognl:results" value="ognl:doc" element="tr" >
-    <td><span jwcd="@Insert" value="ognl:doc.revision">12345</span></td>
-    <td><span jwcd="@Insert" value="ognl:doc.author">jsmith</span></td>
-    <td><span jwcd="@Insert" value="ognl:doc.date">1/1/2007</span></td>
-    <td><span jwcd="@Insert" value="ognl:doc.message">Commit message here</span></td>
+   <tr jwcid="@For" source="ognl:results" value="ognl:doc" element="tr" >
+    <td><span jwcid="@Insert" value="ognl:doc.revision">12345</span></td>
+    <td><span jwcid="@Insert" value="ognl:doc.author">jsmith</span></td>
+    <td><span jwcid="@Insert" value="ognl:doc.date">1/1/2007</span></td>
+    <td><span jwcid="@Insert" value="ognl:doc.MD5">hash</span></td>
+    <td><span jwcid="@Insert" value="ognl:doc.URL">http://blah</span></td>    
    </tr>
 </table> 
 </center>

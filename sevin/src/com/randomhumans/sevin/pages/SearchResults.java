@@ -11,13 +11,14 @@ import org.apache.tapestry.event.PageEvent;
 import org.apache.tapestry.html.BasePage;
 
 import com.randomhumans.sevin.Document;
+import com.randomhumans.svnindex.indexing.ContentDocument;
 import com.randomhumans.svnindex.queries.ContentQuery;
 import com.randomhumans.svnindex.queries.IQuery;
 
 public abstract class SearchResults extends BasePage implements PageBeginRenderListener
 {
     Log log = LogFactory.getLog(this.getClass());
-    String sortField = "AUTHOR";
+    String sortField = ContentDocument.AUTHOR;
     
     public abstract void setQuery(String query);
     public abstract String getQuery();
@@ -26,9 +27,11 @@ public abstract class SearchResults extends BasePage implements PageBeginRenderL
         
     }
     
+    public abstract Document getDoc();
+    public abstract void setDoc(Document d);
+    
     public Document[] getResults()
-    {
-        log.error("Foo");
+    {        
         IQuery cq = new ContentQuery();
         try
         {
@@ -45,13 +48,18 @@ public abstract class SearchResults extends BasePage implements PageBeginRenderL
             catch (IOException e)
             {
                 // TODO Auto-generated catch block -- Finish Me
-                e.printStackTrace();
+                log.error(e);
             }
         }
+        log.info(docs.length);
         return docs;
+        } catch (Exception ex) {
+        	log.error(ex);
+        	
         } finally {
             cq.close();
         }
+        return null;
     }
 
 }

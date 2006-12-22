@@ -12,10 +12,10 @@ public class QueryTest extends TestCase
     public void testGetResults()
     {
         Query q = new Query();
-        q.setQuery("author:pitts");
+        q.setQueryString("author:pitts");
         q.getResults();
         
-        q.setQuery("112345678987698769876987698769879876");
+        q.setQueryString("112345678987698769876987698769879876");
         q.getResults();
 
     }

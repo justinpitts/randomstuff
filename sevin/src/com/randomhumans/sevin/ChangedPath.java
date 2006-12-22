@@ -11,14 +11,14 @@ public class ChangedPath
 {
     public enum ChangeTypes {Modified, Added, Deleted, Replaced};
     
-    public static ChangedPath[] buildChangedPaths(SVNLogEntry log)
+    public static ChangedPath[] buildChangedPaths(final SVNLogEntry log)
     {
-        Map cp = log.getChangedPaths();
-        ChangedPath[] paths = new ChangedPath[cp.size()];
+        final Map changedPaths = log.getChangedPaths();
+        ChangedPath[] paths = new ChangedPath[changedPaths.size()];
         int i = 0;
-        for(Object o : cp.values())
+        for(Object o : changedPaths.values())
         {
-            SVNLogEntryPath logEntryPath = (SVNLogEntryPath)o;
+            final SVNLogEntryPath logEntryPath = (SVNLogEntryPath)o;
             paths[i++] = new ChangedPath(logEntryPath);
         }
         return paths;        

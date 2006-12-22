@@ -9,34 +9,34 @@ import com.randomhumans.svnindex.queries.IQuery;
 
 public class Query
 {
-    private String query = "";
+    private String queryString = "";
     
     private String sortField = ContentDocument.URL;
     
-    public String getQuery()
+    public String getQueryString()
     {
-        return query;
+        return queryString;
     }
 
-    public void setQuery(String query)
+    public void setQueryString(final String query)
     {
-        this.query = query;
+        this.queryString = query;
     }
 
     public Document[] getResults()
     {
-        IQuery cq = new ContentQuery();
+        final IQuery contentQuery = new ContentQuery();
         try
         {
-        Hits h = cq.performQuery(query, new Sort(sortField));
+        Hits hits = contentQuery.performQuery(queryString, new Sort(sortField));
         
-        Document[] docs = new Document[h.length()];
+        Document[] docs = new Document[hits.length()];
      
-        for(int i = 0; i < h.length(); i++)
+        for(int i = 0; i < hits.length(); i++)
         {
             try
             {
-                docs[i] = new Document(h.doc(i));
+                docs[i] = new Document(hits.doc(i));
             }
             catch (IOException e)
             {
@@ -46,7 +46,7 @@ public class Query
         }
         return docs;
         } finally {
-            cq.close();
+            contentQuery.close();
         }
     }
 
@@ -55,7 +55,7 @@ public class Query
         return sortField;
     }
 
-    public void setSortField(String sortField)
+    public void setSortField(final String sortField)
     {
         this.sortField = sortField;
     }
