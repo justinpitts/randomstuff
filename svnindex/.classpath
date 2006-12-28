@@ -3,17 +3,29 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/lucene-core-2.0.0.jar">
 		<attributes>
-			<attribute value="http://lucene.apache.org/java/docs/api" name="javadoc_location"/>
+			<attribute name="javadoc_location" value="http://lucene.apache.org/java/docs/api"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" sourcepath="Z:/lib/javasvn-1.0.6/javasvnsrc.zip" kind="lib" path="lib/javasvn.jar">
+	<classpathentry exported="true" kind="lib" path="lib/javasvn.jar" sourcepath="Z:/lib/javasvn-1.0.6/javasvnsrc.zip">
 		<attributes>
-			<attribute value="file:/Z:/lib/javasvn-1.0.6/doc/javadoc/" name="javadoc_location"/>
+			<attribute name="javadoc_location" value="file:/Z:/lib/javasvn-1.0.6/doc/javadoc/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.1.1/src/org.junit_3.8.1/junitsrc.zip" kind="var" path="JUNIT_HOME/junit.jar"/>
+	<classpathentry kind="var" path="JUNIT_HOME/junit.jar" sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.1.1/src/org.junit_3.8.1/junitsrc.zip"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/1.5.0"/>
-	<classpathentry kind="lib" path="C:/tools/tapestry-4.0.2/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-fileupload-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/hivemind-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/hivemind-lib-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/javassist-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib/ognl-2.6.7.jar"/>
+	<classpathentry kind="lib" path="lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-annotations-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-contrib-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-portlet-4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

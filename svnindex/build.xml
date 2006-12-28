@@ -16,7 +16,19 @@
         <pathelement location="lib/lucene-core-2.0.0.jar"/>
         <pathelement location="lib/javasvn.jar"/>
         <pathelement location="${JUNIT_HOME}/junit.jar"/>
-        <pathelement location="../../../../tools/tapestry-4.0.2/lib/commons-logging-1.0.4.jar"/>
+        <pathelement location="lib/commons-codec-1.3.jar"/>
+        <pathelement location="lib/commons-fileupload-1.0.jar"/>
+        <pathelement location="lib/commons-logging-1.0.4.jar"/>
+        <pathelement location="lib/hivemind-1.1.jar"/>
+        <pathelement location="lib/hivemind-lib-1.1.jar"/>
+        <pathelement location="lib/javassist-3.0.jar"/>
+        <pathelement location="lib/log4j-1.2.8.jar"/>
+        <pathelement location="lib/ognl-2.6.7.jar"/>
+        <pathelement location="lib/oro-2.0.8.jar"/>
+        <pathelement location="lib/tapestry-4.0.jar"/>
+        <pathelement location="lib/tapestry-annotations-4.0.jar"/>
+        <pathelement location="lib/tapestry-contrib-4.0.jar"/>
+        <pathelement location="lib/tapestry-portlet-4.0.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
