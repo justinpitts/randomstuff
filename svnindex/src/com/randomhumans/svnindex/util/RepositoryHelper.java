@@ -27,7 +27,7 @@ public class RepositoryHelper
         String user = Configuration.getConfig().getRepoUser();
         String password = Configuration.getConfig().getRepoPassword();
         ISVNAuthenticationManager auth = SVNWCUtil.createDefaultAuthenticationManager(user, password);
-        pool = new DefaultSVNRepositoryPool(auth);
+        pool = new DefaultSVNRepositoryPool(auth, null);
         
     }
     public static SVNRepository getRepo() throws SVNException

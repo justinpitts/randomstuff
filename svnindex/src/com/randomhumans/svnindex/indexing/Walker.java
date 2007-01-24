@@ -21,14 +21,14 @@ public class Walker
     public static void main(String[] args)
     {
         ContentIndexer.init();
-        TreeSet<String> t = new TreeSet<String>();
-        t.add("tags");
-        t.add("branches");
-        t.add("oracleRetail");
-        ISVNUrlAction ta = new ContentTokenizer(t);
-        SVNRepoTreeWalker w = new SVNRepoTreeWalker();
+        TreeSet<String> ignoreList = new TreeSet<String>();
+        ignoreList.add("tags");
+        ignoreList.add("branches");
+        ignoreList.add("oracleRetail");
+        ISVNUrlAction urlAction = new ContentTokenizer(ignoreList);
+        SVNRepoTreeWalker walker = new SVNRepoTreeWalker();
         Long start = Calendar.getInstance().getTimeInMillis();
-        w.map(Configuration.getConfig().getRepositoryURL(), ta);
+        walker.map(Configuration.getConfig().getRepositoryURL(), urlAction);
         Long done = Calendar.getInstance().getTimeInMillis();
         log.info("index run complete");
         log.info(done-start);    
