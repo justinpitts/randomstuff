@@ -15,9 +15,9 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import com.randomhumans.svnindex.util.Configuration;
 
-public class ContentIndexer implements Runnable
+public class ContentIndexerThread implements Runnable
 {
-	static Log log = LogFactory.getLog(ContentIndexer.class);
+	static Log log = LogFactory.getLog(ContentIndexerThread.class);
     private static ExecutorService indexerPool = null;
     private static BlockingQueue<Document> documentQueue = new LinkedBlockingQueue<Document>();
     private volatile static boolean signal = false;
@@ -107,7 +107,7 @@ public class ContentIndexer implements Runnable
             }
         }
         indexerPool = Executors.newSingleThreadExecutor();
-        indexerPool.submit(new ContentIndexer());
+        indexerPool.submit(new ContentIndexerThread());
     }
 
     public static void close()

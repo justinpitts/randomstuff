@@ -8,9 +8,9 @@ import org.tmatesoft.svn.core.SVNDirEntry;
  * 
  */
 
-public interface ISVNUrlAction
+public interface IFilter
 {
     //define a action to be performed on a repository directory entry. 
     // returns true iff the entry's children should be processed
-    public boolean execute(String url, SVNDirEntry entry);
+    public boolean allow(String url, SVNDirEntry entry);
 }

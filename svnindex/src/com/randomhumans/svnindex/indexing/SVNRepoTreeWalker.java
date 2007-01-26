@@ -11,7 +11,7 @@ import com.randomhumans.svnindex.util.RepositoryHelper;
 public class SVNRepoTreeWalker
 {
 	Log log = LogFactory.getLog(Walker.class);
-    public void map(String url, ISVNUrlAction action)
+    public void map(String url, IFilter action)
     {
         SVNRepository repo = null;
         try
@@ -36,13 +36,13 @@ public class SVNRepoTreeWalker
         }        
     }
     
-    private void map(String url, ISVNUrlAction action, SVNRepository repo, long revision)
+    private void map(String url, IFilter action, SVNRepository repo, long revision)
     {
         try
         {
             for(SVNDirEntry entry : RepositoryHelper.dir(repo, url))
             {
-                boolean process =  action.execute(url + "/" + entry.getName(), entry);
+                boolean process =  action.allow(url + "/" + entry.getName(), entry);
                 if ( process && entry.getKind() == SVNNodeKind.DIR )
                 {                    
                     map( (url.equals("") ?  entry.getName() : url + "/" + entry.getName()), action, repo, revision);                        

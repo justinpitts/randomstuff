@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-public class ContentTokenizer implements ISVNUrlAction
+public class DefaultNameAndSizeFilter implements IFilter
 {
     SortedSet<String> nameFilters = null;
 
@@ -16,18 +16,18 @@ public class ContentTokenizer implements ISVNUrlAction
     static final long MB = KB * KB;
 
     int i = 0;
-    public ContentTokenizer(Set<String> filters)
+    public DefaultNameAndSizeFilter(Set<String> filters)
     {
         nameFilters = new TreeSet<String>(filters);
     }
 
-    public boolean execute(String url, SVNDirEntry entry)
+    public boolean allow(String url, SVNDirEntry entry)
     {        
         boolean process = !nameFilters.contains(entry.getName())
                           && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder") && entry.getSize() < 2 * MB;
         if (process)
         {            
-            ContentDocumentThread.queueEntry(url, entry);
+            DirectoryEntryThreadPool.queueEntry(url, entry);
         }
         return process;
     }

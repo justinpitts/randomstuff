@@ -9,19 +9,21 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-public class ContentDocumentThread implements Runnable
+import com.randomhumans.svnindex.parsing.DirectoryEntryParser;
+
+public class DirectoryEntryThreadPool implements Runnable
 {
-	static Log log = LogFactory.getLog(ContentDocumentThread.class);
+	static Log log = LogFactory.getLog(DirectoryEntryThreadPool.class);
     private static ExecutorService indexerPool = Executors.newFixedThreadPool(20);
     String docUrl = "";
     SVNDirEntry dirEntry = null;
     
     public static void queueEntry(String url, SVNDirEntry entry)
     {
-        indexerPool.submit(new ContentDocumentThread(url, entry));
+        indexerPool.submit(new DirectoryEntryThreadPool(url, entry));
     }
     
-    public ContentDocumentThread(String url, SVNDirEntry entry)
+    public DirectoryEntryThreadPool(String url, SVNDirEntry entry)
     {
         docUrl = url;
         dirEntry = entry;        
@@ -31,8 +33,8 @@ public class ContentDocumentThread implements Runnable
     {
         try
         {            
-            Document doc = ContentDocument.createDocument(dirEntry, docUrl);
-            ContentIndexer.queueDocument(doc);
+            Document doc = DirectoryEntryParser.createDocument(dirEntry, docUrl);
+            ContentIndexerThread.queueDocument(doc);
         }
         catch (IOException e)
         {
