@@ -16,25 +16,26 @@ import org.tmatesoft.svn.core.wc.DefaultSVNRepositoryPool;
 import org.tmatesoft.svn.core.wc.ISVNRepositoryPool;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
-
 public class RepositoryHelper
 {
     private static ISVNRepositoryPool pool = null;
-    static {
+    static
+    {
         DAVRepositoryFactory.setup();
         SVNRepositoryFactoryImpl.setup();
-        
+
         String user = Configuration.getConfig().getRepoUser();
         String password = Configuration.getConfig().getRepoPassword();
         ISVNAuthenticationManager auth = SVNWCUtil.createDefaultAuthenticationManager(user, password);
         pool = new DefaultSVNRepositoryPool(auth, null);
-        
+
     }
+
     public static SVNRepository getRepo() throws SVNException
     {
         return getRepo(getRepoURL());
     }
-    
+
     public static SVNRepository getRepo(String url) throws SVNException
     {
         return pool.createRepository(SVNURL.parseURIEncoded(url), true);
@@ -53,20 +54,20 @@ public class RepositoryHelper
             repo.closeSession();
         }
     }
-    
+
     public static SVNNodeKind checkPath(String path) throws SVNException
     {
         SVNRepository repo = null;
         try
         {
-            repo = getRepo();            
+            repo = getRepo();
             return repo.checkPath(path, -1);
         }
         finally
         {
             repo.closeSession();
         }
-        
+
     }
 
     public static SVNDirEntry getInfo(String path) throws SVNException
@@ -94,7 +95,7 @@ public class RepositoryHelper
         finally
         {
             repo.closeSession();
-        }        
+        }
     }
 
     public static Collection<SVNDirEntry> dir(SVNRepository repo, String url) throws SVNException
