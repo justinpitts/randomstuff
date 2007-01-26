@@ -1,15 +1,15 @@
+
 package com.randomhumans.svnindex;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-import com.randomhumans.svnindex.indexing.ISVNUrlAction;
+import com.randomhumans.svnindex.indexing.IFilter;
 
-
-public class TestAction implements ISVNUrlAction
+public class TestAction implements IFilter
 {
-    int i =0;
+    int i = 0;
 
-    public boolean execute(final String url, final SVNDirEntry entry)
+    public boolean allow(final String url, final SVNDirEntry entry)
     {
         i++;
         return true;
@@ -19,6 +19,5 @@ public class TestAction implements ISVNUrlAction
     {
         return i;
     }
-
 
 }
