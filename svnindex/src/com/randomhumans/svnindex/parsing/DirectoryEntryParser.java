@@ -1,0 +1,152 @@
+
+package com.randomhumans.svnindex.parsing;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.math.BigInteger;
+import java.security.DigestOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.Field.TermVector;
+import org.tmatesoft.svn.core.SVNDirEntry;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNNodeKind;
+import org.tmatesoft.svn.core.SVNProperty;
+import org.tmatesoft.svn.core.io.SVNRepository;
+import com.randomhumans.svnindex.util.RepositoryHelper;
+
+public class DirectoryEntryParser
+{
+    public static final String CONTENT = "content";
+
+    public static final String URL = "url";
+
+    public static final String REVISION = "revision";
+
+    public static final String DATE = "date";
+
+    public static final String MESSAGE = "message";
+
+    public static final String AUTHOR = "author";
+    
+    public static final String MD5 = "md5";
+
+    static Log log = LogFactory.getLog(DirectoryEntryParser.class);
+    public static Document createDocument(SVNDirEntry entry, String path) throws IOException
+    {
+        Document doc = new Document();
+        try
+        {
+            if (RepositoryHelper.checkPath(path) == SVNNodeKind.NONE)
+            {
+                return doc;
+            }
+        }
+        catch (SVNException e1)
+        {
+        	log.warn(e1);
+        }
+
+        addAuthorField(entry, doc);
+        addMessageField(entry, doc);
+        addDateField(entry, doc);
+        addRevisionField(entry, doc);
+        addURLField(entry, doc);
+        processContent(entry, doc);
+        return doc;
+    }
+    private static void processContent(SVNDirEntry entry, Document doc) throws IOException, FileNotFoundException
+    {
+        String digest = "";
+        Field content = null;
+        String mimeType = "";
+
+        try
+        {
+            SVNRepository repo = RepositoryHelper.getRepo(entry.getURL().toString());
+            try
+            {
+                Map properties = new HashMap();
+                File temp = File.createTempFile("index", "dat");
+                OutputStream os = new FileOutputStream(temp);
+                MessageDigest md5 = null;
+                try
+                {
+                    md5 = MessageDigest.getInstance("MD5");
+                }
+                catch (NoSuchAlgorithmException e)
+                {
+                    log.error(e);
+                }
+                DigestOutputStream stream = new DigestOutputStream(os, md5);
+
+                try
+                {
+                    repo.getFile("", -1, properties, stream);
+                    mimeType = (String) properties.get(SVNProperty.MIME_TYPE);
+                    digest = new BigInteger(stream.getMessageDigest().digest()).toString(16);
+                }
+                finally
+                {
+                    stream.close();
+                }
+                if (SVNProperty.isTextMimeType(mimeType))
+                {
+                    Reader r = new InputStreamReader(new FileInputStream(temp));
+                    try
+                    {
+                        content = new Field(CONTENT, r, TermVector.YES);
+                        doc.add(content);
+                    }
+                    finally
+                    {
+                        r.close();
+                    }
+                }
+                temp.delete();
+            }
+            finally
+            {
+                repo.closeSession();
+            }
+        }
+        catch (SVNException e)
+        {
+            log.error(e);
+        }
+        doc.add(new Field(MD5, digest, Field.Store.YES, Field.Index.UN_TOKENIZED));
+    }
+    private static void addURLField(SVNDirEntry entry, Document doc)
+    {
+        doc.add(new Field(URL, entry.getURL().toString(), Field.Store.YES, Field.Index.NO));
+    }
+    private static void addRevisionField(SVNDirEntry entry, Document doc)
+    {
+        doc.add(new Field(REVISION, Long.toString(entry.getRevision()), Field.Store.YES, Field.Index.UN_TOKENIZED));
+    }
+    private static void addDateField(SVNDirEntry entry, Document doc)
+    {
+        doc.add(new Field(DATE, entry.getDate().toString(), Field.Store.YES, Field.Index.NO));
+    }
+    private static void addMessageField(SVNDirEntry entry, Document doc)
+    {
+        doc.add(new Field(MESSAGE, entry.getCommitMessage() + "", Field.Store.COMPRESS, Field.Index.TOKENIZED));
+    }
+    private static void addAuthorField(SVNDirEntry entry, Document doc)
+    {
+        doc.add(new Field(AUTHOR, entry.getAuthor() + "", Field.Store.YES, Field.Index.TOKENIZED));
+    }
+}
