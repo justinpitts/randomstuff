@@ -1,3 +1,4 @@
+
 package com.randomhumans.svnindex.queries;
 
 import java.io.IOException;
@@ -15,10 +16,11 @@ import org.apache.lucene.search.Sort;
 
 import com.randomhumans.svnindex.util.Configuration;
 
-public class AbstractQuery
+public abstract class AbstractQuery
 {
 
     private IndexReader ir = null;
+
     protected IndexReader getReader() throws IOException
     {
         if (ir == null)
@@ -30,7 +32,7 @@ public class AbstractQuery
     {
         try
         {
-            if(ir != null)
+            if (ir != null)
                 ir.close();
         }
         catch (IOException e)
@@ -40,14 +42,16 @@ public class AbstractQuery
         }
     }
 
-    public Hits performQuery(String query, Sort sort, String defaultFieldName)
+    abstract public Hits performQuery(String query, Sort sort);
+
+    protected Hits performQuery(String query, Sort sort, String defaultFieldName)
     {
         try
         {
             Searcher s = new IndexSearcher(getReader());
             Analyzer a = new StandardAnalyzer();
-            QueryParser qp = new QueryParser(defaultFieldName, a);            
-            Query q = qp.parse(query);            
+            QueryParser qp = new QueryParser(defaultFieldName, a);
+            Query q = qp.parse(query);
             return s.search(q, sort);
         }
         catch (IOException e)
