@@ -13,14 +13,14 @@ import com.randomhumans.svnindex.indexing.IFilter;
 public class FilteringTestAction implements IFilter
 {
     SortedSet<String> nameFilters = null;
-    public FilteringTestAction(Set<String> filters)
+    public FilteringTestAction(final Set<String> filters)
     {
-        nameFilters = new TreeSet<String>(filters);        
+        this.nameFilters = new TreeSet<String>(filters);        
     }
 
-    public boolean allow(String url, SVNDirEntry entry)
+    public boolean allow(final String url, final SVNDirEntry entry)
     {        
-        boolean result = !nameFilters.contains(entry.getName())  && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder");        
+        final boolean result = !this.nameFilters.contains(entry.getName())  && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder");        
         return result ;
     }
 

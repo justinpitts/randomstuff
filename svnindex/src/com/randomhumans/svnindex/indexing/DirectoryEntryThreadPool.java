@@ -34,6 +34,7 @@ public class DirectoryEntryThreadPool implements Runnable
 
     public void run()
     {
+        DirectoryEntryThreadPool.log.debug(this.docUrl);
         try
         {
             final Document doc = DirectoryEntryDocumentGenerator.createDocument(this.dirEntry, this.docUrl);

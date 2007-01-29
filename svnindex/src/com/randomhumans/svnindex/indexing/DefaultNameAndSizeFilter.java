@@ -16,17 +16,28 @@ public class DefaultNameAndSizeFilter implements IFilter
     static final long MB = DefaultNameAndSizeFilter.KB * DefaultNameAndSizeFilter.KB;
 
     int i = 0;
+
     public DefaultNameAndSizeFilter(final Set<String> filters)
     {
         this.nameFilters = new TreeSet<String>(filters);
     }
 
+    public DefaultNameAndSizeFilter(final String[] filters)
+    {
+        this.nameFilters = new TreeSet<String>();
+        for (final String s : filters)
+        {
+            this.nameFilters.add(s);
+        }
+    }
+
     public boolean allow(final String url, final SVNDirEntry entry)
-    {        
+    {
         final boolean process = !this.nameFilters.contains(entry.getName())
-                          && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder") && (entry.getSize() < 2 * DefaultNameAndSizeFilter.MB);
+            && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder")
+            && (entry.getSize() < 2 * DefaultNameAndSizeFilter.MB);
         if (process)
-        {            
+        {
             DirectoryEntryThreadPool.queueEntry(url, entry);
         }
         return process;

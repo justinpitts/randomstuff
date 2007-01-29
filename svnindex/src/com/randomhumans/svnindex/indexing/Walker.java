@@ -2,8 +2,6 @@
 package com.randomhumans.svnindex.indexing;
 
 import java.util.Calendar;
-import java.util.TreeSet;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -21,20 +19,16 @@ public class Walker
      */
     public static void main(final String[] args)
     {
+        log.info(Configuration.getConfig().toString());
         ContentIndexerThread.init();
-        final TreeSet<String> ignoreList = new TreeSet<String>();
-        ignoreList.add("tags");
-        ignoreList.add("branches");
-        ignoreList.add("oracleRetail");
-        final IFilter urlAction = new DefaultNameAndSizeFilter(ignoreList);
+        final IFilter urlAction = new DefaultNameAndSizeFilter(Configuration.getConfig().getIgnoredNames());
         final SVNRepoTreeWalker walker = new SVNRepoTreeWalker();
         final Long start = Calendar.getInstance().getTimeInMillis();
-        walker.map(Configuration.loadFromSystemProperties().getRepositoryURL(), urlAction);
+        walker.map(Configuration.getConfig().getRepositoryURL(), urlAction);
         final Long done = Calendar.getInstance().getTimeInMillis();
-        Walker.log.info("index run complete");
-        Walker.log.info(done - start);
+        Walker.log.info("repository walk completed in " + (done - start) + " ms");
         ContentIndexerThread.close();
         DirectoryEntryThreadPool.shutdown();
-        Walker.log.info("shutdown");
+        Walker.log.info("shutdown complete");
     }
 }

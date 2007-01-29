@@ -43,7 +43,7 @@ public class ContentIndexerThread implements Runnable
                 }
             }
             while (!ContentIndexerThread.signal);
-            ContentIndexerThread.log.info("signal caught; draining queue");            
+            ContentIndexerThread.log.debug("signal caught; draining queue");            
             doc = ContentIndexerThread.documentQueue.poll();
             while(doc != null)
             {

@@ -3,6 +3,7 @@ package com.randomhumans.svnindex;
 
 import java.io.IOException;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
@@ -24,16 +25,16 @@ public class CommitQueryTest extends TestCase
      */
     public void testPerformQuery() throws IOException
     {
-        IQuery t = new ContentQuery();
+        final IQuery t = new ContentQuery();
         try
         {
-            Hits h = t.performQuery("author:jpitts", new Sort(DirectoryEntryDocumentGenerator.REVISION));
-            assertNotNull(h);
-            assertTrue(0 < h.length());
+            final Hits h = t.performQuery("author:jpitts", new Sort(DirectoryEntryDocumentGenerator.REVISION));
+            Assert.assertNotNull(h);
+            Assert.assertTrue(0 < h.length());
             for (int i = 0; i < h.length(); i++)
             {
-                Document d = h.doc(i);
-                log.debug(d);
+                final Document d = h.doc(i);
+                this.log.debug(d);
             }
         }
         finally

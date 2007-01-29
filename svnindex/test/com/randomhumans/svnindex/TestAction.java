@@ -11,13 +11,13 @@ public class TestAction implements IFilter
 
     public boolean allow(final String url, final SVNDirEntry entry)
     {
-        i++;
+        this.i++;
         return true;
     }
 
     public int getI()
     {
-        return i;
+        return this.i;
     }
 
 }
