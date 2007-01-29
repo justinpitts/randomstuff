@@ -19,22 +19,22 @@ public class Walker
     /**
      * @param args
      */
-    public static void main(String[] args)
+    public static void main(final String[] args)
     {
         ContentIndexerThread.init();
-        TreeSet<String> ignoreList = new TreeSet<String>();
+        final TreeSet<String> ignoreList = new TreeSet<String>();
         ignoreList.add("tags");
         ignoreList.add("branches");
         ignoreList.add("oracleRetail");
-        IFilter urlAction = new DefaultNameAndSizeFilter(ignoreList);
-        SVNRepoTreeWalker walker = new SVNRepoTreeWalker();
-        Long start = Calendar.getInstance().getTimeInMillis();
+        final IFilter urlAction = new DefaultNameAndSizeFilter(ignoreList);
+        final SVNRepoTreeWalker walker = new SVNRepoTreeWalker();
+        final Long start = Calendar.getInstance().getTimeInMillis();
         walker.map(Configuration.loadFromSystemProperties().getRepositoryURL(), urlAction);
-        Long done = Calendar.getInstance().getTimeInMillis();
-        log.info("index run complete");
-        log.info(done - start);
+        final Long done = Calendar.getInstance().getTimeInMillis();
+        Walker.log.info("index run complete");
+        Walker.log.info(done - start);
         ContentIndexerThread.close();
         DirectoryEntryThreadPool.shutdown();
-        log.info("shutdown");
+        Walker.log.info("shutdown");
     }
 }

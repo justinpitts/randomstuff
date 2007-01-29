@@ -23,19 +23,23 @@ public abstract class AbstractQuery
 
     protected IndexReader getReader() throws IOException
     {
-        if (ir == null)
-            ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
-        return ir;
+        if (this.ir == null)
+        {
+            this.ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
+        }
+        return this.ir;
     }
 
     public void close()
     {
         try
         {
-            if (ir != null)
-                ir.close();
+            if (this.ir != null)
+            {
+                this.ir.close();
+            }
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
@@ -44,23 +48,23 @@ public abstract class AbstractQuery
 
     abstract public Hits performQuery(String query, Sort sort);
 
-    protected Hits performQuery(String query, Sort sort, String defaultFieldName)
+    protected Hits performQuery(final String query, final Sort sort, final String defaultFieldName)
     {
         try
         {
-            Searcher s = new IndexSearcher(getReader());
-            Analyzer a = new StandardAnalyzer();
-            QueryParser qp = new QueryParser(defaultFieldName, a);
-            Query q = qp.parse(query);
+            final Searcher s = new IndexSearcher(this.getReader());
+            final Analyzer a = new StandardAnalyzer();
+            final QueryParser qp = new QueryParser(defaultFieldName, a);
+            final Query q = qp.parse(query);
             return s.search(q, sort);
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();
             return null;
         }
-        catch (ParseException e)
+        catch (final ParseException e)
         {
             // TODO Auto-generated catch block -- Finish Me
             e.printStackTrace();

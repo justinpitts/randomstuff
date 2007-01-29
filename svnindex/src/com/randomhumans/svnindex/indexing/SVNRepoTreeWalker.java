@@ -11,47 +11,47 @@ import com.randomhumans.svnindex.util.RepositoryHelper;
 public class SVNRepoTreeWalker
 {
 	Log log = LogFactory.getLog(Walker.class);
-    public void map(String url, IFilter action)
+    public void map(final String url, final IFilter action)
     {
         SVNRepository repo = null;
         try
         {
             repo = RepositoryHelper.getRepo(url);
-            long currentRevision = repo.getLatestRevision();            
+            final long currentRevision = repo.getLatestRevision();            
             
-            map("", action, repo, currentRevision);            
+            this.map("", action, repo, currentRevision);            
         }
-        catch (SVNException e)
+        catch (final SVNException e)
         {
-            log.error(e);            
+            this.log.error(e);            
         } finally {
             try
             {
                 repo.closeSession();
             }
-            catch (SVNException e)
+            catch (final SVNException e)
             {
-            	log.error(e);
+            	this.log.error(e);
             }
         }        
     }
     
-    private void map(String url, IFilter action, SVNRepository repo, long revision)
+    private void map(final String url, final IFilter action, final SVNRepository repo, final long revision)
     {
         try
         {
-            for(SVNDirEntry entry : RepositoryHelper.dir(repo, url))
+            for(final SVNDirEntry entry : RepositoryHelper.dir(repo, url))
             {
-                boolean process =  action.allow(url + "/" + entry.getName(), entry);
-                if ( process && entry.getKind() == SVNNodeKind.DIR )
+                final boolean process =  action.allow(url + "/" + entry.getName(), entry);
+                if ( process && (entry.getKind() == SVNNodeKind.DIR) )
                 {                    
-                    map( (url.equals("") ?  entry.getName() : url + "/" + entry.getName()), action, repo, revision);                        
+                    this.map( (url.equals("") ?  entry.getName() : url + "/" + entry.getName()), action, repo, revision);                        
                 }
             }
         }
-        catch (SVNException e)
+        catch (final SVNException e)
         {
-            log.error(e);
+            this.log.error(e);
         }        
     }
 

@@ -19,12 +19,12 @@ public class ContentIndexerThread implements Runnable
 {
 	static Log log = LogFactory.getLog(ContentIndexerThread.class);
     private static ExecutorService indexerPool = null;
-    private static BlockingQueue<Document> documentQueue = new LinkedBlockingQueue<Document>();
+    private static final BlockingQueue<Document> documentQueue = new LinkedBlockingQueue<Document>();
     private volatile static boolean signal = false;
         
-    public synchronized static void queueDocument(Document d) throws InterruptedException
+    public synchronized static void queueDocument(final Document d) throws InterruptedException
     {        
-        documentQueue.put(d);        
+        ContentIndexerThread.documentQueue.put(d);        
     }
    
     public void run()
@@ -36,29 +36,29 @@ public class ContentIndexerThread implements Runnable
             iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), false);
             do
             {
-                doc = documentQueue.poll(1, TimeUnit.SECONDS);
+                doc = ContentIndexerThread.documentQueue.poll(1, TimeUnit.SECONDS);
                 if (doc != null)
                 {
                     iw.addDocument(doc);
                 }
             }
-            while (!signal);
-            log.info("signal caught; draining queue");            
-            doc = documentQueue.poll();
+            while (!ContentIndexerThread.signal);
+            ContentIndexerThread.log.info("signal caught; draining queue");            
+            doc = ContentIndexerThread.documentQueue.poll();
             while(doc != null)
             {
-                log.debug("Queuesize: " + documentQueue.size());
+                ContentIndexerThread.log.debug("Queuesize: " + ContentIndexerThread.documentQueue.size());
                 iw.addDocument(doc);
-                doc = documentQueue.poll();
+                doc = ContentIndexerThread.documentQueue.poll();
             }
         }
-        catch (IOException e)
+        catch (final IOException e)
         {            
-        	log.error(e);            
+        	ContentIndexerThread.log.error(e);            
         }
-        catch (InterruptedException e)
+        catch (final InterruptedException e)
         {        
-        	log.warn(e);            
+        	ContentIndexerThread.log.warn(e);            
         }
         finally
         {
@@ -66,13 +66,13 @@ public class ContentIndexerThread implements Runnable
             {
                 if (iw != null)
                 {
-                    log.debug("optimizing index");
+                    ContentIndexerThread.log.debug("optimizing index");
                     iw.optimize();
                     iw.close();
-                    log.debug("index closed");
+                    ContentIndexerThread.log.debug("index closed");
                 }
             }
-            catch (IOException e)
+            catch (final IOException e)
             {
                 e.printStackTrace();
             }
@@ -86,9 +86,9 @@ public class ContentIndexerThread implements Runnable
         {
             iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), true);
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
-            log.error(e);
+            ContentIndexerThread.log.error(e);
         }
 
         finally
@@ -97,32 +97,32 @@ public class ContentIndexerThread implements Runnable
             {
                 iw.close();                
             }
-            catch (IOException e)
+            catch (final IOException e)
             {
-                log.error(e);
+                ContentIndexerThread.log.error(e);
             }
             finally
             {
                 ;
             }
         }
-        indexerPool = Executors.newSingleThreadExecutor();
-        indexerPool.submit(new ContentIndexerThread());
+        ContentIndexerThread.indexerPool = Executors.newSingleThreadExecutor();
+        ContentIndexerThread.indexerPool.submit(new ContentIndexerThread());
     }
 
     public static void close()
     {
-        signal = true;
+        ContentIndexerThread.signal = true;
         try
         {
-            log.debug("waiting");
-            indexerPool.shutdown();
-            indexerPool.awaitTermination(60, TimeUnit.SECONDS);
-            log.debug("wait complete");
+            ContentIndexerThread.log.debug("waiting");
+            ContentIndexerThread.indexerPool.shutdown();
+            ContentIndexerThread.indexerPool.awaitTermination(60, TimeUnit.SECONDS);
+            ContentIndexerThread.log.debug("wait complete");
         }
-        catch (InterruptedException e1)
+        catch (final InterruptedException e1)
         {
-            log.error(e1);
+            ContentIndexerThread.log.error(e1);
         }
     }
 

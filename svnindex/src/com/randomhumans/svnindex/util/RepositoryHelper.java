@@ -24,21 +24,21 @@ public class RepositoryHelper
         DAVRepositoryFactory.setup();
         SVNRepositoryFactoryImpl.setup();
 
-        String user = Configuration.getConfig().getRepoUser();
-        String password = Configuration.getConfig().getRepoPassword();
-        ISVNAuthenticationManager auth = SVNWCUtil.createDefaultAuthenticationManager(user, password);
-        pool = new DefaultSVNRepositoryPool(auth, null);
+        final String user = Configuration.getConfig().getRepoUser();
+        final String password = Configuration.getConfig().getRepoPassword();
+        final ISVNAuthenticationManager auth = SVNWCUtil.createDefaultAuthenticationManager(user, password);
+        RepositoryHelper.pool = new DefaultSVNRepositoryPool(auth, null);
 
     }
 
     public static SVNRepository getRepo() throws SVNException
     {
-        return getRepo(getRepoURL());
+        return RepositoryHelper.getRepo(RepositoryHelper.getRepoURL());
     }
 
-    public static SVNRepository getRepo(String url) throws SVNException
+    public static SVNRepository getRepo(final String url) throws SVNException
     {
-        return pool.createRepository(SVNURL.parseURIEncoded(url), true);
+        return RepositoryHelper.pool.createRepository(SVNURL.parseURIEncoded(url), true);
     }
 
     public static long getLatestRevision() throws SVNException
@@ -46,7 +46,7 @@ public class RepositoryHelper
         SVNRepository repo = null;
         try
         {
-            repo = getRepo();
+            repo = RepositoryHelper.getRepo();
             return repo.getLatestRevision();
         }
         finally
@@ -55,12 +55,12 @@ public class RepositoryHelper
         }
     }
 
-    public static SVNNodeKind checkPath(String path) throws SVNException
+    public static SVNNodeKind checkPath(final String path) throws SVNException
     {
         SVNRepository repo = null;
         try
         {
-            repo = getRepo();
+            repo = RepositoryHelper.getRepo();
             return repo.checkPath(path, -1);
         }
         finally
@@ -70,12 +70,12 @@ public class RepositoryHelper
 
     }
 
-    public static SVNDirEntry getInfo(String path) throws SVNException
+    public static SVNDirEntry getInfo(final String path) throws SVNException
     {
         SVNRepository repo = null;
         try
         {
-            repo = getRepo();
+            repo = RepositoryHelper.getRepo();
             return repo.info(path, -1);
         }
         finally
@@ -84,13 +84,13 @@ public class RepositoryHelper
         }
     }
 
-    public static Collection<SVNDirEntry> dir(String url) throws SVNException
+    public static Collection<SVNDirEntry> dir(final String url) throws SVNException
     {
         SVNRepository repo = null;
         try
         {
-            repo = getRepo();
-            return dir(repo, url);
+            repo = RepositoryHelper.getRepo();
+            return RepositoryHelper.dir(repo, url);
         }
         finally
         {
@@ -98,14 +98,14 @@ public class RepositoryHelper
         }
     }
 
-    public static Collection<SVNDirEntry> dir(SVNRepository repo, String url) throws SVNException
+    public static Collection<SVNDirEntry> dir(final SVNRepository repo, final String url) throws SVNException
     {
-        return dir(repo, url, repo.getLatestRevision());
+        return RepositoryHelper.dir(repo, url, repo.getLatestRevision());
     }
 
-    public static Collection<SVNDirEntry> dir(SVNRepository repo, String url, long revision) throws SVNException
+    public static Collection<SVNDirEntry> dir(final SVNRepository repo, final String url, final long revision) throws SVNException
     {
-        ArrayList<SVNDirEntry> entries = new ArrayList<SVNDirEntry>();
+        final ArrayList<SVNDirEntry> entries = new ArrayList<SVNDirEntry>();
         repo.getDir(url, revision, null, entries);
         return entries;
     }
@@ -116,7 +116,7 @@ public class RepositoryHelper
     }
 
     @SuppressWarnings("unchecked")
-    public static SVNLogEntry getLogEntry(long revisionNumber)
+    public static SVNLogEntry getLogEntry(final long revisionNumber)
     {
         SVNRepository repo = null;
         SVNLogEntry logEntry = null;
@@ -124,7 +124,7 @@ public class RepositoryHelper
         {
             try
             {
-                repo = getRepo();
+                repo = RepositoryHelper.getRepo();
                 ArrayList<SVNLogEntry> logs;
                 try
                 {
@@ -132,13 +132,13 @@ public class RepositoryHelper
                     logEntry = logs.get(0);
 
                 }
-                catch (SVNException e)
+                catch (final SVNException e)
                 {
                     e.printStackTrace();
                 }
 
             }
-            catch (SVNException e)
+            catch (final SVNException e)
             {
                 e.printStackTrace();
             }
@@ -150,7 +150,7 @@ public class RepositoryHelper
             {
                 repo.closeSession();
             }
-            catch (SVNException e)
+            catch (final SVNException e)
             {
                 e.printStackTrace();
             }

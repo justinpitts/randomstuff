@@ -11,7 +11,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
-import com.randomhumans.svnindex.parsing.DirectoryEntryParser;
+import com.randomhumans.svnindex.parsing.DirectoryEntryDocumentGenerator;
 import com.randomhumans.svnindex.queries.ContentQuery;
 import com.randomhumans.svnindex.queries.IQuery;
 
@@ -27,7 +27,7 @@ public class CommitQueryTest extends TestCase
         IQuery t = new ContentQuery();
         try
         {
-            Hits h = t.performQuery("author:jpitts", new Sort(DirectoryEntryParser.REVISION));
+            Hits h = t.performQuery("author:jpitts", new Sort(DirectoryEntryDocumentGenerator.REVISION));
             assertNotNull(h);
             assertTrue(0 < h.length());
             for (int i = 0; i < h.length(); i++)

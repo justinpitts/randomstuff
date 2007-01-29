@@ -4,14 +4,15 @@ package com.randomhumans.svnindex.queries;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
-import com.randomhumans.svnindex.parsing.DirectoryEntryParser;
+import com.randomhumans.svnindex.parsing.DirectoryEntryDocumentGenerator;
 
 public class ContentQuery extends AbstractQuery implements IQuery
 {
 
-    public Hits performQuery(String query, Sort sort)
+    @Override
+    public Hits performQuery(final String query, final Sort sort)
     {
-        return performQuery(query, sort, DirectoryEntryParser.CONTENT);
+        return this.performQuery(query, sort, DirectoryEntryDocumentGenerator.CONTENT);
     }
 
 }

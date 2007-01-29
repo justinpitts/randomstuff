@@ -1,6 +1,6 @@
+
 package com.randomhumans.svnindex.indexing;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -9,46 +9,45 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-import com.randomhumans.svnindex.parsing.DirectoryEntryParser;
+import com.randomhumans.svnindex.parsing.DirectoryEntryDocumentGenerator;
 
 public class DirectoryEntryThreadPool implements Runnable
 {
-	static Log log = LogFactory.getLog(DirectoryEntryThreadPool.class);
-    private static ExecutorService indexerPool = Executors.newFixedThreadPool(20);
+    static Log log = LogFactory.getLog(DirectoryEntryThreadPool.class);
+
+    private static final ExecutorService indexerPool = Executors.newFixedThreadPool(20);
+
     String docUrl = "";
+
     SVNDirEntry dirEntry = null;
-    
-    public static void queueEntry(String url, SVNDirEntry entry)
+
+    public static void queueEntry(final String url, final SVNDirEntry entry)
     {
-        indexerPool.submit(new DirectoryEntryThreadPool(url, entry));
+        DirectoryEntryThreadPool.indexerPool.submit(new DirectoryEntryThreadPool(url, entry));
     }
-    
-    public DirectoryEntryThreadPool(String url, SVNDirEntry entry)
+
+    public DirectoryEntryThreadPool(final String url, final SVNDirEntry entry)
     {
-        docUrl = url;
-        dirEntry = entry;        
+        this.docUrl = url;
+        this.dirEntry = entry;
     }
-    
+
     public void run()
     {
         try
-        {            
-            Document doc = DirectoryEntryParser.createDocument(dirEntry, docUrl);
+        {
+            final Document doc = DirectoryEntryDocumentGenerator.createDocument(this.dirEntry, this.docUrl);
             ContentIndexerThread.queueDocument(doc);
         }
-        catch (IOException e)
+        catch (final InterruptedException e)
         {
-        	log.error(e);
+            DirectoryEntryThreadPool.log.error(e);
         }
-        catch (InterruptedException e)
-        {
-            log.error(e);
-        }        
     }
-    
+
     public static void shutdown()
     {
-        indexerPool.shutdown();
+        DirectoryEntryThreadPool.indexerPool.shutdown();
     }
 
 }

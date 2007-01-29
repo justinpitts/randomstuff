@@ -5,7 +5,7 @@ public class Configuration
 {
     public static Configuration getConfig()
     {
-        return loadFromSystemProperties();
+        return Configuration.loadFromSystemProperties();
     }
 
     private String indexLocation;
@@ -19,24 +19,24 @@ public class Configuration
 
     public String getRepoPassword()
     {
-        String password = "";
+        final String password = "";
         return password;
     }
 
     public String getRepoUser()
     {
-        String user = "";
+        final String user = "";
         return user;
     }
 
     public String getIndexLocation()
     {
-        return indexLocation;
+        return this.indexLocation;
     }
 
     public static Configuration loadFromSystemProperties()
     {
-        Configuration c = new Configuration();
+        final Configuration c = new Configuration();
         c.indexLocation = System.getProperty("com.randomhumans.svnindex.indexLocation");
 
         return c;
@@ -44,10 +44,10 @@ public class Configuration
 
     public String[] getIgnoredNames()
     {
-        return ignoredNames;
+        return this.ignoredNames;
     }
 
-    public void setIgnoredNames(String[] ignoredNames)
+    public void setIgnoredNames(final String[] ignoredNames)
     {
         this.ignoredNames = ignoredNames;
     }
