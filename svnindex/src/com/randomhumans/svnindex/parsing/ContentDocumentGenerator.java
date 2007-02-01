@@ -5,20 +5,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.Field.TermVector;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.SVNProperty;
 import org.tmatesoft.svn.core.io.SVNRepository;
 
@@ -26,14 +25,33 @@ import com.randomhumans.svnindex.util.MD5Formatter;
 import com.randomhumans.svnindex.util.RepositoryHelper;
 import com.randomhumans.svnindex.util.TempFileReader;
 
-public class SVNDirEntryContentParser implements IFieldParser<SVNDirEntry>
+public class ContentDocumentGenerator
 {
-    static Log log = LogFactory.getLog(SVNDirEntryContentParser.class);
+    static Log log = LogFactory.getLog(ContentDocumentGenerator.class);
 
-    public List<Field> parse(final SVNDirEntry entry)
+    public static ContentDocument createDocument(final SVNDirEntry entry, final String path)
     {
-        final ArrayList<Field> fields = new ArrayList<Field>();
-        String digest = "";
+        try
+        {
+            if (RepositoryHelper.checkPath(path) == SVNNodeKind.NONE)
+            {
+                return null;
+            }
+        }
+        catch (final SVNException e1)
+        {
+            ContentDocumentGenerator.log.error(e1);
+            return null;
+
+        }
+        final long revision = entry.getRevision();
+        final String author = entry.getAuthor();
+        final Date date = entry.getDate();
+        final String message = entry.getCommitMessage();
+        final String url = entry.getURL().toString();
+        String md5Hash = "";
+        Reader content = null;
+        ;
         String mimeType = "";
         try
         {
@@ -50,7 +68,7 @@ public class SVNDirEntryContentParser implements IFieldParser<SVNDirEntry>
                     {
                         repo.getFile("", -1, properties, stream);
                         mimeType = (String) properties.get(SVNProperty.MIME_TYPE);
-                        digest = MD5Formatter.formatHash(stream.getMessageDigest().digest());
+                        md5Hash = MD5Formatter.formatHash(stream.getMessageDigest().digest());
                     }
                     finally
                     {
@@ -59,16 +77,18 @@ public class SVNDirEntryContentParser implements IFieldParser<SVNDirEntry>
                 }
                 catch (final NoSuchAlgorithmException e)
                 {
-                    SVNDirEntryContentParser.log.error(e);
+                    ContentDocumentGenerator.log.error(e);
                 }
                 if (SVNProperty.isTextMimeType(mimeType))
-                {                    
-                    fields.add(new Field(DirectoryEntryDocumentGenerator.CONTENT, new TempFileReader(temp), TermVector.YES));
+                {
+                    content = new TempFileReader(temp);
                 }
+
+                return new ContentDocument(revision, author, date, message, url, md5Hash, content);
             }
             catch (final IOException e)
             {
-                SVNDirEntryContentParser.log.error(e);
+                ContentDocumentGenerator.log.error(e);
             }
             finally
             {
@@ -77,11 +97,8 @@ public class SVNDirEntryContentParser implements IFieldParser<SVNDirEntry>
         }
         catch (final SVNException e)
         {
-            SVNDirEntryContentParser.log.error(e);
+            ContentDocumentGenerator.log.error(e);
         }
-        fields.add(new Field(DirectoryEntryDocumentGenerator.MD5, digest, Field.Store.YES, Field.Index.UN_TOKENIZED));
-
-        return fields;
+        return null;
     }
-
 }

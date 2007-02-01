@@ -3,6 +3,7 @@ package com.randomhumans.svnindex.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
@@ -18,6 +19,8 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 public class RepositoryHelper
 {
+    static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(RepositoryHelper.class);
+
     private static ISVNRepositoryPool pool = null;
     static
     {
@@ -103,7 +106,8 @@ public class RepositoryHelper
         return RepositoryHelper.dir(repo, url, repo.getLatestRevision());
     }
 
-    public static Collection<SVNDirEntry> dir(final SVNRepository repo, final String url, final long revision) throws SVNException
+    public static Collection<SVNDirEntry> dir(final SVNRepository repo, final String url, final long revision)
+        throws SVNException
     {
         final ArrayList<SVNDirEntry> entries = new ArrayList<SVNDirEntry>();
         repo.getDir(url, revision, null, entries);
@@ -133,14 +137,14 @@ public class RepositoryHelper
 
                 }
                 catch (final SVNException e)
-                {
-                    e.printStackTrace();
+                {                    
+                    RepositoryHelper.log.error(e);
                 }
 
             }
             catch (final SVNException e)
             {
-                e.printStackTrace();
+                RepositoryHelper.log.error(e);
             }
             return logEntry;
         }
@@ -152,7 +156,7 @@ public class RepositoryHelper
             }
             catch (final SVNException e)
             {
-                e.printStackTrace();
+                RepositoryHelper.log.error(e);
             }
         }
     }

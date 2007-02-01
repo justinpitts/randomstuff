@@ -18,6 +18,7 @@ import com.randomhumans.svnindex.util.Configuration;
 
 public abstract class AbstractQuery
 {
+    static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(AbstractQuery.class);
 
     private IndexReader ir = null;
 
@@ -40,9 +41,8 @@ public abstract class AbstractQuery
             }
         }
         catch (final IOException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+        {            
+            AbstractQuery.log.error(e);
         }
     }
 
@@ -59,15 +59,13 @@ public abstract class AbstractQuery
             return s.search(q, sort);
         }
         catch (final IOException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+        {            
+            AbstractQuery.log.error(e);
             return null;
         }
         catch (final ParseException e)
-        {
-            // TODO Auto-generated catch block -- Finish Me
-            e.printStackTrace();
+        {            
+            AbstractQuery.log.error(e);
             return null;
         }
     }

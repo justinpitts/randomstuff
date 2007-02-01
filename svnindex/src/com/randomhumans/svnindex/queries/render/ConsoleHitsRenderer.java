@@ -5,10 +5,12 @@ import java.io.IOException;
 
 import org.apache.lucene.search.Hits;
 
-import com.randomhumans.svnindex.parsing.DirectoryEntryDocumentGenerator;
+import com.randomhumans.svnindex.parsing.ContentDocument;
 
 public class ConsoleHitsRenderer implements IHitsRenderer
 {
+
+    static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(ConsoleHitsRenderer.class);
 
     public String render(final Hits h)
     {
@@ -17,12 +19,11 @@ public class ConsoleHitsRenderer implements IHitsRenderer
         {
             try
             {
-                sb.append(h.doc(i).get(DirectoryEntryDocumentGenerator.URL)).append("\r\n");
+                sb.append(h.doc(i).get(ContentDocument.URL_FIELD)).append("\r\n");
             }
             catch (final IOException e)
-            {
-                // TODO Auto-generated catch block -- Finish Me
-                e.printStackTrace();
+            {                
+                ConsoleHitsRenderer.log.error(e);
             }
         }
         return sb.toString();

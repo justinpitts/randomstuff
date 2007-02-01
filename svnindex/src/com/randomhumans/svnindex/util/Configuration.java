@@ -40,7 +40,7 @@ public class Configuration
 
     public String getRepositoryURL()
     {
-        return repositoryURL;
+        return this.repositoryURL;
     }
 
     public String getRepoPassword()
@@ -73,7 +73,7 @@ public class Configuration
 
     public String[] getIgnoredNames()
     {
-        return ignoredNames;
+        return this.ignoredNames;
     }
 
     public void setIgnoredNames(final String[] ignoredNames)
@@ -88,6 +88,7 @@ public class Configuration
      * @return a <code>String</code> representation 
      * of this object.
      */
+    @Override
     public String toString()
     {
         final String TAB = "\r\n";

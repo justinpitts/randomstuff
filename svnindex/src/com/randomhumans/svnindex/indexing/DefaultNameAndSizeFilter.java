@@ -1,7 +1,6 @@
 
 package com.randomhumans.svnindex.indexing;
 
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -15,20 +14,13 @@ public class DefaultNameAndSizeFilter implements IFilter
 
     static final long MB = DefaultNameAndSizeFilter.KB * DefaultNameAndSizeFilter.KB;
 
-    int i = 0;
-
-    public DefaultNameAndSizeFilter(final Set<String> filters)
-    {
-        this.nameFilters = new TreeSet<String>(filters);
-    }
-
     public DefaultNameAndSizeFilter(final String[] filters)
     {
         this.nameFilters = new TreeSet<String>();
         for (final String s : filters)
         {
             this.nameFilters.add(s);
-        }
+        }        
     }
 
     public boolean allow(final String url, final SVNDirEntry entry)

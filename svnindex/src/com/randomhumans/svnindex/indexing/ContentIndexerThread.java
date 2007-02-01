@@ -10,100 +10,82 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
-import com.randomhumans.svnindex.util.Configuration;
+
+import com.randomhumans.svnindex.parsing.ContentDocument;
 
 public class ContentIndexerThread implements Runnable
 {
-	static Log log = LogFactory.getLog(ContentIndexerThread.class);
+    static Log log = LogFactory.getLog(ContentIndexerThread.class);
+
     private static ExecutorService indexerPool = null;
-    private static final BlockingQueue<Document> documentQueue = new LinkedBlockingQueue<Document>();
+
+    private static final BlockingQueue<ContentDocument> documentQueue = new LinkedBlockingQueue<ContentDocument>();
+
     private volatile static boolean signal = false;
-        
-    public synchronized static void queueDocument(final Document d) throws InterruptedException
-    {        
-        ContentIndexerThread.documentQueue.put(d);        
-    }
-   
-    public void run()
-    {        
-        Document doc = null;
-        IndexWriter iw = null;
-        try
-        {
-            iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), false);
-            do
-            {
-                doc = ContentIndexerThread.documentQueue.poll(1, TimeUnit.SECONDS);
-                if (doc != null)
-                {
-                    iw.addDocument(doc);
-                }
-            }
-            while (!ContentIndexerThread.signal);
-            ContentIndexerThread.log.debug("signal caught; draining queue");            
-            doc = ContentIndexerThread.documentQueue.poll();
-            while(doc != null)
-            {
-                ContentIndexerThread.log.debug("Queuesize: " + ContentIndexerThread.documentQueue.size());
-                iw.addDocument(doc);
-                doc = ContentIndexerThread.documentQueue.poll();
-            }
-        }
-        catch (final IOException e)
-        {            
-        	ContentIndexerThread.log.error(e);            
-        }
-        catch (final InterruptedException e)
-        {        
-        	ContentIndexerThread.log.warn(e);            
-        }
-        finally
-        {
-            try
-            {
-                if (iw != null)
-                {
-                    ContentIndexerThread.log.debug("optimizing index");
-                    iw.optimize();
-                    iw.close();
-                    ContentIndexerThread.log.debug("index closed");
-                }
-            }
-            catch (final IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
+
+    public synchronized static void queueDocument(final ContentDocument d) throws InterruptedException
+    {
+        ContentIndexerThread.documentQueue.put(d);
     }
 
-    public static void init()
+    public void run()
     {
-        IndexWriter iw = null;
         try
         {
-            iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), new StandardAnalyzer(), true);
+            // dequeue documents until the signal arrives
+            while (!ContentIndexerThread.signal)
+            {
+                this.updateDocument(ContentIndexerThread.documentQueue.poll(1, TimeUnit.SECONDS));
+            }
+
+            // process the remaining documents in the queue
+            for (final ContentDocument doc : ContentIndexerThread.documentQueue)
+            {
+                this.updateDocument(doc);
+            }
+        }
+        catch (final InterruptedException e)
+        {
+            ContentIndexerThread.log.warn(e);
         }
         catch (final IOException e)
         {
             ContentIndexerThread.log.error(e);
         }
-
         finally
         {
             try
             {
-                iw.close();                
+                IndexHelper.optimize();
             }
             catch (final IOException e)
             {
                 ContentIndexerThread.log.error(e);
-            }
-            finally
+             }
+        }
+    }
+
+    private void updateDocument(final ContentDocument doc) throws IOException
+    {        
+        if (doc != null)
+        {         
+            IndexHelper.addIndexDocument(doc);
+        }
+    }
+
+    public static void init(final boolean rebuild) throws IOException
+    {
+
+        if (rebuild)
+        {
+            try
             {
-                ;
+                IndexHelper.createIndex();
+            }
+            catch (final IOException e)
+            {
+                ContentIndexerThread.log.error(e);
+                throw (e);
             }
         }
         ContentIndexerThread.indexerPool = Executors.newSingleThreadExecutor();

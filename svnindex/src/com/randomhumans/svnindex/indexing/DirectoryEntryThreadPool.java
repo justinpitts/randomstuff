@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-import com.randomhumans.svnindex.parsing.DirectoryEntryDocumentGenerator;
+import com.randomhumans.svnindex.parsing.ContentDocument;
+import com.randomhumans.svnindex.parsing.ContentDocumentGenerator;
 
 public class DirectoryEntryThreadPool implements Runnable
 {
@@ -37,8 +37,11 @@ public class DirectoryEntryThreadPool implements Runnable
         DirectoryEntryThreadPool.log.debug(this.docUrl);
         try
         {
-            final Document doc = DirectoryEntryDocumentGenerator.createDocument(this.dirEntry, this.docUrl);
-            ContentIndexerThread.queueDocument(doc);
+            final ContentDocument doc = ContentDocumentGenerator.createDocument(this.dirEntry, this.docUrl);
+            if (doc != null)
+            {
+                ContentIndexerThread.queueDocument(doc);
+            }
         }
         catch (final InterruptedException e)
         {

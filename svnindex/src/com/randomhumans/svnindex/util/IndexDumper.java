@@ -18,24 +18,28 @@ public class IndexDumper
      */
     public static void main(final String[] args) throws IOException
     {
-
-        final IndexReader ir = IndexReader.open("C:\\index");
-        for (int i = 0; i < ir.numDocs(); i++)
-        {
-            final Document d = ir.document(i);
-            for (final Enumeration e = d.fields(); e.hasMoreElements();)
+        final IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
+        try{
+            for (int i = 0; i < ir.numDocs(); i++)
             {
-                final Field f = (Field) e.nextElement();
-                System.out.println(f.name());
-                System.out.println(f.stringValue());
-                System.out.println();
+                final Document d = ir.document(i);
+                for (final Enumeration e = d.fields(); e.hasMoreElements();)
+                {
+                    final Field f = (Field) e.nextElement();
+                    System.out.println(f.name());
+                    System.out.println(f.stringValue());
+                    System.out.println();
+
+                }
 
             }
-
-        }
-        for(final TermEnum terms = ir.terms();terms.next();)
-        {
-            System.out.println(terms.term().field() + ":" + terms.term().text());
+//            for(final TermEnum terms = ir.terms();terms.next();)
+//            {
+//                System.out.println(terms.term().field() + ":" + terms.term().text());
+//            }
+//            
+        } finally {
+            ir.close();
         }
         
     }
