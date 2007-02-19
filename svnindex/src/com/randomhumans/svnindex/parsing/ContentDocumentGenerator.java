@@ -78,6 +78,9 @@ public class ContentDocumentGenerator
                 catch (final NoSuchAlgorithmException e)
                 {
                     ContentDocumentGenerator.log.error(e);
+                } finally
+                {
+                    os.close();
                 }
                 if (SVNProperty.isTextMimeType(mimeType))
                 {
