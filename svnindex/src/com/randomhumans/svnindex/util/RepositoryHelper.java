@@ -11,6 +11,7 @@ import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
+import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.wc.DefaultSVNRepositoryPool;
@@ -25,6 +26,7 @@ public class RepositoryHelper
     static
     {
         DAVRepositoryFactory.setup();
+        FSRepositoryFactory.setup();
         SVNRepositoryFactoryImpl.setup();
 
         final String user = Configuration.getConfig().getRepoUser();
