@@ -8,6 +8,9 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 
 public class DefaultNameAndSizeFilter implements IFilter
 {
+    static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory
+        .getLog(DefaultNameAndSizeFilter.class);
+    
     SortedSet<String> nameFilters = null;
 
     static final long KB = 1024;
@@ -24,10 +27,17 @@ public class DefaultNameAndSizeFilter implements IFilter
     }
 
     public boolean allow(final String url, final SVNDirEntry entry)
-    {
-        final boolean process = !this.nameFilters.contains(entry.getName())
+    {        
+        boolean process =  false;
+        try
+        {
+        process = !this.nameFilters.contains(entry.getName())
             && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder")
             && (entry.getSize() < 2 * DefaultNameAndSizeFilter.MB);
+        } catch (NullPointerException npe)
+        {
+            log.warn(npe);
+        }
         if (process)
         {
             DirectoryEntryThreadPool.queueEntry(url, entry);
