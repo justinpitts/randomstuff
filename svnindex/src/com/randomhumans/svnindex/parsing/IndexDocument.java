@@ -75,7 +75,7 @@ public class IndexDocument
 
     public void setMessage(final String message)
     {
-        this.message = message;
+        this.message = message != null ? message : "";
     }
 
     public long getRevision()
@@ -101,20 +101,28 @@ public class IndexDocument
     protected List<Field> getFields()
     {
         final ArrayList<Field> fields = new ArrayList<Field>();        
-        fields.add(new Field(IndexDocument.REVISION_FIELD, Long.toString(this.getRevision()), Store.YES, Index.UN_TOKENIZED));
-        fields.add(new Field(IndexDocument.DATE_FIELD, new SimpleDateFormat().format(this.getDate()),Store.YES, Index.UN_TOKENIZED ));
-        fields.add(new Field(IndexDocument.MESSAGE_FIELD, this.getMessage(), Store.YES, Index.TOKENIZED));
-        fields.add(new Field(IndexDocument.AUTHOR_FIELD, this.getAuthor(), Store.YES, Index.UN_TOKENIZED));        
+        try
+        {
+            fields.add(new Field(IndexDocument.REVISION_FIELD, Long.toString(this.getRevision()), Store.YES, Index.UN_TOKENIZED));
+            fields.add(new Field(IndexDocument.DATE_FIELD, new SimpleDateFormat().format(this.getDate()),Store.YES, Index.UN_TOKENIZED ));
+            fields.add(new Field(IndexDocument.MESSAGE_FIELD, this.getMessage(), Store.YES, Index.TOKENIZED));
+            fields.add(new Field(IndexDocument.AUTHOR_FIELD, this.getAuthor(), Store.YES, Index.UN_TOKENIZED));
+        }
+        catch (RuntimeException e)
+        {
+            // TODO Auto-generated catch block -- Finish Me
+            log.error(e);
+        }        
         return fields;
     }
 
     public IndexDocument(final long revision, final String author, final Date date, final String message)
     {
         super();
-        this.revision = revision;
-        this.author = author;
-        this.date = date;
-        this.message = message;
+        this.setRevision(revision);
+        this.setAuthor(author);
+        this.setDate(date);
+        this.setMessage(message);
     }
         
 }
