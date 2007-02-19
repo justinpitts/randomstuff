@@ -27,7 +27,7 @@ public class TempFileReader extends InputStreamReader
             super.close();
         }
         finally
-        {  //best effor attempt to ensure the file is deleted.
+        {  //best effort attempt to ensure the file is deleted.
             if (!this.file.delete())
             {
                 this.file.deleteOnExit();
