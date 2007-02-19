@@ -38,6 +38,8 @@ public class Configuration
 
     private String repositoryURL;
 
+    private int directoryEntryThreadPoolPoolSize;
+
     public String getRepositoryURL()
     {
         return this.repositoryURL;
@@ -66,8 +68,7 @@ public class Configuration
         c.indexLocation = System.getProperty("com.randomhumans.svnindex.indexLocation");
         c.setIgnoredNames(System.getProperty("com.randomhumans.svnindex.ignore").split(","));
         c.repositoryURL = System.getProperty("com.randomhumans.svnindex.repoURL");
-        ;
-
+        c.directoryEntryThreadPoolPoolSize = Integer.parseInt(System.getProperty("com.randomhumans.svnindex.DirectoryEntryThreadPool.poolSize"));
         return c;
     }
 
@@ -103,6 +104,16 @@ public class Configuration
             + " )";
     
         return retValue;
+    }
+
+    public int getDirectoryEntryThreadPoolPoolSize()
+    {
+        return directoryEntryThreadPoolPoolSize;
+    }
+
+    public void setDirectoryEntryThreadPoolPoolSize(int directoryEntryThreadPoolPoolSize)
+    {
+        this.directoryEntryThreadPoolPoolSize = directoryEntryThreadPoolPoolSize;
     }
 
 }
