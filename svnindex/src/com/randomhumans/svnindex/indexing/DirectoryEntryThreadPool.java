@@ -10,12 +10,13 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 
 import com.randomhumans.svnindex.parsing.ContentDocument;
 import com.randomhumans.svnindex.parsing.ContentDocumentGenerator;
+import com.randomhumans.svnindex.util.Configuration;
 
 public class DirectoryEntryThreadPool implements Runnable
 {
     static Log log = LogFactory.getLog(DirectoryEntryThreadPool.class);
 
-    private static final ExecutorService indexerPool = Executors.newFixedThreadPool(20);
+    private static final ExecutorService indexerPool = Executors.newFixedThreadPool(Configuration.getConfig().getDirectoryEntryThreadPoolPoolSize());
 
     String docUrl = "";
 
