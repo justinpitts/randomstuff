@@ -34,9 +34,9 @@ public class DefaultNameAndSizeFilter implements IFilter
         process = !this.nameFilters.contains(entry.getName())
             && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder")
             && (entry.getSize() < 2 * DefaultNameAndSizeFilter.MB);
-        } catch (NullPointerException npe)
+        } catch (final NullPointerException npe)
         {
-            log.warn(npe);
+            DefaultNameAndSizeFilter.log.warn(npe);
         }
         if (process)
         {

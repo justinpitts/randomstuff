@@ -108,10 +108,10 @@ public class IndexDocument
             fields.add(new Field(IndexDocument.MESSAGE_FIELD, this.getMessage(), Store.YES, Index.TOKENIZED));
             fields.add(new Field(IndexDocument.AUTHOR_FIELD, this.getAuthor(), Store.YES, Index.UN_TOKENIZED));
         }
-        catch (RuntimeException e)
+        catch (final RuntimeException e)
         {
             // TODO Auto-generated catch block -- Finish Me
-            log.error(e);
+            IndexDocument.log.error(e);
         }        
         return fields;
     }

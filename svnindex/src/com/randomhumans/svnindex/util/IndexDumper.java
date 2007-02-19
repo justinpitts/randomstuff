@@ -33,11 +33,11 @@ public class IndexDumper
                 }
 
             }
-//            for(final TermEnum terms = ir.terms();terms.next();)
-//            {
-//                System.out.println(terms.term().field() + ":" + terms.term().text());
-//            }
-//            
+            for(final TermEnum terms = ir.terms();terms.next();)
+            {
+                System.out.println(terms.term().field() + ":" + terms.term().text());
+            }
+            
         } finally {
             ir.close();
         }

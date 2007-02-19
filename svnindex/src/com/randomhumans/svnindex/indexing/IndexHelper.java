@@ -13,7 +13,7 @@ import com.randomhumans.svnindex.util.Configuration;
 
 public class IndexHelper
 {
-    
+
     static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(IndexHelper.class);
 
     public static void updateIndexDoc(final IndexDocument d) throws IOException
@@ -27,7 +27,7 @@ public class IndexHelper
     {
         final IndexWriter iw = IndexHelper.getWriter();
         try
-        {            
+        {
             iw.addDocument(d.toDocument());
         }
         finally
@@ -35,21 +35,24 @@ public class IndexHelper
             iw.close();
         }
     }
-    
+
     public static void createIndex() throws IOException
     {
-        log.info("Create index");
-        final IndexWriter iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), IndexHelper.getAnalyzer(), true);
-        iw.close();        
+        IndexHelper.log.info("Create index");
+        final IndexWriter iw = new IndexWriter(Configuration.getConfig().getIndexLocation(), IndexHelper.getAnalyzer(),
+            true);
+        iw.close();
     }
-    
+
     public static void optimize() throws IOException
     {
         final IndexWriter iw = IndexHelper.getWriter();
         try
         {
             iw.optimize();
-        } finally {
+        }
+        finally
+        {
             iw.close();
         }
     }

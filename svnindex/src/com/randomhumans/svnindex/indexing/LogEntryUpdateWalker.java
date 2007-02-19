@@ -15,20 +15,20 @@ public class LogEntryUpdateWalker
 
     public void walk() throws IOException, SVNException
     {
-        IndexInfo info = IndexInfo.loadFromIndex();
-        long endRevision = info.getRevision() + 1;
-        long currentRevision = RepositoryHelper.getLatestRevision();
+        final IndexInfo info = IndexInfo.loadFromIndex();
+        final long endRevision = info.getRevision() + 1;
+        final long currentRevision = RepositoryHelper.getLatestRevision();
 
         for (long i = currentRevision; i > endRevision; i--)
         {
-            SVNLogEntry logEntry = RepositoryHelper.getLogEntry(i);
-            for (Object o : logEntry.getChangedPaths().keySet())
+            final SVNLogEntry logEntry = RepositoryHelper.getLogEntry(i);
+            for (final Object o : logEntry.getChangedPaths().keySet())
             {
-                String url = o.toString();
-                if (!visitedUrls.contains(url))
+                final String url = o.toString();
+                if (!this.visitedUrls.contains(url))
                 {
                  //   ContentIndexerThread.queueDocument(d)
-                    visitedUrls.add(o.toString());
+                    this.visitedUrls.add(o.toString());
                 }
             }
         }

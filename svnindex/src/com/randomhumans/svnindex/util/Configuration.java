@@ -108,10 +108,10 @@ public class Configuration
 
     public int getDirectoryEntryThreadPoolPoolSize()
     {
-        return directoryEntryThreadPoolPoolSize;
+        return this.directoryEntryThreadPoolPoolSize;
     }
 
-    public void setDirectoryEntryThreadPoolPoolSize(int directoryEntryThreadPoolPoolSize)
+    public void setDirectoryEntryThreadPoolPoolSize(final int directoryEntryThreadPoolPoolSize)
     {
         this.directoryEntryThreadPoolPoolSize = directoryEntryThreadPoolPoolSize;
     }
