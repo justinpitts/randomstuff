@@ -17,7 +17,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.SVNProperty;
 import org.tmatesoft.svn.core.io.SVNRepository;
 
@@ -31,19 +30,6 @@ public class ContentDocumentGenerator
 
     public static ContentDocument createDocument(final SVNDirEntry entry, final String path)
     {
-        try
-        {
-            if (RepositoryHelper.checkPath(path) == SVNNodeKind.NONE)
-            {
-                return null;
-            }
-        }
-        catch (final SVNException e1)
-        {
-            ContentDocumentGenerator.log.error(e1);
-            return null;
-
-        }
         final long revision = entry.getRevision();
         final String author = entry.getAuthor();
         final Date date = entry.getDate();
@@ -78,7 +64,8 @@ public class ContentDocumentGenerator
                 catch (final NoSuchAlgorithmException e)
                 {
                     ContentDocumentGenerator.log.error(e);
-                } finally
+                }
+                finally
                 {
                     os.close();
                 }

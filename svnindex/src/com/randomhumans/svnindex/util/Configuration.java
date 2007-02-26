@@ -1,12 +1,11 @@
 
 package com.randomhumans.svnindex.util;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+//TODO: spring!
 public class Configuration
 {
     static Log log = LogFactory.getLog(Configuration.class);
@@ -15,7 +14,8 @@ public class Configuration
     {
         try
         {
-            System.getProperties().load(new FileInputStream("config/svnindex.properties"));
+            
+            System.getProperties().load(Configuration.class.getClassLoader().getResourceAsStream("svnindex.properties"));
         }
         catch (final FileNotFoundException e)
         {
@@ -82,6 +82,18 @@ public class Configuration
         this.ignoredNames = ignoredNames;
     }
 
+
+
+    public int getDirectoryEntryThreadPoolPoolSize()
+    {
+        return this.directoryEntryThreadPoolPoolSize;
+    }
+
+    public void setDirectoryEntryThreadPoolPoolSize(final int directoryEntryThreadPoolPoolSize)
+    {
+        this.directoryEntryThreadPoolPoolSize = directoryEntryThreadPoolPoolSize;
+    }
+
     /**
      * Constructs a <code>String</code> with all attributes
      * in name = value format.
@@ -92,7 +104,7 @@ public class Configuration
     @Override
     public String toString()
     {
-        final String TAB = "\r\n";
+        final String TAB = "    ";
         
         String retValue = "";
         
@@ -101,19 +113,10 @@ public class Configuration
             + "indexLocation = " + this.indexLocation + TAB
             + "ignoredNames = " + this.ignoredNames + TAB
             + "repositoryURL = " + this.repositoryURL + TAB
+            + "directoryEntryThreadPoolPoolSize = " + this.directoryEntryThreadPoolPoolSize + TAB
             + " )";
     
         return retValue;
-    }
-
-    public int getDirectoryEntryThreadPoolPoolSize()
-    {
-        return this.directoryEntryThreadPoolPoolSize;
-    }
-
-    public void setDirectoryEntryThreadPoolPoolSize(final int directoryEntryThreadPoolPoolSize)
-    {
-        this.directoryEntryThreadPoolPoolSize = directoryEntryThreadPoolPoolSize;
     }
 
 }

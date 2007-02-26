@@ -2,11 +2,14 @@
 package com.randomhumans.svnindex.indexing;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.index.TermEnum;
 
 import com.randomhumans.svnindex.parsing.IndexDocument;
 import com.randomhumans.svnindex.util.Configuration;
@@ -18,9 +21,16 @@ public class IndexHelper
 
     public static void updateIndexDoc(final IndexDocument d) throws IOException
     {
-        IndexHelper.deleteTermDocs(d.getUniqueTerm());
-        IndexHelper.addIndexDocument(d);
-
+        final IndexWriter iw = IndexHelper.getWriter();
+        try
+        {
+            iw.updateDocument(d.getUniqueTerm(), d.toDocument());
+        }
+        finally
+        {
+            iw.close();
+            d.close();
+        }
     }
 
     public static void addIndexDocument(final IndexDocument d) throws IOException
@@ -33,6 +43,7 @@ public class IndexHelper
         finally
         {
             iw.close();
+            d.close();
         }
     }
 
@@ -68,23 +79,45 @@ public class IndexHelper
 
     }
 
-    private static void deleteTermDocs(final Term t) throws IOException
+    public static List<String> getTerms(String fieldName, Predicate<String> filter)
     {
-        final IndexReader ir = IndexHelper.getReader();
+        int i = 0;
+        ArrayList<String> results = new ArrayList<String>();
         try
         {
-            ir.deleteDocuments(t);
+            IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
+            TermEnum te = ir.terms();
+            while (te.next() && i < 25)
+            {
+                Term t = te.term();
+                if (t.field().equals(fieldName))
+                {
+                    if (filter.eval(t.text()))
+                    {                        
+                        results.add(t.text());
+                        i++;
+                    }
+                }
+            }
+            te.close();
         }
-        finally
+        catch (IOException e)
         {
-            ir.close();
+            log.error(e);
+            return null;
         }
+        return results;
     }
 
-    private static IndexReader getReader() throws IOException
+    public static List<String> getTerms(String fieldName)
     {
-        final IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
-        return ir;
+        Predicate<String> truePred = new Predicate<String>()
+        {
+            public boolean eval(String t)
+            {
+                return true;
+            }
+        };
+        return getTerms(fieldName, truePred);
     }
-
 }

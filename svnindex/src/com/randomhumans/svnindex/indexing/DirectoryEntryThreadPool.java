@@ -3,6 +3,7 @@ package com.randomhumans.svnindex.indexing;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,6 +54,14 @@ public class DirectoryEntryThreadPool implements Runnable
     public static void shutdown()
     {
         DirectoryEntryThreadPool.indexerPool.shutdown();
+        try
+        {
+            DirectoryEntryThreadPool.indexerPool.awaitTermination(20, TimeUnit.SECONDS);
+        }
+        catch (InterruptedException e)
+        {
+            log.warn(e);
+        }
     }
 
 }

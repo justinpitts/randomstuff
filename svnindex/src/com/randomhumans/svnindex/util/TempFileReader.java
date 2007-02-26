@@ -7,32 +7,39 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/** An input stream reader that attempts to delete the file on close */
-
 public class TempFileReader extends InputStreamReader
 {
-    File file;
+    @Override
+    public int read(final char[] cbuf, final int offset, final int length) throws IOException
+    {
+        //TempFileReader.log.debug(null);                
+        return super.read(cbuf, offset, length);
+    }
+
+    static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(TempFileReader.class);
+
+    private File file;
 
     public TempFileReader(final File in) throws FileNotFoundException
     {
         super(new FileInputStream(in));
         this.file = in;
+        this.file.deleteOnExit();
+        TempFileReader.log.debug(in);
     }
 
     @Override
     public void close() throws IOException
     {
-        try
+        if(this.file != null)
         {
+            TempFileReader.log.debug(this.file);
             super.close();
-        }
-        finally
-        {  //best effort attempt to ensure the file is deleted.
-            if (!this.file.delete())
+            while(this.file.exists())
             {
-                this.file.deleteOnExit();
+             TempFileReader.log.debug(this.file.delete());
             }
+            this.file = null;            
         }
     }
-
 }

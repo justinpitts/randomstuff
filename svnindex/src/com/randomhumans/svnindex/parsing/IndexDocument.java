@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Index;
@@ -104,7 +105,7 @@ public class IndexDocument
         try
         {
             fields.add(new Field(IndexDocument.REVISION_FIELD, Long.toString(this.getRevision()), Store.YES, Index.UN_TOKENIZED));
-            fields.add(new Field(IndexDocument.DATE_FIELD, new SimpleDateFormat().format(this.getDate()),Store.YES, Index.UN_TOKENIZED ));
+            fields.add(new Field(IndexDocument.DATE_FIELD, DateTools.dateToString(this.getDate(), DateTools.Resolution.SECOND),Store.YES, Index.UN_TOKENIZED ));
             fields.add(new Field(IndexDocument.MESSAGE_FIELD, this.getMessage(), Store.YES, Index.TOKENIZED));
             fields.add(new Field(IndexDocument.AUTHOR_FIELD, this.getAuthor(), Store.YES, Index.UN_TOKENIZED));
         }
@@ -123,6 +124,11 @@ public class IndexDocument
         this.setAuthor(author);
         this.setDate(date);
         this.setMessage(message);
+    }
+    
+    public void close()
+    {
+        
     }
         
 }

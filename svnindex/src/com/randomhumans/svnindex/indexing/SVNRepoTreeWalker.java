@@ -20,7 +20,10 @@ public class SVNRepoTreeWalker
         {
             repo = RepositoryHelper.getRepo(url);
             final long currentRevision = repo.getLatestRevision();
+            log.debug("mapping");
             this.map("", action, repo, currentRevision);
+            log.debug("done");
+            
             return currentRevision;
         }
         catch (final SVNException e)

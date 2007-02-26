@@ -3,6 +3,6 @@
 <wb-module deploy-name="svnindex">
 <wb-resource deploy-path="/" source-path="/src"/>
 <wb-resource deploy-path="/" source-path="/test"/>
-<wb-resource deploy-path="/" source-path="/config"/>
+<wb-resource deploy-path="/" source-path="/conf"/>
 </wb-module>
 </project-modules>

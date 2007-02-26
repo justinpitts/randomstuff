@@ -1,6 +1,7 @@
 
 package com.randomhumans.svnindex.parsing;
 
+import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,5 +97,18 @@ public class ContentDocument extends IndexDocument
         // TODO Auto-generated method stub
         return this.getUrl();
     }
-
+    
+    @Override
+    public void close()
+    {        
+        super.close();
+        try
+        {
+            this.getContent().close();
+        }
+        catch (IOException e)
+        {
+            log.error(e);
+        }
+    }
 }

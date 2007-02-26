@@ -37,8 +37,8 @@ public class Walker
         ContentIndexerThread.init(rebuild);
         final SVNRepoTreeWalker walker = new SVNRepoTreeWalker();
         info.setRevision(walker.map(Configuration.getConfig().getRepositoryURL(), filter));
-        ContentIndexerThread.close();
         DirectoryEntryThreadPool.shutdown();
+        ContentIndexerThread.shutdown();
         info.save();
         Walker.log.info("shutdown complete");
     }

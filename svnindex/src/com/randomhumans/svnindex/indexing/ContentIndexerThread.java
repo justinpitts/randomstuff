@@ -92,12 +92,13 @@ public class ContentIndexerThread implements Runnable
         ContentIndexerThread.indexerPool.submit(new ContentIndexerThread());
     }
 
-    public static void close()
+    public static void shutdown()
     {
         ContentIndexerThread.signal = true;
         try
         {
             ContentIndexerThread.log.debug("waiting");
+            
             ContentIndexerThread.indexerPool.shutdown();
             ContentIndexerThread.indexerPool.awaitTermination(60, TimeUnit.SECONDS);
             ContentIndexerThread.log.debug("wait complete");
