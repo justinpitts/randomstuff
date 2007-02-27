@@ -1,5 +1,5 @@
 
-package com.randomhumans.svnindex.indexing;
+package com.randomhumans.svnindex.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.index.TermEnum;
 
+import com.randomhumans.svnindex.indexing.Predicate;
 import com.randomhumans.svnindex.parsing.IndexDocument;
-import com.randomhumans.svnindex.util.Configuration;
 
 public class IndexHelper
 {

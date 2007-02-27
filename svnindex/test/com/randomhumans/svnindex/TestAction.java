@@ -3,7 +3,7 @@ package com.randomhumans.svnindex;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-import com.randomhumans.svnindex.indexing.IFilter;
+import com.randomhumans.svnindex.indexing.filters.IFilter;
 
 public class TestAction implements IFilter
 {

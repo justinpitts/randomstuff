@@ -1,4 +1,4 @@
-package com.randomhumans.svnindex.indexing;
+package com.randomhumans.svnindex.indexing.filters;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 

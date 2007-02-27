@@ -1,5 +1,5 @@
 
-package com.randomhumans.svnindex.indexing;
+package com.randomhumans.svnindex.indexing.revision;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -7,6 +7,7 @@ import java.util.HashSet;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 
+import com.randomhumans.svnindex.indexing.IndexMetaDocument;
 import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class LogEntryUpdateWalker
@@ -15,7 +16,7 @@ public class LogEntryUpdateWalker
 
     public void walk() throws IOException, SVNException
     {
-        final IndexInfo info = IndexInfo.loadFromIndex();
+        final IndexMetaDocument info = IndexMetaDocument.loadFromIndex();
         final long endRevision = info.getRevision() + 1;
         final long currentRevision = RepositoryHelper.getLatestRevision();
 

@@ -1,10 +1,12 @@
 
-package com.randomhumans.svnindex.indexing;
+package com.randomhumans.svnindex.indexing.filters;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
+
+import com.randomhumans.svnindex.indexing.DirectoryEntryThreadPool;
 
 public class DefaultNameAndSizeFilter implements IFilter
 {

@@ -5,6 +5,10 @@ import java.io.IOException;
 
 import org.tmatesoft.svn.core.SVNException;
 
+import com.randomhumans.svnindex.indexing.filters.DefaultNameAndSizeFilter;
+import com.randomhumans.svnindex.indexing.filters.IFilter;
+import com.randomhumans.svnindex.indexing.filters.NameSizeAndRevisionFilter;
+import com.randomhumans.svnindex.indexing.tree.SVNRepoTreeWalker;
 import com.randomhumans.svnindex.util.Configuration;
 
 public class Walker
@@ -21,7 +25,7 @@ public class Walker
     public static void main(final String[] args) throws IOException, SVNException
     {
         Walker.log.info(Configuration.getConfig().toString());        
-        final IndexInfo info = IndexInfo.loadFromIndex();
+        final IndexMetaDocument info = IndexMetaDocument.loadFromIndex();
         final boolean rebuild = ((args.length > 0) && args[0].equalsIgnoreCase("--REBUILD")) ;
         IFilter filter;
         if (rebuild)

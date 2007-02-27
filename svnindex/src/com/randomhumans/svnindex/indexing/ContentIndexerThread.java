@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.randomhumans.svnindex.parsing.ContentDocument;
+import com.randomhumans.svnindex.util.IndexHelper;
 
 public class ContentIndexerThread implements Runnable
 {

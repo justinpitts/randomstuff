@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-import com.randomhumans.svnindex.indexing.IFilter;
+import com.randomhumans.svnindex.indexing.filters.IFilter;
 
 
 public class FilteringTestAction implements IFilter

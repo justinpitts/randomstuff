@@ -1,5 +1,5 @@
 
-package com.randomhumans.svnindex.indexing;
+package com.randomhumans.svnindex.indexing.tree;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -7,6 +7,9 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
 import org.tmatesoft.svn.core.io.SVNRepository;
+
+import com.randomhumans.svnindex.indexing.Walker;
+import com.randomhumans.svnindex.indexing.filters.IFilter;
 import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class SVNRepoTreeWalker

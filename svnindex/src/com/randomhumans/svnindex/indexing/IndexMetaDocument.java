@@ -24,7 +24,7 @@ import org.tmatesoft.svn.core.SVNException;
 import com.randomhumans.svnindex.util.Configuration;
 import com.randomhumans.svnindex.util.RepositoryHelper;
 
-public class IndexInfo
+public class IndexMetaDocument
 {
     private static final String LASTMODIFIED = "LASTMODIFIED";
 
@@ -32,22 +32,22 @@ public class IndexInfo
 
     public static String UUID = "AAA9C74F-B5D3-435a-B8B4-3D12826851DB";
 
-    static Log log = LogFactory.getLog(IndexInfo.class);
+    static Log log = LogFactory.getLog(IndexMetaDocument.class);
 
-    public static IndexInfo loadFromIndex() throws IOException
+    public static IndexMetaDocument loadFromIndex() throws IOException
     {
         try
         {
             final IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
             try
             {
-                final Term t = new Term(IndexInfo.UUID, IndexInfo.UUID);
+                final Term t = new Term(IndexMetaDocument.UUID, IndexMetaDocument.UUID);
                 final TermDocs td = ir.termDocs(t);
                 if (td.next())
                 {
-                    return new IndexInfo(ir.document(td.doc()));
+                    return new IndexMetaDocument(ir.document(td.doc()));
                 }
-                return new IndexInfo();
+                return new IndexMetaDocument();
             }
             finally
             {
@@ -56,7 +56,7 @@ public class IndexInfo
         }
         catch (final FileNotFoundException f)
         {
-            return new IndexInfo();
+            return new IndexMetaDocument();
         }
     }
 
@@ -64,15 +64,15 @@ public class IndexInfo
 
     long revision = -1;
 
-    public IndexInfo()
+    public IndexMetaDocument()
     {
 
     }
 
-    protected IndexInfo(final Document doc)
+    protected IndexMetaDocument(final Document doc)
     {
-        assert (doc.get(IndexInfo.UUID).equals(IndexInfo.UUID));
-        final String rev = doc.get(IndexInfo.REVISION);
+        assert (doc.get(IndexMetaDocument.UUID).equals(IndexMetaDocument.UUID));
+        final String rev = doc.get(IndexMetaDocument.REVISION);
         try
         {
             this.revision = Long.parseLong(rev);
@@ -84,11 +84,11 @@ public class IndexInfo
         final SimpleDateFormat sdf = new SimpleDateFormat();
         try
         {
-            this.lastModified = sdf.parse(doc.get(IndexInfo.LASTMODIFIED));
+            this.lastModified = sdf.parse(doc.get(IndexMetaDocument.LASTMODIFIED));
         }
         catch (final ParseException e)
         {
-            IndexInfo.log.warn(e);
+            IndexMetaDocument.log.warn(e);
             this.lastModified = Calendar.getInstance().getTime();
         }
     }
@@ -115,9 +115,9 @@ public class IndexInfo
     public Document toDocument()
     {
         final Document doc = new Document();
-        doc.add(this.createField(IndexInfo.UUID, IndexInfo.UUID));
-        doc.add(this.createField(IndexInfo.LASTMODIFIED, new SimpleDateFormat().format(this.lastModified)));
-        doc.add(this.createField(IndexInfo.REVISION, Long.toString(this.revision)));
+        doc.add(this.createField(IndexMetaDocument.UUID, IndexMetaDocument.UUID));
+        doc.add(this.createField(IndexMetaDocument.LASTMODIFIED, new SimpleDateFormat().format(this.lastModified)));
+        doc.add(this.createField(IndexMetaDocument.REVISION, Long.toString(this.revision)));
         return doc;
     }
 
@@ -127,7 +127,7 @@ public class IndexInfo
             new StandardAnalyzer(), false);
         try
         {
-            final Term t = new Term(IndexInfo.UUID, IndexInfo.UUID);
+            final Term t = new Term(IndexMetaDocument.UUID, IndexMetaDocument.UUID);
             index.deleteDocuments(t);
             index.addDocument(this.toDocument());
         }
@@ -145,7 +145,7 @@ public class IndexInfo
         }
         catch (final SVNException e)
         {
-            IndexInfo.log.error(e);
+            IndexMetaDocument.log.error(e);
             return false;
         }
     }
