@@ -12,7 +12,6 @@ public class TempFileReader extends InputStreamReader
     @Override
     public int read(final char[] cbuf, final int offset, final int length) throws IOException
     {
-        //TempFileReader.log.debug(null);                
         return super.read(cbuf, offset, length);
     }
 
@@ -25,21 +24,33 @@ public class TempFileReader extends InputStreamReader
         super(new FileInputStream(in));
         this.file = in;
         this.file.deleteOnExit();
-        TempFileReader.log.debug(in);
     }
 
     @Override
     public void close() throws IOException
     {
-        if(this.file != null)
+        int i = 0;
+        if (this.file != null)
         {
-            TempFileReader.log.debug(this.file);
             super.close();
-            while(this.file.exists())
+            while (this.file.exists() && i < 5)
             {
-             TempFileReader.log.debug(this.file.delete());
+                this.file.delete();
+                try
+                {
+                    Thread.sleep(500);
+                }
+                catch (InterruptedException e)
+                {
+                    log.warn(e);
+                }
+                i++;
             }
-            this.file = null;            
+            if (file.exists())
+            {
+                log.debug("abandoned delete of " + file.toString());
+            }
+            this.file = null;
         }
     }
 }

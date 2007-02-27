@@ -32,8 +32,8 @@ public class ContentDocumentGenerator
     {
         final long revision = entry.getRevision();
         final String author = entry.getAuthor();
-        final Date date = entry.getDate();
-        final String message = entry.getCommitMessage();
+        final Date date = entry.getDate();        
+        final String message = RepositoryHelper.getLogEntry(revision).getMessage();
         final String url = entry.getURL().toString();
         String md5Hash = "";
         Reader content = null;

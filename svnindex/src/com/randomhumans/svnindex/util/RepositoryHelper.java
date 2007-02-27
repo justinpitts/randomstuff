@@ -104,7 +104,7 @@ public class RepositoryHelper
     }
 
     public static Collection<SVNDirEntry> dir(final SVNRepository repo, final String url) throws SVNException
-    {
+    {        
         return RepositoryHelper.dir(repo, url, repo.getLatestRevision());
     }
 

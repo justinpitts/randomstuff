@@ -86,20 +86,27 @@ public class IndexHelper
         try
         {
             IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
-            TermEnum te = ir.terms();
-            while (te.next() && i < 25)
+            try
             {
-                Term t = te.term();
-                if (t.field().equals(fieldName))
+                TermEnum te = ir.terms();
+                while (te.next() && i < 25)
                 {
-                    if (filter.eval(t.text()))
-                    {                        
-                        results.add(t.text());
-                        i++;
+                    Term t = te.term();
+                    if (t.field().equals(fieldName))
+                    {
+                        if (filter.eval(t.text()))
+                        {
+                            results.add(t.text());
+                            i++;
+                        }
                     }
                 }
+                te.close();
             }
-            te.close();
+            finally
+            {
+                ir.close();
+            }
         }
         catch (IOException e)
         {

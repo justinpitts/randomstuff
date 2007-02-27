@@ -52,15 +52,18 @@ public class DirectoryEntryThreadPool implements Runnable
     }
 
     public static void shutdown()
-    {
+    {        
         DirectoryEntryThreadPool.indexerPool.shutdown();
         try
-        {
-            DirectoryEntryThreadPool.indexerPool.awaitTermination(20, TimeUnit.SECONDS);
+        {            
+            while(!DirectoryEntryThreadPool.indexerPool.awaitTermination(20, TimeUnit.SECONDS))
+            {
+                DirectoryEntryThreadPool.log.debug("waiting");
+            }
         }
-        catch (InterruptedException e)
+        catch (final InterruptedException e)
         {
-            log.warn(e);
+            DirectoryEntryThreadPool.log.warn(e);
         }
     }
 

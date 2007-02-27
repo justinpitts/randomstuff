@@ -100,7 +100,11 @@ public class ContentIndexerThread implements Runnable
             ContentIndexerThread.log.debug("waiting");
             
             ContentIndexerThread.indexerPool.shutdown();
-            ContentIndexerThread.indexerPool.awaitTermination(60, TimeUnit.SECONDS);
+            while(documentQueue.size() > 0 && !ContentIndexerThread.indexerPool.awaitTermination(10, TimeUnit.SECONDS))
+            {
+                log.debug(documentQueue.size());                                
+            }
+            
             ContentIndexerThread.log.debug("wait complete");
         }
         catch (final InterruptedException e1)
