@@ -3,8 +3,10 @@ package com.randomhumans.svnindex.indexing;
 
 import java.io.IOException;
 
+import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 
+import com.randomhumans.svnindex.document.IndexMetaDocument;
 import com.randomhumans.svnindex.indexing.filters.DefaultNameAndSizeFilter;
 import com.randomhumans.svnindex.indexing.filters.IFilter;
 import com.randomhumans.svnindex.indexing.filters.NameSizeAndRevisionFilter;
@@ -25,9 +27,9 @@ public class Walker
     public static void main(final String[] args) throws IOException, SVNException
     {
         Walker.log.info(Configuration.getConfig().toString());        
-        final IndexMetaDocument info = IndexMetaDocument.loadFromIndex();
+        final IndexMetaDocument info = IndexMetaDocument.loadFromIndex(Configuration.getConfig().getIndexLocation());
         final boolean rebuild = ((args.length > 0) && args[0].equalsIgnoreCase("--REBUILD")) ;
-        IFilter filter;
+        IFilter<String, SVNDirEntry> filter;
         if (rebuild)
         {
             filter = new DefaultNameAndSizeFilter(Configuration.getConfig().getIgnoredNames());
@@ -43,7 +45,7 @@ public class Walker
         info.setRevision(walker.map(Configuration.getConfig().getRepositoryURL(), filter));
         DirectoryEntryThreadPool.shutdown();
         ContentIndexerThread.shutdown();
-        info.save();
+        info.save(Configuration.getConfig().getIndexLocation());
         Walker.log.info("shutdown complete");
     }
 }

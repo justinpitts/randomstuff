@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.apache.lucene.search.Hits;
 
-import com.randomhumans.svnindex.parsing.ContentDocument;
+import com.randomhumans.svnindex.document.ContentDocument;
 
 public class ConsoleHitsRenderer implements IHitsRenderer
 {

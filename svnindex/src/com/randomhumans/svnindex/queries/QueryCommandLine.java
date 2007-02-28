@@ -4,7 +4,7 @@ package com.randomhumans.svnindex.queries;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
-import com.randomhumans.svnindex.parsing.IndexDocument;
+import com.randomhumans.svnindex.document.IndexDocument;
 import com.randomhumans.svnindex.queries.render.ConsoleHitsRenderer;
 import com.randomhumans.svnindex.queries.render.IHitsRenderer;
 

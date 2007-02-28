@@ -4,7 +4,7 @@ package com.randomhumans.svnindex.queries;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
 
-import com.randomhumans.svnindex.parsing.ContentDocument;
+import com.randomhumans.svnindex.document.ContentDocument;
 
 public class ContentQuery extends AbstractQuery implements IQuery
 {

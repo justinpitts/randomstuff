@@ -5,7 +5,7 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 
 import com.randomhumans.svnindex.indexing.filters.IFilter;
 
-public class TestAction implements IFilter
+public class TestAction implements IFilter<String,SVNDirEntry>
 {
     int i = 0;
 

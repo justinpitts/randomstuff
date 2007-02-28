@@ -4,7 +4,7 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 
 import com.randomhumans.svnindex.indexing.DirectoryEntryThreadPool;
 
-public class NameSizeAndRevisionFilter extends DefaultNameAndSizeFilter implements IFilter
+public class NameSizeAndRevisionFilter extends DefaultNameAndSizeFilter implements IFilter<String, SVNDirEntry>
 {
 
     long minimumRevision = 0;

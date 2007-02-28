@@ -10,7 +10,7 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 import com.randomhumans.svnindex.indexing.filters.IFilter;
 
 
-public class FilteringTestAction implements IFilter
+public class FilteringTestAction implements IFilter<String,SVNDirEntry>
 {
     SortedSet<String> nameFilters = null;
     public FilteringTestAction(final Set<String> filters)

@@ -16,16 +16,16 @@ public class SVNRepoTreeWalker
 {
     Log log = LogFactory.getLog(Walker.class);
 
-    public long map(final String url, final IFilter action)
+    public long map(final String url, final IFilter<String, SVNDirEntry> action)
     {
         SVNRepository repo = null;
         try
         {
             repo = RepositoryHelper.getRepo(url);
             final long currentRevision = repo.getLatestRevision();
-            log.debug("mapping");
+            this.log.debug("mapping");
             this.map("", action, repo, currentRevision);
-            log.debug("done");
+            this.log.debug("done");
             
             return currentRevision;
         }
@@ -47,7 +47,7 @@ public class SVNRepoTreeWalker
         }
     }
 
-    private void map(final String url, final IFilter action, final SVNRepository repo, final long revision)
+    private void map(final String url, final IFilter<String, SVNDirEntry> action, final SVNRepository repo, final long revision)
     {
         try
         {

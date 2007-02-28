@@ -11,8 +11,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.index.TermEnum;
 
+import com.randomhumans.svnindex.document.IndexDocument;
 import com.randomhumans.svnindex.indexing.Predicate;
-import com.randomhumans.svnindex.parsing.IndexDocument;
 
 public class IndexHelper
 {
@@ -79,19 +79,19 @@ public class IndexHelper
 
     }
 
-    public static List<String> getTerms(String fieldName, Predicate<String> filter)
+    public static List<String> getTerms(final String fieldName, final Predicate<String> filter)
     {
         int i = 0;
-        ArrayList<String> results = new ArrayList<String>();
+        final ArrayList<String> results = new ArrayList<String>();
         try
         {
-            IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
+            final IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
             try
             {
-                TermEnum te = ir.terms();
-                while (te.next() && i < 25)
+                final TermEnum te = ir.terms();
+                while (te.next() && (i < 25))
                 {
-                    Term t = te.term();
+                    final Term t = te.term();
                     if (t.field().equals(fieldName))
                     {
                         if (filter.eval(t.text()))
@@ -108,23 +108,23 @@ public class IndexHelper
                 ir.close();
             }
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
-            log.error(e);
+            IndexHelper.log.error(e);
             return null;
         }
         return results;
     }
 
-    public static List<String> getTerms(String fieldName)
+    public static List<String> getTerms(final String fieldName)
     {
-        Predicate<String> truePred = new Predicate<String>()
+        final Predicate<String> truePred = new Predicate<String>()
         {
             public boolean eval(String t)
             {
                 return true;
             }
         };
-        return getTerms(fieldName, truePred);
+        return IndexHelper.getTerms(fieldName, truePred);
     }
 }

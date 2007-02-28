@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.randomhumans.svnindex.parsing.ContentDocument;
+import com.randomhumans.svnindex.document.ContentDocument;
 import com.randomhumans.svnindex.util.IndexHelper;
 
 public class ContentIndexerThread implements Runnable
@@ -101,9 +101,9 @@ public class ContentIndexerThread implements Runnable
             ContentIndexerThread.log.debug("waiting");
             
             ContentIndexerThread.indexerPool.shutdown();
-            while(documentQueue.size() > 0 && !ContentIndexerThread.indexerPool.awaitTermination(10, TimeUnit.SECONDS))
+            while((ContentIndexerThread.documentQueue.size() > 0) && !ContentIndexerThread.indexerPool.awaitTermination(10, TimeUnit.SECONDS))
             {
-                log.debug(documentQueue.size());                                
+                ContentIndexerThread.log.debug(ContentIndexerThread.documentQueue.size());                                
             }
             
             ContentIndexerThread.log.debug("wait complete");

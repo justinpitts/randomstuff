@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tmatesoft.svn.core.SVNDirEntry;
 
-import com.randomhumans.svnindex.parsing.ContentDocument;
+import com.randomhumans.svnindex.document.ContentDocument;
 import com.randomhumans.svnindex.parsing.ContentDocumentGenerator;
 import com.randomhumans.svnindex.util.Configuration;
 

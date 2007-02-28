@@ -1,5 +1,5 @@
 
-package com.randomhumans.svnindex.indexing;
+package com.randomhumans.svnindex.document;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,10 +21,9 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.index.TermDocs;
 import org.tmatesoft.svn.core.SVNException;
 
-import com.randomhumans.svnindex.util.Configuration;
 import com.randomhumans.svnindex.util.RepositoryHelper;
 
-public class IndexMetaDocument
+public class IndexMetaDocument implements UniqueDocument
 {
     private static final String LASTMODIFIED = "LASTMODIFIED";
 
@@ -34,11 +33,11 @@ public class IndexMetaDocument
 
     static Log log = LogFactory.getLog(IndexMetaDocument.class);
 
-    public static IndexMetaDocument loadFromIndex() throws IOException
+    public static IndexMetaDocument loadFromIndex(final String indexindexPath) throws IOException
     {
         try
         {
-            final IndexReader ir = IndexReader.open(Configuration.getConfig().getIndexLocation());
+            final IndexReader ir = IndexReader.open(indexindexPath);
             try
             {
                 final Term t = new Term(IndexMetaDocument.UUID, IndexMetaDocument.UUID);
@@ -121,9 +120,9 @@ public class IndexMetaDocument
         return doc;
     }
 
-    public void save() throws IOException
+    public void save(final String indexLocation) throws IOException
     {
-        final IndexModifier index = new IndexModifier(Configuration.getConfig().getIndexLocation(),
+        final IndexModifier index = new IndexModifier(indexLocation,
             new StandardAnalyzer(), false);
         try
         {
@@ -153,6 +152,11 @@ public class IndexMetaDocument
     public Date getLastModified()
     {
         return this.lastModified;
+    }
+
+    public Term getUniqueTerm()
+    {
+        return new Term(IndexMetaDocument.UUID, IndexMetaDocument.UUID);
     }
 
 }
