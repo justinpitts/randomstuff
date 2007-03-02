@@ -13,8 +13,8 @@
     <property name="source" value="1.5"/>
     <path id="svnindex.classpath">
         <pathelement location="bin"/>
-        <pathelement location="lib/lucene-core-2.0.0.jar"/>
-        <pathelement location="lib/javasvn.jar"/>
+        <pathelement location="lib/lucene-core-2.1.0.jar"/>
+        <pathelement location="lib/svnkit.jar"/>
         <pathelement location="${JUNIT_HOME}/junit.jar"/>
         <pathelement location="lib/commons-logging-1.0.4.jar"/>
         <pathelement location="lib/log4j-1.2.8.jar"/>
