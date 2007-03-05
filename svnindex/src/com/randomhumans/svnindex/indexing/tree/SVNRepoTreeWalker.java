@@ -1,69 +1,48 @@
 
 package com.randomhumans.svnindex.indexing.tree;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
-import org.tmatesoft.svn.core.io.SVNRepository;
-
-import com.randomhumans.svnindex.indexing.Walker;
 import com.randomhumans.svnindex.indexing.filters.IFilter;
 import com.randomhumans.svnindex.util.RepositoryHelper;
 
 public class SVNRepoTreeWalker
 {
-    Log log = LogFactory.getLog(Walker.class);
+    static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(SVNRepoTreeWalker.class);
 
-    public long map(final String url, final IFilter<String, SVNDirEntry> action)
+    public long map(String[] folders, final IFilter<String, SVNDirEntry> action) throws SVNException
     {
-        SVNRepository repo = null;
-        try
+        final long currentRevision = RepositoryHelper.getLatestRevision();
+        for(String folder : folders)
         {
-            repo = RepositoryHelper.getRepo(url);
-            final long currentRevision = repo.getLatestRevision();
-            this.log.debug("mapping");
-            this.map("", action, repo, currentRevision);
-            this.log.debug("done");
-            
-            return currentRevision;
+            SVNRepoTreeWalker.this.map(folder, action, currentRevision);
         }
-        catch (final SVNException e)
-        {
-            this.log.error(e);
-            return -1;
-        }
-        finally
-        {
-            try
+        return currentRevision;
+    }
+    public long map(String folder, final IFilter<String, SVNDirEntry> action) throws SVNException
+    {        
+        final long currentRevision = RepositoryHelper.getLatestRevision();
+        SVNRepoTreeWalker.this.map(folder, action, currentRevision);
+        return currentRevision;
+    }
+
+    private void map(final String path, final IFilter<String, SVNDirEntry> action, final long revision)        throws SVNException
+    {        
+        for (final SVNDirEntry entry : RepositoryHelper.dir(path, revision))
+        {            
+            String newPath = formatEntryPath(path, entry);
+            final boolean process = action.allow(path, entry);
+            if (process && (entry.getKind() == SVNNodeKind.DIR))
             {
-                repo.closeSession();
-            }
-            catch (final SVNException e)
-            {
-                this.log.error(e);
+                this.map(newPath, action, revision);
             }
         }
     }
-
-    private void map(final String url, final IFilter<String, SVNDirEntry> action, final SVNRepository repo, final long revision)
+        
+    private String formatEntryPath(final String folderUrl, final SVNDirEntry entry)
     {
-        try
-        {
-            for (final SVNDirEntry entry : RepositoryHelper.dir(repo, url))
-            {
-                final boolean process = action.allow(url + "/" + entry.getName(), entry);
-                if (process && (entry.getKind() == SVNNodeKind.DIR))
-                {
-                    this.map((url.equals("") ? entry.getName() : url + "/" + entry.getName()), action, repo, revision);
-                }
-            }
-        }
-        catch (final SVNException e)
-        {
-            this.log.error(e);
-        }
+        String s = folderUrl.equals("") ? entry.getName() : folderUrl + (folderUrl.endsWith("/") ? "" : "/") + entry.getName();        
+        return s;
     }
-
 }

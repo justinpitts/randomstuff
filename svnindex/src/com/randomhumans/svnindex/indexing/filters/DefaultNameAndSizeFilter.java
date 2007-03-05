@@ -5,6 +5,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
+import org.tmatesoft.svn.core.SVNNodeKind;
 
 import com.randomhumans.svnindex.indexing.DirectoryEntryThreadPool;
 
@@ -33,15 +34,14 @@ public class DefaultNameAndSizeFilter implements IFilter<String, SVNDirEntry>
         boolean process = false;
         try
         {
-            process = !this.nameFilters.contains(entry.getName())
-                && !entry.getAuthor().equalsIgnoreCase("nextgenbuilder")
+            process = !this.nameFilters.contains(entry.getName())                
                 && (entry.getSize() < 2 * DefaultNameAndSizeFilter.MB);
         }
         catch (final NullPointerException npe)
         {
             DefaultNameAndSizeFilter.log.warn(npe);
         }
-        if (process)
+        if (process && entry.getKind().equals(SVNNodeKind.FILE))
         {
             DirectoryEntryThreadPool.queueEntry(url, entry);
         }

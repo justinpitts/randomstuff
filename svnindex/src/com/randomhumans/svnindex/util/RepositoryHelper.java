@@ -8,159 +8,89 @@ import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.SVNNodeKind;
-import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
-import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
-import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
-import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
+import org.tmatesoft.svn.core.io.SVNFileRevision;
 import org.tmatesoft.svn.core.io.SVNRepository;
-import org.tmatesoft.svn.core.wc.DefaultSVNRepositoryPool;
-import org.tmatesoft.svn.core.wc.ISVNRepositoryPool;
-import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 public class RepositoryHelper
 {
     static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(RepositoryHelper.class);
 
-    private static ISVNRepositoryPool pool = null;
-    static
-    {
-        DAVRepositoryFactory.setup();
-        FSRepositoryFactory.setup();
-        SVNRepositoryFactoryImpl.setup();
-
-        final String user = Configuration.getConfig().getRepoUser();
-        final String password = Configuration.getConfig().getRepoPassword();
-        final ISVNAuthenticationManager auth = SVNWCUtil.createDefaultAuthenticationManager(user, password);
-        RepositoryHelper.pool = new DefaultSVNRepositoryPool(auth, null);
-
-    }
-
-    public static SVNRepository getRepo() throws SVNException
-    {
-        return RepositoryHelper.getRepo(RepositoryHelper.getRepoURL());
-    }
-
-    public static SVNRepository getRepo(final String url) throws SVNException
-    {
-        return RepositoryHelper.pool.createRepository(SVNURL.parseURIEncoded(url), true);
-    }
-
     public static long getLatestRevision() throws SVNException
     {
-        SVNRepository repo = null;
-        try
+        return new RepositoryTemplate<Long>().execute(Configuration.getConfig().getPathToRepository(), new RepositoryAction<Long>()
         {
-            repo = RepositoryHelper.getRepo();
-            return repo.getLatestRevision();
-        }
-        finally
-        {
-            repo.closeSession();
-        }
+            public Long execute(final SVNRepository repo) throws SVNException
+            {
+                return repo.getLatestRevision();
+            }
+        });
     }
 
     public static SVNNodeKind checkPath(final String path) throws SVNException
     {
-        SVNRepository repo = null;
-        try
+        return new RepositoryTemplate<SVNNodeKind>().execute(Configuration.getConfig().getPathToRepository(), new RepositoryAction<SVNNodeKind>()
         {
-            repo = RepositoryHelper.getRepo();
-            return repo.checkPath(path, -1);
-        }
-        finally
-        {
-            repo.closeSession();
-        }
-
+            public SVNNodeKind execute(final SVNRepository repo) throws SVNException
+            {
+                return repo.checkPath(path, -1);
+            }
+        });
     }
 
-    public static SVNDirEntry getInfo(final String path) throws SVNException
-    {
-        SVNRepository repo = null;
-        try
-        {
-            repo = RepositoryHelper.getRepo();
-            return repo.info(path, -1);
-        }
-        finally
-        {
-            repo.closeSession();
-        }
-    }
-
-    public static Collection<SVNDirEntry> dir(final String url) throws SVNException
-    {
-        SVNRepository repo = null;
-        try
-        {
-            repo = RepositoryHelper.getRepo();
-            return RepositoryHelper.dir(repo, url);
-        }
-        finally
-        {
-            repo.closeSession();
-        }
-    }
-
-    public static Collection<SVNDirEntry> dir(final SVNRepository repo, final String url) throws SVNException
+    public static Collection<SVNDirEntry> dir(final String url, final long revision) throws SVNException
     {        
-        return RepositoryHelper.dir(repo, url, repo.getLatestRevision());
-    }
-
-    public static Collection<SVNDirEntry> dir(final SVNRepository repo, final String url, final long revision)
-        throws SVNException
-    {
-        final ArrayList<SVNDirEntry> entries = new ArrayList<SVNDirEntry>();
-        repo.getDir(url, revision, null, entries);
-        return entries;
-    }
-
-    private static String getRepoURL()
-    {
-        return Configuration.getConfig().getRepositoryURL();
+        return new RepositoryTemplate<Collection<SVNDirEntry>>()
+        .execute(Configuration.getConfig().getPathToRepository(), new RepositoryAction<Collection<SVNDirEntry>>()
+        {
+            @SuppressWarnings("unchecked")
+            public Collection<SVNDirEntry> execute(final SVNRepository repo) throws SVNException 
+            {
+                return repo.getDir(url, revision, null, (Collection<SVNDirEntry>)null);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
-    public static SVNLogEntry getLogEntry(final long revisionNumber)
+    public static SVNLogEntry getLogEntry(final long revisionNumber) throws SVNException
     {
-        SVNRepository repo = null;
-        SVNLogEntry logEntry = null;
+        return new RepositoryTemplate<SVNLogEntry>().execute(Configuration.getConfig().getPathToRepository(),new RepositoryAction<SVNLogEntry>()
+        {
+            public SVNLogEntry execute(final SVNRepository repo) throws SVNException
+            {
+                ArrayList<SVNLogEntry> logs;
+                logs = new ArrayList<SVNLogEntry>(repo.log(new String[] {""}, null, revisionNumber, revisionNumber, true, true));
+                return logs.get(0);
+            }
+        });
+    }
+
+    public static synchronized SVNFileRevision getFileRevision(final String path, final long revision) 
+    {
+        
         try
         {
-            try
-            {
-                repo = RepositoryHelper.getRepo();
-                ArrayList<SVNLogEntry> logs;
-                try
+            return new RepositoryTemplate<SVNFileRevision>().execute(Configuration.getConfig().getPathToRepository(), new RepositoryAction<SVNFileRevision>()
                 {
-                    logs = new ArrayList(repo.log(new String[] {""}, null, revisionNumber, revisionNumber, true, true));
-                    logEntry = logs.get(0);
-
-                }
-                catch (final SVNException e)
-                {                    
-                    RepositoryHelper.log.error(e);
-                }
-
-            }
-            catch (final SVNException e)
-            {
-                RepositoryHelper.log.error(e);
-            }
-            return logEntry;
+                    public SVNFileRevision execute(final SVNRepository repo) throws SVNException 
+                    {
+                        log.debug(checkPath(path));
+                        Collection revisions = repo.getFileRevisions(path , null, revision,revision);
+                        SVNFileRevision[] fileRevisionInfos = (SVNFileRevision[]) revisions.toArray();
+                        SVNFileRevision s = fileRevisionInfos[0];
+                        return s;
+                    }
+                });
         }
-        finally
+        catch (SVNException e)
         {
-            try
-            {
-                repo.closeSession();
-            }
-            catch (final SVNException e)
-            {
-                RepositoryHelper.log.error(e);
-            }
-        }
+            log.warn("Problem retrieving filerevision for " + path, e);
+            return null;
+        }        
+    }
+    
+    public static SVNFileRevision getFileRevision(final SVNDirEntry entry, final String path) throws SVNException 
+    {
+        return getFileRevision(path +"/" + entry.getName(), entry.getRevision());
     }
 
 }

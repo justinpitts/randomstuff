@@ -35,14 +35,28 @@ public class Configuration
     private String indexLocation;
 
     private String[] ignoredNames;
+    
+    private String[] ignoredExtensions;
 
-    private String repositoryURL;
+    private String pathToRepository;
 
     private int directoryEntryThreadPoolPoolSize;
+    
+    private String[] folders; 
 
-    public String getRepositoryURL()
+    public String[] getFolders()
     {
-        return this.repositoryURL;
+        return folders;
+    }
+
+    public void setFolders(String[] folders)
+    {
+        this.folders = folders;
+    }
+
+    public String getPathToRepository()
+    {
+        return this.pathToRepository;
     }
 
     public String getRepoPassword()
@@ -67,8 +81,10 @@ public class Configuration
         final Configuration c = new Configuration();
         c.indexLocation = System.getProperty("com.randomhumans.svnindex.indexLocation");
         c.setIgnoredNames(System.getProperty("com.randomhumans.svnindex.ignore").split(","));
-        c.repositoryURL = System.getProperty("com.randomhumans.svnindex.repoURL");
+        c.pathToRepository = System.getProperty("com.randomhumans.svnindex.repoURL");
         c.directoryEntryThreadPoolPoolSize = Integer.parseInt(System.getProperty("com.randomhumans.svnindex.DirectoryEntryThreadPool.poolSize"));
+        c.folders=System.getProperty("com.randomhumans.svnindex.folders").split(",");
+        c.ignoredExtensions =  System.getProperty("com.randomhumans.svnindex.ignoredExtensions").split(",");
         return c;
     }
 
@@ -94,6 +110,17 @@ public class Configuration
         this.directoryEntryThreadPoolPoolSize = directoryEntryThreadPoolPoolSize;
     }
 
+
+    public String[] getIgnoredExtensions()
+    {
+        return ignoredExtensions;
+    }
+
+    public void setIgnoredExtensions(String[] ignoredExtensions)
+    {
+        this.ignoredExtensions = ignoredExtensions;
+    }
+
     /**
      * Constructs a <code>String</code> with all attributes
      * in name = value format.
@@ -101,7 +128,6 @@ public class Configuration
      * @return a <code>String</code> representation 
      * of this object.
      */
-    @Override
     public String toString()
     {
         final String TAB = "    ";
@@ -112,11 +138,14 @@ public class Configuration
             + super.toString() + TAB
             + "indexLocation = " + this.indexLocation + TAB
             + "ignoredNames = " + this.ignoredNames + TAB
-            + "repositoryURL = " + this.repositoryURL + TAB
+            + "ignoredExtensions = " + this.ignoredExtensions + TAB
+            + "repositoryURL = " + this.pathToRepository + TAB
             + "directoryEntryThreadPoolPoolSize = " + this.directoryEntryThreadPoolPoolSize + TAB
+            + "folders = " + this.folders + TAB
             + " )";
     
         return retValue;
     }
+
 
 }

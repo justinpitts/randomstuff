@@ -122,8 +122,7 @@ public class IndexMetaDocument implements UniqueDocument
 
     public void save(final String indexLocation) throws IOException
     {
-        final IndexModifier index = new IndexModifier(indexLocation,
-            new StandardAnalyzer(), false);
+        final IndexModifier index = new IndexModifier(indexLocation, new StandardAnalyzer(), false);
         try
         {
             final Term t = new Term(IndexMetaDocument.UUID, IndexMetaDocument.UUID);
@@ -136,17 +135,9 @@ public class IndexMetaDocument implements UniqueDocument
         }
     }
 
-    public boolean isCurrentWithRepository()
+    public boolean isCurrentWithRepository() throws SVNException
     {
-        try
-        {
-            return this.getRevision() == RepositoryHelper.getLatestRevision();
-        }
-        catch (final SVNException e)
-        {
-            IndexMetaDocument.log.error(e);
-            return false;
-        }
+        return this.getRevision() == RepositoryHelper.getLatestRevision();
     }
 
     public Date getLastModified()
