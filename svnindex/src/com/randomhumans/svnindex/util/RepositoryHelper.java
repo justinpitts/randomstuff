@@ -74,8 +74,8 @@ public class RepositoryHelper
                     public SVNFileRevision execute(final SVNRepository repo) throws SVNException 
                     {
                         log.debug(checkPath(path));
-                        Collection revisions = repo.getFileRevisions(path , null, revision,revision);
-                        SVNFileRevision[] fileRevisionInfos = (SVNFileRevision[]) revisions.toArray();
+                        Collection<?> revisions = repo.getFileRevisions(path , null, revision,revision);
+                        SVNFileRevision[] fileRevisionInfos = (SVNFileRevision[]) revisions.toArray(new SVNFileRevision[0]);
                         SVNFileRevision s = fileRevisionInfos[0];
                         return s;
                     }

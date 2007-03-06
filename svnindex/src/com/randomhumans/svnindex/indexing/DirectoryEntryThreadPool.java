@@ -39,7 +39,7 @@ public class DirectoryEntryThreadPool implements Runnable
         DirectoryEntryThreadPool.log.debug(this.docUrl);
         try
         {
-            final ContentDocument doc = ContentDocumentGenerator.createDocument(this.dirEntry, this.docUrl);
+            final ContentDocument doc = ContentDocumentGenerator.createDocument(this.dirEntry, this.docUrl);            
             if (doc != null)
             {
                 ContentIndexerThread.queueDocument(doc);
@@ -48,6 +48,11 @@ public class DirectoryEntryThreadPool implements Runnable
         catch (final InterruptedException e)
         {
             DirectoryEntryThreadPool.log.error(e);
+        }
+        catch (RuntimeException e)
+        {
+            log.error(e,e);
+            throw(e);
         }
     }
 
