@@ -51,7 +51,7 @@ public class DirectoryEntryThreadPool implements Runnable
         }
         catch (RuntimeException e)
         {
-            log.error(e,e);
+            log.fatal(e,e);
             throw(e);
         }
     }
