@@ -26,7 +26,7 @@ public class CommitQueryTest extends TestCase
         final IQuery t = new ContentQuery();
         try
         {
-            final Hits h = t.performQuery("author:jpitts", new Sort(IndexDocument.REVISION_FIELD));
+            final Hits h = t.performQuery("AUTHOR:jpitts", new Sort(IndexDocument.REVISION_FIELD));
             Assert.assertNotNull(h);
             Assert.assertTrue(0 < h.length());
             for (int i = 0; i < h.length(); i++)

@@ -53,6 +53,11 @@ public class ContentIndexerThread implements Runnable
         {
             ContentIndexerThread.log.error(e);
         }
+        catch (RuntimeException e)
+        {
+            log.fatal(e,e);
+            throw(e);
+        }
         finally
         {
             try
