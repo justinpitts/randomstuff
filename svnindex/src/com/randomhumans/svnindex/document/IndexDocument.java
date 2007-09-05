@@ -68,12 +68,12 @@ public class IndexDocument implements UniqueDocument
 
     public Date getDate()
     {
-        return this.date;
+        return new Date(this.date.getTime());
     }
 
     public void setDate(final Date date)
     {
-        this.date = date;
+        this.date = new Date(date.getTime());        
     }
 
     public long getRevision()

@@ -29,7 +29,7 @@ public class IndexMetaDocument implements UniqueDocument
 
     private static final String REVISION = "REVISION";
 
-    public static String UUID = "AAA9C74F-B5D3-435a-B8B4-3D12826851DB";
+    public static final String UUID = "AAA9C74F-B5D3-435a-B8B4-3D12826851DB";
 
     static Log log = LogFactory.getLog(IndexMetaDocument.class);
 
@@ -142,7 +142,7 @@ public class IndexMetaDocument implements UniqueDocument
 
     public Date getLastModified()
     {
-        return this.lastModified;
+        return new Date(this.lastModified.getTime());
     }
 
     public Term getUniqueTerm()

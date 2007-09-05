@@ -3,6 +3,8 @@ package com.randomhumans.svnindex.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 //TODO: spring!
@@ -45,13 +47,13 @@ public class Configuration
     private String[] folders; 
 
     public String[] getFolders()
-    {
-        return folders;
+    {    
+        return folders.clone();
     }
 
     public void setFolders(String[] folders)
     {
-        this.folders = folders;
+        this.folders = folders.clone();
     }
 
     public String getPathToRepository()
@@ -90,12 +92,12 @@ public class Configuration
 
     public String[] getIgnoredNames()
     {
-        return this.ignoredNames;
+        return this.ignoredNames.clone();
     }
 
     public void setIgnoredNames(final String[] ignoredNames)
     {
-        this.ignoredNames = ignoredNames;
+        this.ignoredNames = ignoredNames.clone();
     }
 
 
@@ -113,12 +115,12 @@ public class Configuration
 
     public String[] getIgnoredExtensions()
     {
-        return ignoredExtensions;
+        return ignoredExtensions.clone();
     }
 
     public void setIgnoredExtensions(String[] ignoredExtensions)
     {
-        this.ignoredExtensions = ignoredExtensions;
+        this.ignoredExtensions = ignoredExtensions.clone();
     }
 
     /**
@@ -137,11 +139,11 @@ public class Configuration
         retValue = "Configuration ( "
             + super.toString() + TAB
             + "indexLocation = " + this.indexLocation + TAB
-            + "ignoredNames = " + this.ignoredNames + TAB
-            + "ignoredExtensions = " + this.ignoredExtensions + TAB
+            + "ignoredNames = " + Arrays.deepToString(this.ignoredNames) + TAB
+            + "ignoredExtensions = " + Arrays.deepToString(this.ignoredExtensions) + TAB
             + "repositoryURL = " + this.pathToRepository + TAB
             + "directoryEntryThreadPoolPoolSize = " + this.directoryEntryThreadPoolPoolSize + TAB
-            + "folders = " + this.folders + TAB
+            + "folders = " + Arrays.deepToString(this.folders) + TAB
             + " )";
     
         return retValue;
