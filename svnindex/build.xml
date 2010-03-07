@@ -1,31 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="build" name="svnindex">
+	<import file="userbuild.xml" />
     <property environment="env"/>
-    <property name="JUNIT_HOME" value="../../../eclipse/eclipse-3.2.1/plugins/org.junit_3.8.1"/>
-    <property name="ECLIPSE_HOME" value="../../../eclipse/eclipse-3.2.1"/>
+    <property name="ECLIPSE_HOME" value="../../../../Downloads/eclipse"/>
+    <property name="sevin.location" value="../sevin"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.5"/>
     <property name="source" value="1.5"/>
+    <path id="JUnit 3.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_3.8.2.v20090203-1005/junit.jar"/>
+    </path>
     <path id="svnindex.classpath">
         <pathelement location="bin"/>
+        <path refid="JUnit 3.libraryclasspath"/>
+        <pathelement location="lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="lib/jewelcli-0.57.jar"/>
+        <pathelement location="lib/svnkit-1.1.0.jar"/>
         <pathelement location="lib/lucene-core-2.1.0.jar"/>
-        <pathelement location="lib/svnkit.jar"/>
-        <pathelement location="${JUNIT_HOME}/junit.jar"/>
-        <pathelement location="lib/commons-logging-1.0.4.jar"/>
-        <pathelement location="lib/log4j-1.2.8.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src" excludes="**/*.launch, **/*.java"/>
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="**/.svn/**"/>
+            </fileset>
         </copy>
         <copy includeemptydirs="false" todir="bin">
-            <fileset dir="test" excludes="**/*.launch, **/*.java"/>
+            <fileset dir="conf">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="**/.svn/**"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="test">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="**/.svn/**"/>
+            </fileset>
         </copy>
     </target>
     <target name="clean">
@@ -38,14 +52,28 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
             <src path="src"/>
+            <exclude name="**/.svn/**"/>
+            <classpath refid="svnindex.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="conf"/>
+            <exclude name="**/.svn/**"/>
             <classpath refid="svnindex.classpath"/>
         </javac>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
             <src path="test"/>
+            <exclude name="**/.svn/**"/>
             <classpath refid="svnindex.classpath"/>
         </javac>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <ant antfile="${sevin.location}/build.xml" dir="${sevin.location}" inheritAll="false" target="clean"/>
+        <ant antfile="${sevin.location}/build.xml" dir="${sevin.location}" inheritAll="false" target="build">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+    </target>
     <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
         <copy todir="${ant.library.dir}">
             <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
@@ -58,5 +86,16 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
+    </target>
+    <target name="Walker REBUILD">
+        <java classname="com.randomhumans.svnindex.indexing.Walker" failonerror="true" fork="yes">
+            <arg line="--REBUILD"/>
+            <classpath refid="svnindex.classpath"/>
+        </java>
+    </target>
+    <target name="Walker">
+        <java classname="com.randomhumans.svnindex.indexing.Walker" failonerror="true" fork="yes">
+            <classpath refid="svnindex.classpath"/>
+        </java>
     </target>
 </project>

@@ -18,7 +18,7 @@ public class LogEntryDocument extends IndexDocument
     public static final String COMMIT_MESSAGE_FIELD = "COMMIT_MESSAGE";
     
     private String commitMessage;
-    private Map changedPaths;
+    private Map<?, ?> changedPaths;
 
     @Override
     public Term getUniqueTerm()
@@ -26,12 +26,12 @@ public class LogEntryDocument extends IndexDocument
         return new Term(IndexDocument.REVISION_FIELD, Long.toString(this.getRevision()));        
     }
 
-    public Map getChangedPaths()
+    public Map<?, ?> getChangedPaths()
     {
         return this.changedPaths;
     }
 
-    public void setChangedPaths(final Map changedPaths)
+    public void setChangedPaths(final Map<?, ?> changedPaths)
     {
         this.changedPaths = changedPaths;
     }
@@ -48,7 +48,7 @@ public class LogEntryDocument extends IndexDocument
         return fields;
     }
 
-    public LogEntryDocument(final long revision, final String author, final Date date, final String commitMessage, final Map changedPaths)
+    public LogEntryDocument(final long revision, final String author, final Date date, final String commitMessage, final Map<?, ?> changedPaths)
     {
         super(revision, author, date);
         this.setCommitMessage(commitMessage);

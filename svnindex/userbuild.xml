@@ -1,0 +1,6 @@
+<?eclipse.ant.import ?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="snvindex-ivy" default="run">
+    <target name="resolve" description="--> retrieve dependencies with ivy">
+        <ivy:retrieve />
+    </target>
+</project>

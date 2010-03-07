@@ -225,9 +225,9 @@ public class DisplayRepositoryTree {
          * doesn't provide its own Collection instance and uses the one returned
          * by getDir.
          */
-        Collection entries = repository.getDir(path, -1, null,
-                (Collection) null);
-        Iterator iterator = entries.iterator();
+        Collection<?> entries = repository.getDir(path, -1, null,
+                (Collection<?>) null);
+        Iterator<?> iterator = entries.iterator();
         while (iterator.hasNext()) {
             SVNDirEntry entry = (SVNDirEntry) iterator.next();
             System.out.println("/" + (path.equals("") ? "" : path + "/")

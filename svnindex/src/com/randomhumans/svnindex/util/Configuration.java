@@ -149,5 +149,10 @@ public class Configuration
         return retValue;
     }
 
+	public String getRepositoryURL() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

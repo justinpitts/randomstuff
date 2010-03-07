@@ -88,7 +88,7 @@ public class ContentDocumentGenerator
     {
         if (fileRevision == null)
             return false;
-        Map properties = fileRevision.getRevisionProperties();
+        Map<?, ?> properties = fileRevision.getRevisionProperties();
         String mimeType = (String) properties.get(SVNProperty.MIME_TYPE);
         boolean isTextMimeType = SVNProperty.isTextMimeType(mimeType);
         return isTextMimeType;

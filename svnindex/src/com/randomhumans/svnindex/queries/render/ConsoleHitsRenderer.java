@@ -10,6 +10,7 @@ import com.randomhumans.svnindex.document.ContentDocument;
 public class ConsoleHitsRenderer implements IHitsRenderer
 {
 
+	private static String eol = System.getProperty("line.separator"); 
     static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(ConsoleHitsRenderer.class);
 
     public String render(final Hits h)
@@ -19,7 +20,7 @@ public class ConsoleHitsRenderer implements IHitsRenderer
         {
             try
             {
-                sb.append(h.doc(i).get(ContentDocument.URL_FIELD)).append("\r\n");
+                sb.append(h.doc(i).get(ContentDocument.URL_FIELD)).append(eol);
             }
             catch (final IOException e)
             {                
