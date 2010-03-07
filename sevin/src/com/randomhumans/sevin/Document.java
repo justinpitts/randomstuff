@@ -1,6 +1,7 @@
 package com.randomhumans.sevin;
 
-import com.randomhumans.svnindex.indexing.ContentDocument;;
+import com.randomhumans.svnindex.document.ContentDocument;
+
 
 public class Document
 {
@@ -13,32 +14,32 @@ public class Document
   
     public String getAuthor()
     {
-        return doc.get(ContentDocument.AUTHOR);
+        return doc.get(ContentDocument.AUTHOR_FIELD);
     }
     
     public String  getMessage()
     {
-        String message = doc.get(ContentDocument.MESSAGE) + "";
+        String message = doc.get(ContentDocument.CONTENT_FIELD) + "";
         return message.length() > 50 ? message.substring(0,47) + "..." : message;            
     }
     
     public String getDate()
     {
-        return doc.get(ContentDocument.DATE);
+        return doc.get(ContentDocument.DATE_FIELD);
     }
     
     public String getRevision()
     {
-        return doc.get(ContentDocument.REVISION);
+        return doc.get(ContentDocument.REVISION_FIELD);
     }
     
     public String getURL()
     {
-    	return doc.get(ContentDocument.URL);
+    	return doc.get(ContentDocument.URL_FIELD);
     }
     
     public String getMD5()
     {
-    	return doc.get(ContentDocument.MD5);
+    	return "";//doc.get(ContentDocument.MD5);
     }
 }

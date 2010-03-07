@@ -13,7 +13,7 @@ public class ChangedPath
     
     public static ChangedPath[] buildChangedPaths(final SVNLogEntry log)
     {
-        final Map changedPaths = log.getChangedPaths();
+        final Map<?, ?> changedPaths = log.getChangedPaths();
         ChangedPath[] paths = new ChangedPath[changedPaths.size()];
         int i = 0;
         for(Object o : changedPaths.values())

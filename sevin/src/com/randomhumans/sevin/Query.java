@@ -3,7 +3,8 @@ package com.randomhumans.sevin;
 import java.io.IOException;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.Sort;
-import com.randomhumans.svnindex.indexing.ContentDocument;
+
+import com.randomhumans.svnindex.document.ContentDocument;
 import com.randomhumans.svnindex.queries.ContentQuery;
 import com.randomhumans.svnindex.queries.IQuery;
 
@@ -11,7 +12,7 @@ public class Query
 {
     private String queryString = "";
     
-    private String sortField = ContentDocument.URL;
+    private String sortField = ContentDocument.URL_FIELD;
     
     public String getQueryString()
     {

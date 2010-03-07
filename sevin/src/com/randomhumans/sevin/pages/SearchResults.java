@@ -11,14 +11,14 @@ import org.apache.tapestry.event.PageEvent;
 import org.apache.tapestry.html.BasePage;
 
 import com.randomhumans.sevin.Document;
-import com.randomhumans.svnindex.indexing.ContentDocument;
+import com.randomhumans.svnindex.document.ContentDocument;
 import com.randomhumans.svnindex.queries.ContentQuery;
 import com.randomhumans.svnindex.queries.IQuery;
 
 public abstract class SearchResults extends BasePage implements PageBeginRenderListener
 {
     Log log = LogFactory.getLog(this.getClass());
-    String sortField = ContentDocument.AUTHOR;
+    String sortField = ContentDocument.AUTHOR_FIELD;
     
     public abstract void setQuery(String query);
     public abstract String getQuery();

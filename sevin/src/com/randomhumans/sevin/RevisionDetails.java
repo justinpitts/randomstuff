@@ -1,5 +1,6 @@
 package com.randomhumans.sevin;
 
+import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 
 import com.randomhumans.svnindex.util.RepositoryHelper;
@@ -21,7 +22,12 @@ public class RevisionDetails
     public void setRevision(long revision)
     {
         this.revision = revision;
-        log = RepositoryHelper.getLogEntry(revision);
+        try {
+			log = RepositoryHelper.getLogEntry(revision);
+		} catch (SVNException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     public String getAuthor()
