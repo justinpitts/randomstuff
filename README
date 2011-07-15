@@ -1,0 +1,9 @@
+Includes an engine for crawling a subversion repository and full-text indexing the content with Lucene, along with a sample web application for searching the index.
+
+Could be a great deal better. I have spent most of my energy on the crawling/indexing pipeline as my target repository is very very large.
+
+Possibilities for improvement:
+Support for different source-code repositories.
+Syntax-highlighting display of source.
+Pluggable parsers to index source as an AST.
+etc.
